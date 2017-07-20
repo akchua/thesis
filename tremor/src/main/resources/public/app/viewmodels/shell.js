@@ -1,7 +1,8 @@
 ﻿define(['plugins/router', 'durandal/app', 'knockout', 'modules/securityservice'], 
 		function (router, app, ko, securityService) {
 	var homeroute = [
-	    { route: ['', 'home'], moduleId: 'viewmodels/home/home', title: 'Home', nav: false }
+	    { route: ['', 'home'], moduleId: 'viewmodels/home/home', title: 'Home', nav: true },
+	    { route: ['patients'], moduleId: 'template/crud/view', title: 'Patients', nav: true }
 	];
 	
 	var Shell = function() {

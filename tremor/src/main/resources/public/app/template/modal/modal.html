@@ -1,0 +1,20 @@
+<div data-view="plugins/messageBox">
+	<div class="modal-content">
+	    <div class="modal-header">
+	        <h3 data-bind="html: title"></h3>
+	    </div>
+	    
+	    <div data-bind='compose: container'>
+		    <!-- ko compose: container -->
+		    <div class="modal-body" data-part="content"></div>
+	    	<!-- /ko -->
+	    </div>
+	   
+	    <div class="modal-footer">
+	        <!-- ko foreach: options -->
+	       <button class="btn" data-bind="click: function () { $parent.selectOption($data); }, html: $data, css: { 'btn-primary': $index() == 0, autofocus: $index() == 0 }"></button>
+	        <!-- /ko -->
+	        <div style="clear:both;"></div>
+	    </div>
+	</div>
+</div>
