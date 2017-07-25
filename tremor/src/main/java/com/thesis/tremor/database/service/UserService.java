@@ -2,6 +2,7 @@ package com.thesis.tremor.database.service;
 
 import com.thesis.tremor.database.entity.User;
 import com.thesis.tremor.database.prototype.UserPrototype;
+import com.thesis.tremor.objects.ObjectList;
 
 /**
  * @author  Adrian Jasper K. Chua
@@ -10,4 +11,5 @@ import com.thesis.tremor.database.prototype.UserPrototype;
  */
 public interface UserService extends Service<User, Long>, UserPrototype {
 
+	ObjectList<User> findAllWithPagingOrderByName(int pageNumber, int resultsPerPage, String searchKey);
 }

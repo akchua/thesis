@@ -1,7 +1,10 @@
 package com.thesis.tremor.database.dao;
 
+import org.hibernate.criterion.Order;
+
 import com.thesis.tremor.database.entity.User;
 import com.thesis.tremor.database.prototype.UserPrototype;
+import com.thesis.tremor.objects.ObjectList;
 
 /**
  * @author  Adrian Jasper K. Chua
@@ -10,4 +13,7 @@ import com.thesis.tremor.database.prototype.UserPrototype;
  */
 public interface UserDAO extends DAO<User, Long>, UserPrototype {
 
+	ObjectList<User> findAllWithPaging(int pageNumber, int resultsPerPage, String searchKey);
+	
+	ObjectList<User> findAllWithPagingAndOrder(int pageNumber, int resultsPerPage, String searchKey, Order[] orders);
 }
