@@ -10,7 +10,9 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum UserType {
 
-	ADMINISTRATOR("Administrator");
+	ADMINISTRATOR("Administrator"),
+	
+	PATIENT("Patient");
 	
 	private final String displayName;
 	

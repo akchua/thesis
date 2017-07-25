@@ -12,7 +12,7 @@ import com.thesis.tremor.objects.ObjectList;
 /**
  * @author  Adrian Jasper K. Chua
  * @version 1.0
- * @since   Nov 13, 2016
+ * @since   25 Jul 2017
  */
 @Service
 public class UserServiceImpl
@@ -23,10 +23,20 @@ public class UserServiceImpl
 	protected UserServiceImpl(UserDAO dao) {
 		super(dao);
 	}
-
+	
 	@Override
 	public User findByUsernameAndPassword(String username, String password) {
 		return dao.findByUsernameAndPassword(username, password);
+	}
+	
+	@Override
+	public User findByUsername(String username) {
+		return dao.findByUsername(username);
+	}
+
+	@Override
+	public boolean isExistByUsername(String username) {
+		return dao.findByUsername(username) != null;
 	}
 	
 	@Override

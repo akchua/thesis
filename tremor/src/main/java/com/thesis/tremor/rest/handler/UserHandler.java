@@ -2,6 +2,8 @@ package com.thesis.tremor.rest.handler;
 
 import java.util.List;
 
+import com.thesis.tremor.beans.ResultBean;
+import com.thesis.tremor.beans.UserFormBean;
 import com.thesis.tremor.database.entity.User;
 import com.thesis.tremor.enums.UserType;
 import com.thesis.tremor.objects.ObjectList;
@@ -16,6 +18,8 @@ public interface UserHandler {
 	User getUser(Long userId);
 	
 	ObjectList<User> getUserObjectList(Integer pageNumber, String searchKey);
+	
+	ResultBean createUser(UserFormBean userForm);
 
 	List<UserType> getUserTypeList();
 }

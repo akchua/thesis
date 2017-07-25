@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.thesis.tremor.database.entity.base.BaseObject;
 import com.thesis.tremor.enums.UserType;
@@ -31,6 +32,10 @@ public class User extends BaseObject {
 	
 	private String password;
 	
+	private String emailAddress;
+	
+	private String contactNumber;
+	
 	private UserType userType;
 	
 	private Integer itemsPerPage;
@@ -54,6 +59,11 @@ public class User extends BaseObject {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+	
+	@Transient
+	public String getFormattedName() {
+		return lastName + ", " + firstName;
+	}
 
 	@Basic
 	@Column(name = "username")
@@ -75,6 +85,24 @@ public class User extends BaseObject {
 		this.password = password;
 	}
 	
+	@Basic
+	@Column(name = "email_address")
+	public String getEmailAddress() {
+		return emailAddress;
+	}
+
+	public void setEmailAddress(String emailAddress) {
+		this.emailAddress = emailAddress;
+	}
+
+	public String getContactNumber() {
+		return contactNumber;
+	}
+
+	public void setContactNumber(String contactNumber) {
+		this.contactNumber = contactNumber;
+	}
+
 	@Enumerated(EnumType.STRING)
 	@Column(name = "user_type", length = 50)
 	public UserType getUserType() {

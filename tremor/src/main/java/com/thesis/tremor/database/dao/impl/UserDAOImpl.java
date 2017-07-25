@@ -32,6 +32,15 @@ public class UserDAOImpl
 	}
 	
 	@Override
+	public User findByUsername(String username) {
+		final Junction conjunction = Restrictions.conjunction();
+		conjunction.add(Restrictions.eq("isValid", Boolean.TRUE));
+		conjunction.add(Restrictions.eq("username", username));
+		
+		return findUniqueResult(null, null, null, conjunction);
+	}
+	
+	@Override
 	public ObjectList<User> findAllWithPaging(int pageNumber, int resultsPerPage, String searchKey) {
 		return findAllWithPagingAndOrder(pageNumber, resultsPerPage, searchKey, null);
 	}

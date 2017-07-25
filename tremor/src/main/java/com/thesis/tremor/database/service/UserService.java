@@ -11,5 +11,7 @@ import com.thesis.tremor.objects.ObjectList;
  */
 public interface UserService extends Service<User, Long>, UserPrototype {
 
+	boolean isExistByUsername(String username);
+	
 	ObjectList<User> findAllWithPagingOrderByName(int pageNumber, int resultsPerPage, String searchKey);
 }

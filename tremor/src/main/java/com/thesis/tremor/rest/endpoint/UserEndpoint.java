@@ -1,8 +1,11 @@
 package com.thesis.tremor.rest.endpoint;
 
+import java.io.IOException;
 import java.util.List;
 
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
@@ -10,6 +13,9 @@ import javax.ws.rs.core.MediaType;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.thesis.tremor.beans.ResultBean;
+import com.thesis.tremor.beans.UserFormBean;
 import com.thesis.tremor.database.entity.User;
 import com.thesis.tremor.enums.UserType;
 import com.thesis.tremor.objects.ObjectList;
@@ -38,6 +44,22 @@ public class UserEndpoint {
 	@Produces({ MediaType.APPLICATION_JSON })
 	public ObjectList<User> getUserObjectList(@QueryParam("pageNumber") Integer pageNumber, @QueryParam("searchKey") String searchKey) {
 		return userHandler.getUserObjectList(pageNumber, searchKey);
+	}
+	
+	@POST
+	@Path("/save")
+	@Produces({ MediaType.APPLICATION_JSON })
+	public ResultBean saveUser(@FormParam("userFormData") String userFormData) throws IOException {
+		final ResultBean result;
+
+		final UserFormBean userForm = new ObjectMapper().readValue(userFormData, UserFormBean.class);
+		if(userForm.getId() != null) {
+			result = null; //userHandler.updateUser(userForm);
+		} else {
+			result = userHandler.createUser(userForm);
+		}
+		
+		return result;
 	}
 	
 	@GET

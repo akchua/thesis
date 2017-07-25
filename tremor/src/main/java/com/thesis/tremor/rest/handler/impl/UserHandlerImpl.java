@@ -9,11 +9,18 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.thesis.tremor.UserContextHolder;
+import com.thesis.tremor.beans.PasswordFormBean;
+import com.thesis.tremor.beans.ResultBean;
+import com.thesis.tremor.beans.UserFormBean;
 import com.thesis.tremor.database.entity.User;
 import com.thesis.tremor.database.service.UserService;
+import com.thesis.tremor.enums.Color;
 import com.thesis.tremor.enums.UserType;
 import com.thesis.tremor.objects.ObjectList;
 import com.thesis.tremor.rest.handler.UserHandler;
+import com.thesis.tremor.utility.EmailUtil;
+import com.thesis.tremor.utility.EncryptionUtil;
+import com.thesis.tremor.utility.Html;
 
 /**
  * @author  Adrian Jasper K. Chua
@@ -26,6 +33,9 @@ public class UserHandlerImpl implements UserHandler {
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private EmailUtil emailUtil;
 
 	@Override
 	public User getUser(Long userId) {
@@ -38,8 +48,95 @@ public class UserHandlerImpl implements UserHandler {
 	}
 	
 	@Override
+	public ResultBean createUser(UserFormBean userForm) {
+		final ResultBean result;
+		final ResultBean validateForm = validateUserForm(userForm);
+		
+		if(validateForm.getSuccess()) {
+			final ResultBean validatePassword = validatePassword(userForm);
+			if(validatePassword.getSuccess()) {
+				if(userService.isExistByUsername(userForm.getUsername().trim())) {
+					result = new ResultBean(Boolean.FALSE, Html.line(Html.text(Color.RED, "Username already exists.") + "  Please choose another username."));
+				} else {
+					final User user = new User();
+					
+					user.setPassword(EncryptionUtil.getMd5(userForm.getPassword()));
+					setUser(user, userForm);
+					
+					result = new ResultBean();
+					result.setSuccess(userService.insert(user) != null);
+					if(result.getSuccess()) {
+						result.setMessage(Html.line(Html.text(Color.GREEN, "Successfully") + " created account of " + Html.text(Color.BLUE, user.getFormattedName()) + ". Thank you."));
+					} else {
+						result.setMessage(Html.line(Html.text(Color.RED, "Server Error.") + " Please try again later."));
+					}
+				}
+			} else {
+				result = validatePassword;
+			}
+		} else {
+			result = validateForm;
+		}
+		
+		return result;
+	}
+	
+	@Override
 	public List<UserType> getUserTypeList() {
 		return Stream.of(UserType.values())
 				.collect(Collectors.toList());
+	}
+	
+	private void setUser(User user, UserFormBean userForm) {
+		user.setUsername(userForm.getUsername().trim());
+		user.setFirstName(userForm.getFirstName().trim());
+		user.setLastName(userForm.getLastName().trim());
+		user.setEmailAddress(userForm.getEmailAddress().trim());
+		user.setContactNumber(userForm.getContactNumber().trim());
+		user.setUserType(userForm.getUserType() != null ? userForm.getUserType() : UserType.PATIENT);
+		if(user.getItemsPerPage() == null) user.setItemsPerPage(10);
+	}
+	
+	private ResultBean validateUserForm(UserFormBean userForm) {
+		final ResultBean result;
+		
+		if(userForm.getUsername() == null || userForm.getUsername().trim().length() < 3 ||
+				userForm.getFirstName() == null || userForm.getFirstName().trim().length() < 3 ||
+				userForm.getLastName() == null || userForm.getLastName().trim().length() < 3 ||
+				userForm.getEmailAddress() == null || userForm.getEmailAddress().trim().length() < 3 ||
+				userForm.getContactNumber() == null || userForm.getContactNumber().trim().length() < 3) {
+			result = new ResultBean(Boolean.FALSE, Html.line("All fields are " + Html.text(Color.RED, "required") + " and must contain at least 3 characters."));
+		} else if(!userForm.getUsername().trim().matches("^[A-Za-z_]\\w{2,31}$")) {
+			result = new ResultBean(Boolean.FALSE, Html.line(Color.RED, "Invalid Username!")
+												+ Html.line("Username must be at least 3 to 30 characters and cannot contain white spaces and/or special characters."));
+		} else if(!emailUtil.validateEmail(userForm.getEmailAddress().trim())) {
+			result = new ResultBean(Boolean.FALSE, Html.line(Color.RED, "Invalid Email Address!"));
+		} else {
+			result = new ResultBean(Boolean.TRUE, "");
+		}
+		
+		return result;
+	}
+	
+	private ResultBean validatePassword(UserFormBean userForm) {
+		return validatePassword(new PasswordFormBean("", userForm.getPassword(), userForm.getConfirmPassword()));
+	}
+	
+	private ResultBean validatePassword(PasswordFormBean passwordForm) {
+		final ResultBean result;
+		
+		if(passwordForm.getPassword() == null || passwordForm.getPassword().length() < 3 ||
+				passwordForm.getConfirmPassword() == null || passwordForm.getConfirmPassword().length() < 3) {
+			result = new ResultBean(Boolean.FALSE, Html.line("All fields are " + Html.text(Color.RED, "required") + " and must contain at least 3 characters."));
+		} else if(!passwordForm.getPassword().equals(passwordForm.getConfirmPassword())) {
+			result = new ResultBean(Boolean.FALSE, Html.line(Color.RED, "Confirm password does not match."));
+		} else if(!passwordForm.getPassword().matches("((?=.*\\d)(?=.*[a-zA-Z])\\S{5,21})")) {
+			result = new ResultBean(Boolean.FALSE, Html.line(Color.RED, "Invalid Password!")
+												+ Html.line("Password must be at least 6 to 20 characters and cannot contain white spaces and must be a combination of letters and digits."));
+		} else {
+			result = new ResultBean(Boolean.TRUE, "");
+		}
+		
+		return result;
 	}
 }

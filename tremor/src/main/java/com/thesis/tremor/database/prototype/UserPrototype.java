@@ -10,4 +10,6 @@ import com.thesis.tremor.database.entity.User;
 public interface UserPrototype extends Prototype<User, Long> {
 	
 	User findByUsernameAndPassword(String username, String password);
+	
+	User findByUsername(String username);
 };
