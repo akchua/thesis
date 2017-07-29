@@ -12,6 +12,8 @@ public enum UserType {
 
 	ADMINISTRATOR("Administrator"),
 	
+	DOCTOR("Doctor"),
+	
 	PATIENT("Patient");
 	
 	private final String displayName;

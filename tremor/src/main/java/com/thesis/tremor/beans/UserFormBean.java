@@ -26,6 +26,18 @@ public class UserFormBean extends FormBean {
 	private UserType userType;
 	
 	private Integer itemsPerPage;
+	
+	//DOCTOR
+	private String hospital_name;
+	
+	private String hospital_address;
+	
+	//PATIENT
+	private String birthdate;
+	
+	private String sex;
+	
+	private String address;
 
 	public String getFirstName() {
 		return firstName;
@@ -97,5 +109,45 @@ public class UserFormBean extends FormBean {
 
 	public void setItemsPerPage(Integer itemsPerPage) {
 		this.itemsPerPage = itemsPerPage;
+	}
+
+	public String getHospital_name() {
+		return hospital_name;
+	}
+
+	public void setHospital_name(String hospital_name) {
+		this.hospital_name = hospital_name;
+	}
+
+	public String getHospital_address() {
+		return hospital_address;
+	}
+
+	public void setHospital_address(String hospital_address) {
+		this.hospital_address = hospital_address;
+	}
+
+	public String getBirthdate() {
+		return birthdate;
+	}
+
+	public void setBirthdate(String birthdate) {
+		this.birthdate = birthdate;
+	}
+
+	public String getSex() {
+		return sex;
+	}
+
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 }

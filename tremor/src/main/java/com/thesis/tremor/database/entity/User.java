@@ -40,6 +40,18 @@ public class User extends BaseObject {
 	
 	private Integer itemsPerPage;
 	
+	// DOCTOR
+	private String hospital_name;
+	
+	private String hospital_address;
+	
+	// PATIENT
+	private String birthdate;
+	
+	private String sex;
+	
+	private String address;
+	
 	@Basic
 	@Column(name = "first_name")
 	public String getFirstName() {
@@ -121,5 +133,55 @@ public class User extends BaseObject {
 
 	public void setItemsPerPage(Integer itemsPerPage) {
 		this.itemsPerPage = itemsPerPage;
+	}
+
+	@Basic
+	@Column(name = "hospital_name")
+	public String getHospital_name() {
+		return hospital_name;
+	}
+
+	public void setHospital_name(String hospital_name) {
+		this.hospital_name = hospital_name;
+	}
+
+	@Basic
+	@Column(name = "hospital_address")
+	public String getHospital_address() {
+		return hospital_address;
+	}
+
+	public void setHospital_address(String hospital_address) {
+		this.hospital_address = hospital_address;
+	}
+
+	@Basic
+	@Column(name = "birthdate")
+	public String getBirthdate() {
+		return birthdate;
+	}
+
+	public void setBirthdate(String birthdate) {
+		this.birthdate = birthdate;
+	}
+
+	@Basic
+	@Column(name = "sex")
+	public String getSex() {
+		return sex;
+	}
+
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+
+	@Basic
+	@Column(name = "address")
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
 	}
 }

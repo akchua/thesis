@@ -54,12 +54,19 @@ public class UserEndpoint {
 
 		final UserFormBean userForm = new ObjectMapper().readValue(userFormData, UserFormBean.class);
 		if(userForm.getId() != null) {
-			result = null; //userHandler.updateUser(userForm);
+			result = userHandler.updateUser(userForm);
 		} else {
 			result = userHandler.createUser(userForm);
 		}
 		
 		return result;
+	}
+	
+	@POST
+	@Path("/remove")
+	@Produces({ MediaType.APPLICATION_JSON })
+	public ResultBean removeUser(@FormParam("userId") Long userId) {
+		return userHandler.removeUser(userId);
 	}
 	
 	@GET

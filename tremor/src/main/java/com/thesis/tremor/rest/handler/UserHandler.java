@@ -20,6 +20,10 @@ public interface UserHandler {
 	ObjectList<User> getUserObjectList(Integer pageNumber, String searchKey);
 	
 	ResultBean createUser(UserFormBean userForm);
+	
+	ResultBean updateUser(UserFormBean userForm);
+	
+	ResultBean removeUser(Long userId);
 
 	List<UserType> getUserTypeList();
 }
