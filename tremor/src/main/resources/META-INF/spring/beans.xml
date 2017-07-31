@@ -11,5 +11,5 @@
 
 	<context:property-placeholder location="classpath:config.properties" ignore-unresolvable="true" />
 
-	<bean id="emailUtil" class="com.chua.distributions.utility.EmailUtil" scope="singleton"></bean>
+	<bean id="emailUtil" class="com.thesis.tremor.utility.EmailUtil" scope="singleton"></bean>
 </beans>
