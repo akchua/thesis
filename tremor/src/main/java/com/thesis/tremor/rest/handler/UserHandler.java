@@ -24,6 +24,10 @@ public interface UserHandler {
 	ResultBean updateUser(UserFormBean userForm);
 	
 	ResultBean removeUser(Long userId);
+	
+	ResultBean resetPassword(Long userId);
+	
+	String getEmailOfAllAdmin();
 
 	List<UserType> getUserTypeList();
 }

@@ -1,5 +1,7 @@
 package com.thesis.tremor.database.dao.impl;
 
+import java.util.List;
+
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.criterion.Junction;
 import org.hibernate.criterion.MatchMode;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.thesis.tremor.database.dao.UserDAO;
 import com.thesis.tremor.database.entity.User;
+import com.thesis.tremor.enums.UserType;
 import com.thesis.tremor.objects.ObjectList;
 
 /**
@@ -59,5 +62,14 @@ public class UserDAOImpl
 		}
 		
 		return findAllByCriterion(pageNumber, resultsPerPage, null, null, null, orders, conjunction);
+	}
+
+	@Override
+	public List<User> findAllByUserType(UserType userType) {
+		final Junction conjunction = Restrictions.conjunction();
+		conjunction.add(Restrictions.eq("isValid", Boolean.TRUE));
+		conjunction.add(Restrictions.eq("userType", userType));
+		
+		return findAllByCriterionList(null, null, null, null, conjunction);
 	}
 }

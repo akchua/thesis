@@ -11,11 +11,11 @@ public class MailConstants {
 	
 	public static final String SMTP_PORT = "465";
 	
-	public static final String SMTP_FROM_ADDRESS = "";
+	public static final String SMTP_FROM_ADDRESS = "tremorpro.official@gmail.com";
 	
-	public static final String SMTP_USERNAME = "";
+	public static final String SMTP_USERNAME = "tremorpro.official@gmail.com";
 	
-	public static final String SMTP_PASSWORD = "";
+	public static final String SMTP_PASSWORD = "tremorPr0";
 	
 	public static final String DEFAULT_EMAIL = "";
 }

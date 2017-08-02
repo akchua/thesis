@@ -1,5 +1,7 @@
 package com.thesis.tremor.database.service;
 
+import java.util.List;
+
 import com.thesis.tremor.database.entity.User;
 import com.thesis.tremor.database.prototype.UserPrototype;
 import com.thesis.tremor.objects.ObjectList;
@@ -14,4 +16,6 @@ public interface UserService extends Service<User, Long>, UserPrototype {
 	boolean isExistByUsername(String username);
 	
 	ObjectList<User> findAllWithPagingOrderByName(int pageNumber, int resultsPerPage, String searchKey);
+	
+	List<User> findAllAdministrators();
 }

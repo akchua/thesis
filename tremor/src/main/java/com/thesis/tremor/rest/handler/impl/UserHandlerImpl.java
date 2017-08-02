@@ -12,6 +12,7 @@ import com.thesis.tremor.UserContextHolder;
 import com.thesis.tremor.beans.PasswordFormBean;
 import com.thesis.tremor.beans.ResultBean;
 import com.thesis.tremor.beans.UserFormBean;
+import com.thesis.tremor.constants.MailConstants;
 import com.thesis.tremor.database.entity.User;
 import com.thesis.tremor.database.service.UserService;
 import com.thesis.tremor.enums.Color;
@@ -21,6 +22,7 @@ import com.thesis.tremor.rest.handler.UserHandler;
 import com.thesis.tremor.utility.EmailUtil;
 import com.thesis.tremor.utility.EncryptionUtil;
 import com.thesis.tremor.utility.Html;
+import com.thesis.tremor.utility.StringGenerator;
 
 /**
  * @author  Adrian Jasper K. Chua
@@ -145,6 +147,53 @@ public class UserHandlerImpl implements UserHandler {
 		}
 		
 		return result;
+	}
+	
+	@Override
+	public ResultBean resetPassword(Long userId) {
+		final ResultBean result;
+		final User user = userService.find(userId);
+		
+		if(user != null) {
+			result = new ResultBean();
+			String randomPassword = StringGenerator.nextString();
+			
+			user.setPassword(EncryptionUtil.getMd5(randomPassword));
+			result.setSuccess(userService.update(user) &&
+					emailUtil.send(user.getEmailAddress(),
+					null,
+					MailConstants.DEFAULT_EMAIL + ", " +  getEmailOfAllAdmin(),
+					"Tremor Pro Reset Password",
+					"Hi " + user.getFirstName() + " " + user.getLastName() + ", your Tremor Pro account password has just been reset."
+						+ "\nYour new credentials are : "
+						+ "\n\nUsername - " + user.getUsername()
+						+ "\nPasswrod - " + randomPassword
+						+ "\n\nPlease login at test.url.com and change your password as soon as possible.",
+					null));
+			
+			if(result.getSuccess()) {
+				result.setMessage(Html.line(Color.GREEN, "Password successfully reset.") 
+						+ Html.line("New password sent to " + Html.text(Color.BLUE, user.getEmailAddress()) + "."));
+			} else {
+				result.setMessage(Html.line(Html.text(Color.RED, "Server Error.") + " Please try again later."));
+			}
+		} else {
+			result = new ResultBean(Boolean.FALSE, Html.line(Html.text(Color.RED, "Failed") + " to load user. Please re-log your account."));
+		}
+		
+		return result;
+	}
+	
+	@Override
+	public String getEmailOfAllAdmin() {
+		String emailOfAllAdmin = "";
+		final List<User> administrators = userService.findAllAdministrators();
+		
+		for(User admin : administrators) {
+			emailOfAllAdmin += admin.getEmailAddress() + ", ";
+		}
+		
+		return emailOfAllAdmin;
 	}
 	
 	@Override

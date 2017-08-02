@@ -69,6 +69,13 @@ public class UserEndpoint {
 		return userHandler.removeUser(userId);
 	}
 	
+	@POST
+	@Path("/resetpassword")
+	@Produces({ MediaType.APPLICATION_JSON })
+	public ResultBean resetPassword(@FormParam("userId") Long userId) {
+		return userHandler.resetPassword(userId);
+	}
+	
 	@GET
 	@Path("/usertype")
 	@Produces({ MediaType.APPLICATION_JSON })
