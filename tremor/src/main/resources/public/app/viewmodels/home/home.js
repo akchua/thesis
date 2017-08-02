@@ -2,9 +2,9 @@
 	
 	var Home = function() {	};
 	
-	Home.prototype.showActivityModal = function () {
+	Home.prototype.showPatientInfo = function () {
 		//Opens a Modal
-		myModal.show("Patient Activity", ["Close"], true, { "class": "messageBox2" }, "../viewmodels/home/patientActivity");
+		myModal.show("Patient Information", ["Close"], true, { "class": "messageBox2" }, "../viewmodels/patient/patientInfo");
 	};
 	
 	return Home;

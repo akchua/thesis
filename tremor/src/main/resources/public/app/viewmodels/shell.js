@@ -2,7 +2,8 @@
 		function (router, app, ko, securityService) {
 	var homeroute = [
 	    { route: ['', 'home'], moduleId: 'viewmodels/home/home', title: 'Home', nav: true },
-	    { route: ['patients'], moduleId: 'template/crud/view', title: 'Patients', nav: true }
+	    { route: ['patients'], moduleId: 'viewmodels/patient/patientCrud', title: 'Patients', nav: true },
+	    { route: ['users'], moduleId: 'viewmodels/users/usersCrud', title: 'Users', nav: true }
 	];
 	
 	var Shell = function() {
