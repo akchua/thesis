@@ -23,6 +23,26 @@ define(['jquery'], function ($) {
     		return $.ajax({
     			url: '/services/user/usertype'
     		});
+    	},
+    	
+    	saveUser: function(userFormData) {
+    		return $.ajax({
+    			url: '/services/user/save',
+    			method: 'POST',
+    			data: {
+    				userFormData: userFormData
+    			} 
+    		});
+    	},
+    	
+    	removeUser: function(userId) {
+    		return $.ajax({
+    			url: '/services/user/remove',
+    			method: 'POST',
+    			data: {
+    				userId: userId
+    			}
+    		});
     	}
 	};
 });

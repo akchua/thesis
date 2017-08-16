@@ -1,0 +1,128 @@
+<div class="modal-dialog modal-xl">
+	<div class="modal-content" >
+	  	<form class="form-horizontal">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" data-bind="click: cancel">&times;</button>
+				<h3 align="center"><span data-bind="text: title"></span></h3>
+			</div>
+			<div class="modal-body">
+			
+				<div class="form-group">
+				  <label class="control-label col-sm-2">User Type:</label>
+				  <div class="col-sm-10">
+				  	<select data-bind="options: userTypeList, optionsValue: 'name', optionsText: 'displayName', value: userAddModel.userType" class="form-control select-lg disabled" id="userType"></select>
+				  </div>
+				</div>
+				  
+				  <div class="form-group">
+				    <label class="control-label col-sm-2">First Name:</label>
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" data-bind="textInput: userAddModel.firstName">
+				    </div>
+				  </div>
+				  
+				  <div class="form-group">
+				    <label class="control-label col-sm-2">Last Name:</label>
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" data-bind="textInput: userAddModel.lastName">
+				    </div>
+				  </div>
+				  
+				  <div class="form-group">
+				    <label class="control-label col-sm-2">Username:</label>
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" data-bind="textInput: userAddModel.username">
+				    </div>
+				  </div>
+				  <!-- ko ifnot: userAddModel.id -->
+				  <div class="form-group">
+				    <label class="control-label col-sm-2">Password:</label>
+				    <div class="col-sm-10">
+				      <input type="password" class="form-control" data-bind="textInput: userAddModel.password">
+				    </div>
+				  </div>
+				  
+				  <div class="form-group">
+				    <label class="control-label col-sm-2">Confirm Password:</label>
+				    <div class="col-sm-10">
+				      <input type="password" class="form-control" data-bind="textInput: userAddModel.confirmPassword">
+				    </div>
+				  </div>
+				  <!-- /ko -->
+				  <div class="form-group">
+				    <label class="control-label col-sm-2">Email Address:</label>
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" data-bind="textInput: userAddModel.emailAddress">
+				    </div>
+				  </div>
+				  
+				  <div class="form-group">
+				    <label class="control-label col-sm-2">Contact Number:</label>
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" data-bind="textInput: userAddModel.contactNumber">
+				    </div>
+				  </div>
+				  
+				  <div class="form-group">
+				    <label class="control-label col-sm-2">Items Per Page:</label>
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" data-bind="textInput: userAddModel.itemsPerPage">
+				    </div>
+				  </div>
+			  		
+			  		<div class="row" data-bind="if: showDoctorInformation">
+			  			<div class="form-group">
+						   <label class="control-label col-sm-2">Hospital Name:</label>
+						   <div class="col-sm-10">
+						     <input type="text" class="form-control" data-bind="textInput: userAddModel.hospital_name">
+						   </div>
+						 </div>
+						 
+						 <div class="form-group">
+						   <label class="control-label col-sm-2">Hospital Address:</label>
+						   <div class="col-sm-10">
+						     <input type="text" class="form-control" data-bind="textInput: userAddModel.hospital_address">
+						   </div>
+						 </div>
+			  		</div>
+			  		
+			  		<div class="row" data-bind="if: showPatientInformation">
+			  			<div class="form-group">
+						   <label class="control-label col-sm-2">Birthday:</label>
+						   <div class="col-sm-10">
+						     <input type="text" class="form-control" data-bind="textInput: userAddModel.birthdate">
+						   </div>
+						 </div>
+						 
+						 <div class="form-group">
+						   <label class="control-label col-sm-2">Sex:</label>
+						   <div class="col-sm-10">
+						     <input type="text" class="form-control" data-bind="textInput: userAddModel.sex">
+						   </div>
+						 </div>
+						 
+						 <div class="form-group">
+						   <label class="control-label col-sm-2">Address:</label>
+						   <div class="col-sm-10">
+						     <input type="text" class="form-control" data-bind="textInput: userAddModel.address">
+						   </div>
+						 </div>
+			  		</div>
+			  		
+		  </div>
+		  
+		  <div class="modal-footer">
+		  		<!-- ko if: userAddModel.id -->
+				<button class="btn btn-success" type="submit" data-bind="click: save">Update</button>
+				<!-- /ko -->
+				
+		  		<!-- ko ifnot: userAddModel.id -->
+		  		<button class="btn btn-success" type="submit" data-bind="click: save">Add</button>
+				<!-- /ko -->
+				
+				<button class="btn btn-danger" type="submit" data-bind="click: cancel">Cancel</button>
+			</div>
+		  
+		</form>
+	</div>
+</div>
