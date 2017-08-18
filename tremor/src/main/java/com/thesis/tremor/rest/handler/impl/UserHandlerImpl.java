@@ -13,7 +13,9 @@ import com.thesis.tremor.beans.PasswordFormBean;
 import com.thesis.tremor.beans.ResultBean;
 import com.thesis.tremor.beans.UserFormBean;
 import com.thesis.tremor.constants.MailConstants;
+import com.thesis.tremor.database.entity.DoctorPatient;
 import com.thesis.tremor.database.entity.User;
+import com.thesis.tremor.database.service.DoctorPatientService;
 import com.thesis.tremor.database.service.UserService;
 import com.thesis.tremor.enums.Color;
 import com.thesis.tremor.enums.UserType;
@@ -37,6 +39,9 @@ public class UserHandlerImpl implements UserHandler {
 	private UserService userService;
 	
 	@Autowired
+	private DoctorPatientService doctorPatientService;
+	
+	@Autowired
 	private EmailUtil emailUtil;
 
 	@Override
@@ -47,6 +52,11 @@ public class UserHandlerImpl implements UserHandler {
 	@Override
 	public ObjectList<User> getUserObjectList(Integer pageNumber, String searchKey) {
 		return userService.findAllWithPagingOrderByName(pageNumber, UserContextHolder.getItemsPerPage(), searchKey);
+	}
+	
+	@Override
+	public ObjectList<User> getPatientObjectListByDoctor(Integer pageNumber, String searchKey, Long doctorId) {
+		return doctorPatientService.findAllPatientsByDoctorWithPagingOrderByName(pageNumber, UserContextHolder.getItemsPerPage(), searchKey, doctorId);
 	}
 	
 	@Override
@@ -78,6 +88,37 @@ public class UserHandlerImpl implements UserHandler {
 			}
 		} else {
 			result = validateForm;
+		}
+		
+		return result;
+	}
+	
+	@Override
+	public ResultBean addPatientToDoctor(Long doctorId, String username, String password) {
+		final ResultBean result;
+		final User doctor = userService.find(doctorId);
+		
+		if(doctor != null && doctor.getUserType().equals(UserType.DOCTOR)) {
+			final User patient = userService.findByUsernameAndPassword(username, password);
+			
+			if(patient != null && patient.getUserType().equals(UserType.PATIENT)) {
+				final DoctorPatient doctorPatient = new DoctorPatient();
+				
+				doctorPatient.setDoctor(doctor);
+				doctorPatient.setPatient(patient);
+				
+				result = new ResultBean();
+				result.setSuccess(doctorPatientService.insert(doctorPatient) != null);
+				if(result.getSuccess()) {
+					result.setMessage(Html.line(Html.text(Color.GREEN, "Successfully") + " added " + Html.text(Color.BLUE, patient.getFormattedName()) + " as patient of " + Html.text(Color.BLUE, doctor.getFormattedName()) + "."));
+				} else {
+					result.setMessage(Html.line(Html.text(Color.RED, "Server Error.") + " Please try again later."));
+				}
+			} else {
+				result = new ResultBean(Boolean.FALSE, Html.line(Html.text(Color.RED, "Failed") + " to load patient. Please re-enter correct credentials."));
+			}
+		} else {
+			result = new ResultBean(Boolean.FALSE, Html.line(Html.text(Color.RED, "Failed") + " to load doctor. Please re-log your account."));
 		}
 		
 		return result;

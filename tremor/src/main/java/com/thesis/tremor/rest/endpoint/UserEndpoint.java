@@ -46,6 +46,14 @@ public class UserEndpoint {
 		return userHandler.getUserObjectList(pageNumber, searchKey);
 	}
 	
+	@GET
+	@Path("/patientlist")
+	@Produces({ MediaType.APPLICATION_JSON })
+	public ObjectList<User> getPatientObjectListByDoctor(@QueryParam("pageNumber") Integer pageNumber, @QueryParam("searchKey") String searchKey,
+			@QueryParam("doctorId") Long doctorId) {
+		return userHandler.getPatientObjectListByDoctor(pageNumber, searchKey, doctorId);
+	}
+	
 	@POST
 	@Path("/save")
 	@Produces({ MediaType.APPLICATION_JSON })
@@ -60,6 +68,14 @@ public class UserEndpoint {
 		}
 		
 		return result;
+	}
+	
+	@POST
+	@Path("/addpatient")
+	@Produces({ MediaType.APPLICATION_JSON })
+	public ResultBean addPatientToDoctor(@FormParam("doctorId") Long doctorId, @FormParam("username") String username,
+			@FormParam("password") String password) {
+		return userHandler.addPatientToDoctor(doctorId, username, password);
 	}
 	
 	@POST
