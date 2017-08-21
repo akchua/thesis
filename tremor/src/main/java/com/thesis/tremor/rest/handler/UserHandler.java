@@ -29,6 +29,8 @@ public interface UserHandler {
 	
 	ResultBean removeUser(Long userId);
 	
+	ResultBean removePatient(Long patientId);
+	
 	ResultBean resetPassword(Long userId);
 	
 	String getEmailOfAllAdmin();

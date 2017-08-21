@@ -99,7 +99,7 @@ public class UserHandlerImpl implements UserHandler {
 		final User doctor = userService.find(doctorId);
 		
 		if(doctor != null && doctor.getUserType().equals(UserType.DOCTOR)) {
-			final User patient = userService.findByUsernameAndPassword(username, password);
+			final User patient = userService.findByUsernameAndPassword(username, EncryptionUtil.getMd5(password));
 			
 			if(patient != null && patient.getUserType().equals(UserType.PATIENT)) {
 				final DoctorPatient doctorPatient = new DoctorPatient();
@@ -185,6 +185,27 @@ public class UserHandlerImpl implements UserHandler {
 			}
 		} else {
 			result = new ResultBean(Boolean.FALSE, Html.line("You " + Html.text(Color.RED, "CANNOT") + " delete your account."));
+		}
+		
+		return result;
+	}
+	
+	@Override
+	public ResultBean removePatient(Long patientId) {
+		final ResultBean result;
+		final DoctorPatient doctorPatient = doctorPatientService.findByDoctorAndPatientId(UserContextHolder.getUser().getId(), patientId);
+		
+		if(doctorPatient != null && doctorPatient.getPatient().getUserType().equals(UserType.PATIENT)) {
+			result = new ResultBean();
+			
+			result.setSuccess(doctorPatientService.delete(doctorPatient));
+			if(result.getSuccess()) {
+				result.setMessage(Html.line(Html.text(Color.GREEN, "Successfully") + " removed patient Mr./Ms. " + Html.text(Color.BLUE, doctorPatient.getPatient().getFirstName() + " " + doctorPatient.getPatient().getLastName()) + " from your list of patients."));
+			} else {
+				result.setMessage(Html.line(Html.text(Color.RED, "Server Error.") + " Please try again later."));
+			}
+		} else {
+			result = new ResultBean(Boolean.FALSE, Html.line(Html.text(Color.RED, "Failed") + " to load patient. Please refresh the page."));
 		}
 		
 		return result;

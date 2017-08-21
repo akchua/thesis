@@ -9,4 +9,5 @@ import com.thesis.tremor.database.entity.DoctorPatient;
  */
 public interface DoctorPatientPrototype extends Prototype<DoctorPatient, Long> {
 
+	DoctorPatient findByDoctorAndPatientId(Long doctorId, Long patientId);
 }

@@ -38,4 +38,9 @@ public class DoctorPatientServiceImpl
 		patients.setTotal(doctorPatients.getTotal());
 		return patients;
 	}
+
+	@Override
+	public DoctorPatient findByDoctorAndPatientId(Long doctorId, Long patientId) {
+		return dao.findByDoctorAndPatientId(doctorId, patientId);
+	}
 }

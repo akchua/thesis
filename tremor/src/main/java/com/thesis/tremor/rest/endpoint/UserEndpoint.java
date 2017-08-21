@@ -86,6 +86,13 @@ public class UserEndpoint {
 	}
 	
 	@POST
+	@Path("/removepatient")
+	@Produces({ MediaType.APPLICATION_JSON })
+	public ResultBean removePatient(@FormParam("patientId") Long patientId) {
+		return userHandler.removePatient(patientId);
+	}
+	
+	@POST
 	@Path("/resetpassword")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public ResultBean resetPassword(@FormParam("userId") Long userId) {

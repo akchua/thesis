@@ -47,4 +47,14 @@ public class DoctorPatientDAOImpl
 		
 		return findAllByCriterion(pageNumber, resultsPerPage, associatedPaths, aliasNames, joinTypes, orders, conjunction);
 	}
+
+	@Override
+	public DoctorPatient findByDoctorAndPatientId(Long doctorId, Long patientId) {
+		final Junction conjunction = Restrictions.conjunction();
+		conjunction.add(Restrictions.eq("isValid", Boolean.TRUE));
+		conjunction.add(Restrictions.eq("doctor.id", doctorId));
+		conjunction.add(Restrictions.eq("patient.id", patientId));
+		
+		return findUniqueResult(null, null, null, conjunction);
+	}
 }
