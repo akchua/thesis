@@ -1,111 +1,115 @@
-<div class="container" data-part="content">
-	<div class="col-sm-3 sidenav text-center">
-		<form>
-			<div class="form-group">
+<div class="modal-dialog modal-xl">
+	<div class="modal-content" >
+	  	<form class="form-horizontal">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" data-bind="click: cancel">&times;</button>
+				<h3 align="center"><span data-bind="text: title"></span></h3>
+			</div>
+			<div class="modal-body">
 			
-                <label class="control-label">Patient's Name: </label><br>
-                <input class="form-control" type="text" readonly><br>
-                
-                <label class="control-label">Birthdate: </label><br>
-                <input class="form-control" type="text" readonly><br>
-                
-                <label class="control-label">Sex: </label><br>
-                <input class="form-control" type="text" readonly><br>
-                
-                <label class="control-label">Address: </label><br>
-                <input class="form-control" type="text" readonly><br>
-                
-            </div>
-		</form>
-	</div>
-	<div class="col-sm-9">
-		<!-- Start of Accordion Bootstrap Shit -->
-		<div class="row">
-	        <div class="fancy-collapse-panel">
-	            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-	                <div class="panel panel-default">
-	                    <div class="panel-heading" role="tab" id="headingOne">
-	                        <h4 class="panel-title">
-	                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">July 26, 2017
-	                            </a>
-	                        </h4>
-	                    </div>
-	                    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-	                        <div class="panel-body">
-	                            <!-- This is the content of a certain Session Upload -->         
-								<table class="table table-bordered table-hover table-responsive">
-									<thead>
-										<tr>
-											<th colspan="3">Left</th>
-											<th colspan="3">Right</th>
-										</tr>
-										<tr>
-											<th></th>
-											<th>Amplitude</th>
-											<th>Frequency</th>
-											<th></th>
-											<th>Amplitude</th>
-											<th>Frequency</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>Resting</td>
-											<td></td>
-											<td></td>
-											<td>Resting</td>
-											<td></td>
-											<td></td>
-										</tr>
-										<tr>
-											<td>Postural</td>
-											<td></td>
-											<td></td>
-											<td>Postural</td>
-											<td></td>
-											<td></td>
-										</tr>
-										<tr>
-											<td>Task-Specific</td>
-											<td colspan="2">[IMAGE]</td>
-											<td>Task-Specific</td>
-											<td colspan="2">[IMAGE]</td>
-										</tr>
-										
-									</tbody>
-								</table>
-	                    	</div>
-	                    </div>
-	                </div>
-	                <div class="panel panel-default">
-	                    <div class="panel-heading" role="tab" id="headingTwo">
-	                        <h4 class="panel-title">
-	                            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Collapsible Group Item #2
-	                            </a>
-	                        </h4>
-	                    </div>
-	                    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-	                        <div class="panel-body">
-	                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
-	                        </div>
-	                    </div>
-	                </div>
-	                <div class="panel panel-default">
-	                    <div class="panel-heading" role="tab" id="headingThree">
-	                        <h4 class="panel-title">
-	                            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">Collapsible Group Item #3
-	                            </a>
-	                        </h4>
-	                    </div>
-	                    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-	                        <div class="panel-body">
-	                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
-	                        </div>
-	                    </div>
-	                </div>
-	            </div>
-	        </div>
+				<div class="form-group">
+				  <label class="control-label col-sm-2">User Type:</label>
+				  <div class="col-sm-10">
+				  	<select disabled="disabled" data-bind="options: userTypeList, optionsValue: 'name', optionsText: 'displayName',value: PatientInfoModel.userType" class="form-control select-lg disabled" id="userType"></select>
+				  </div>
+				</div>
+				
+				  
+				  <div class="form-group">
+				    <label class="control-label col-sm-2">First Name:</label>
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" data-bind="textInput: PatientInfoModel.firstName">
+				    </div>
+				  </div>
+				  
+				  <div class="form-group">
+				    <label class="control-label col-sm-2">Last Name:</label>
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" data-bind="textInput: PatientInfoModel.lastName">
+				    </div>
+				  </div>
+				  
+				  <div class="form-group">
+				    <label class="control-label col-sm-2">Username:</label>
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" data-bind="textInput: PatientInfoModel.username">
+				    </div>
+				  </div>
+				  
+				  <!-- ko ifnot: PatientInfoModel.id -->
+				  <div class="form-group">
+				    <label class="control-label col-sm-2">Password:</label>
+				    <div class="col-sm-10">
+				      <input type="password" class="form-control" data-bind="textInput: PatientInfoModel.password">
+				      <p class="help-block">Password should be at least 6 to 20 characters</p>
+				    </div>
+				  </div>
+				  
+				  <div class="form-group">
+				    <label class="control-label col-sm-2">Confirm Password:</label>
+				    <div class="col-sm-10">
+				      <input type="password" class="form-control" data-bind="textInput: PatientInfoModel.confirmPassword">
+				    </div>
+				  </div>
+				  <!-- /ko -->
+				  
+				  <div class="form-group">
+				    <label class="control-label col-sm-2">Email Address:</label>
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" data-bind="textInput: PatientInfoModel.emailAddress">
+				    </div>
+				  </div>
+				  
+				  <div class="form-group">
+				    <label class="control-label col-sm-2">Contact Number:</label>
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" data-bind="textInput: PatientInfoModel.contactNumber">
+				    </div>
+				  </div>
+				  
+				  <div class="form-group">
+				    <label class="control-label col-sm-2">Items Per Page:</label>
+				    <div class="col-sm-10">
+				      <input type="text" class="form-control" data-bind="textInput: PatientInfoModel.itemsPerPage">
+				    </div>
+				  </div>
+			  		
+		  			<div class="form-group">
+					   <label class="control-label col-sm-2">Birthday:</label>
+					   <div class="col-sm-10">
+					     <input type="text" class="form-control" data-bind="textInput: PatientInfoModel.birthdate">
+					   </div>
+					 </div>
+					 
+					 <div class="form-group">
+					   <label class="control-label col-sm-2">Sex:</label>
+					   <div class="col-sm-10">
+					     <input type="text" class="form-control" data-bind="textInput: PatientInfoModel.sex">
+					   </div>
+					 </div>
+					 
+					 <div class="form-group">
+					   <label class="control-label col-sm-2">Address:</label>
+					   <div class="col-sm-10">
+					     <input type="text" class="form-control" data-bind="textInput: PatientInfoModel.address">
+					   </div>
+					 </div>
+		  		</div>
+			  		
 
-        </div>
+		  
+		  <div class="modal-footer">
+		  		<!-- ko if: PatientInfoModel.id -->
+				<button class="btn btn-success" type="submit" data-bind="click: save">Update</button>
+				<!-- /ko -->
+				
+		  		<!-- ko ifnot: PatientInfoModel.id -->
+		  		<button class="btn btn-success" type="submit" data-bind="click: save">Add</button>
+				<!-- /ko -->
+				
+				<button class="btn btn-danger" type="submit" data-bind="click: cancel">Cancel</button>
+			</div>
+		  
+		</form>
 	</div>
 </div>

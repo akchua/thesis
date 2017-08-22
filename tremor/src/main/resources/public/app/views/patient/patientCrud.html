@@ -1,18 +1,50 @@
 <div class="container" data-part="content">
-    <div>
-        <div class="pull right">
-            <input type="search"><span class="glyphicon glyphicon-search"></span><br><br>
+    <div class="row pull-right">
+        <div class="col-md-10">
+        	<input data-bind="value: searchKey" type="text" class="form-control" placeholder="Search">
         </div>
-        <div>
-            <ul class="list-group">
-                <li class="list-group-item"><span>Patient Name 1</span><span class="pull-right"> <span class="glyphicon glyphicon-edit"></span><span class="glyphicon glyphicon-remove"></span></span>
-                </li>
-            </ul>
-        </div>
-        <div>
-            <div class="btn-group" role="group">
-                <button class="btn btn-default" type="button">Add a Patient</button>
-            </div>
-        </div>
-    </div>
+        <div class="col-md-2">
+		    <span class="input-group-btn">
+		    	<button data-bind="click: search" type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+		    </span>
+	    </div>
+	</div>
+	<br />
+	
+	<div class="row">
+		<div class="table-responsive">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th class = "text-center">ID</th>
+						<th>Name</th>
+						<th>User Type</th>
+					</tr>
+				</thead>
+				
+				<tbody data-bind="foreach: { data: patientList, as: 'user' }">
+					<tr>
+						<td data-bind="text: user.id" class = "text-center"></td>
+						<td data-bind="click: function() { $parent.view(user.id) }, text: user.formattedName" role="button"></td>
+						<td data-bind="text: user.userType.displayName"></td>
+						
+						<td>
+							<div class="btn-group pull-right">
+								<button data-bind="click: function() { $parent.resetPassword(user.id, user.lastName, user.firstName) }, enable: $parent.enableReset " type="button" class="btn btn-warning btn-sm" title="Reset Password"><i class="fa fa-refresh"></i></button>
+								<button data-bind="click: function() { $parent.remove(user.id, user.lastName, user.firstName) }" type="button" class="btn btn-danger btn-sm" title="Remove"><i class="fa fa-times"></i></button>
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	
+	<div class="row">
+		<div data-bind="widget: { kind: 'pager', config: { numberOfPagesToShow: 5, itemsPerPage: itemsPerPage, totalItems: totalItems, currentPage: currentPage } }" class="col-md-12"></div>
+	</div>
+	
+	<div class="row">
+		<button class="btn btn-default" data-bind="click: add" type="button" >Add a Patient</button>
+	</div>
 </div>

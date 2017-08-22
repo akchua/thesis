@@ -1,14 +1,15 @@
 <div class="container" data-part="content">
-    <div class="row">
-        <input data-bind="value: searchKey" type="text" class="form-control" placeholder="Search">
-	    <span class="input-group-btn">
-	    	<button data-bind="click: search" type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-	    </span>
+    <div class="row pull-right">
+        <div class="col-md-10">
+        	<input data-bind="value: searchKey" type="text" class="form-control" placeholder="Search">
+        </div>
+        <div class="col-md-2">
+		    <span class="input-group-btn">
+		    	<button data-bind="click: search" type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+		    </span>
+	    </div>
 	</div>
-	
-	<div class="row">
-		<div data-bind="widget: { kind: 'pager', config: { numberOfPagesToShow: 5, itemsPerPage: itemsPerPage, totalItems: totalItems, currentPage: currentPage } }" class="col-md-12"></div>
-	</div>
+	<br />
 	
 	<div class="row">
 		<div class="table-responsive">
@@ -37,6 +38,10 @@
 				</tbody>
 			</table>
 		</div>
+	</div>
+	
+	<div class="row">
+		<div data-bind="widget: { kind: 'pager', config: { numberOfPagesToShow: 5, itemsPerPage: itemsPerPage, totalItems: totalItems, currentPage: currentPage } }" class="col-md-12"></div>
 	</div>
 	
 	<div class="row">

@@ -47,8 +47,10 @@
 		<property name="annotatedClasses">
 			<list>
 				<value>com.thesis.tremor.database.entity.User</value>
+				<value>com.thesis.tremor.database.entity.DoctorPatient</value>
 			</list>
 		</property>
+		
 	</bean>
 
 	<bean class="org.springframework.orm.hibernate4.HibernateTransactionManager" depends-on="sessionFactory" id="transactionManager">

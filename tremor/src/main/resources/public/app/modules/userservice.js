@@ -18,6 +18,17 @@ define(['jquery'], function ($) {
 				}
 			});
 		},
+		
+		getPatientList: function(currentPage, searchKey, doctorId) {
+			return $.ajax({
+				url: '/services/user/patientlist',
+				data: {
+					pageNumber: currentPage - 1,
+					searchKey: searchKey,
+					doctorId: doctorId
+				}
+			});
+		},
     	
     	getUserTypeList: function() {
     		return $.ajax({
@@ -35,6 +46,18 @@ define(['jquery'], function ($) {
     		});
     	},
     	
+    	addPatient: function(doctorId, username, password) {
+    		return $.ajax({
+    			url: '/services/user/addpatient',
+    			method: 'POST',
+    			data: {
+    				doctorId: doctorId,
+    				username: username,
+    				password: password
+    			} 
+    		});
+    	},
+    	
     	removeUser: function(userId) {
     		return $.ajax({
     			url: '/services/user/remove',
@@ -43,6 +66,16 @@ define(['jquery'], function ($) {
     				userId: userId
     			}
     		});
-    	}
+    	},
+    	
+    	resetPassword: function(userId) {
+    		return $.ajax({
+    			url: '/services/user/resetpassword',
+    			method: 'POST',
+    			data: {
+    				userId: userId
+    			}
+    		});
+    	},
 	};
 });
