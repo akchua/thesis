@@ -94,9 +94,9 @@ public class UserHandlerImpl implements UserHandler {
 	}
 	
 	@Override
-	public ResultBean addPatientToDoctor(Long doctorId, String username, String password) {
+	public ResultBean addPatient(String username, String password) {
 		final ResultBean result;
-		final User doctor = userService.find(doctorId);
+		final User doctor = UserContextHolder.getUser().getUserEntity();
 		
 		if(doctor != null && doctor.getUserType().equals(UserType.DOCTOR)) {
 			final User patient = userService.findByUsernameAndPassword(username, EncryptionUtil.getMd5(password));

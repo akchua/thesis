@@ -29,7 +29,7 @@ public class DoctorPatient extends BaseObject {
 	
 	private User patient;
 
-	@ManyToOne(targetEntity = Session.class, fetch = FetchType.LAZY)
+	@ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
 	@JoinColumn(name = "doctor_id")
 	@Where(clause = "valid = 1")
 	@NotFound(action = NotFoundAction.IGNORE)
@@ -41,7 +41,7 @@ public class DoctorPatient extends BaseObject {
 		this.doctor = doctor;
 	}
 
-	@ManyToOne(targetEntity = Session.class, fetch = FetchType.LAZY)
+	@ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
 	@JoinColumn(name = "patient_id")
 	@Where(clause = "valid = 1")
 	@NotFound(action = NotFoundAction.IGNORE)

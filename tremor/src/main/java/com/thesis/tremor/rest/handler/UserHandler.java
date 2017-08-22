@@ -23,7 +23,7 @@ public interface UserHandler {
 	
 	ResultBean createUser(UserFormBean userForm);
 	
-	ResultBean addPatientToDoctor(Long doctorId, String username, String password);
+	ResultBean addPatient(String username, String password);
 	
 	ResultBean updateUser(UserFormBean userForm);
 	

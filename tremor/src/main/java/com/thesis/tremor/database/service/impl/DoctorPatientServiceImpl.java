@@ -2,7 +2,6 @@ package com.thesis.tremor.database.service.impl;
 
 import java.util.stream.Collectors;
 
-import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,7 +30,7 @@ public class DoctorPatientServiceImpl
 	public ObjectList<User> findAllPatientsByDoctorWithPagingOrderByName(int pageNumber, int resultsPerPage,
 			String searchKey, Long doctorId) {
 		final ObjectList<User> patients = new ObjectList<User>();
-		final ObjectList<DoctorPatient> doctorPatients = dao.findAllByDoctorWithPagingAndOrder(pageNumber, resultsPerPage, searchKey, doctorId, new Order[] { Order.asc("patientz.lastName, patientz.firstName") });
+		final ObjectList<DoctorPatient> doctorPatients = dao.findAllByDoctorWithPagingAndOrder(pageNumber, resultsPerPage, searchKey, doctorId, null);
 		patients.setList(doctorPatients.getList().stream()
 								.map(dp -> dp.getPatient())
 								.collect(Collectors.toList()));

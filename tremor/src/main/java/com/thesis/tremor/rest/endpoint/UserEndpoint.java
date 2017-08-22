@@ -73,9 +73,8 @@ public class UserEndpoint {
 	@POST
 	@Path("/addpatient")
 	@Produces({ MediaType.APPLICATION_JSON })
-	public ResultBean addPatientToDoctor(@FormParam("doctorId") Long doctorId, @FormParam("username") String username,
-			@FormParam("password") String password) {
-		return userHandler.addPatientToDoctor(doctorId, username, password);
+	public ResultBean addPatient(@FormParam("username") String username, @FormParam("password") String password) {
+		return userHandler.addPatient(username, password);
 	}
 	
 	@POST
