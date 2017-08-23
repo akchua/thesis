@@ -46,12 +46,11 @@ define(['jquery'], function ($) {
     		});
     	},
     	
-    	addPatient: function(doctorId, username, password) {
+    	addPatient: function(username, password) {
     		return $.ajax({
     			url: '/services/user/addpatient',
     			method: 'POST',
     			data: {
-    				doctorId: doctorId,
     				username: username,
     				password: password
     			} 

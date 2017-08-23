@@ -6,8 +6,6 @@ define(['durandal/app','knockout', 'plugins/dialog', 'modules/userservice'],
 		this.title = title;
 		this.userTypeList = ko.observable();
 		
-		this.enableReset = ko.observable(false);
-		
 		this.showDoctorInformation = ko.observable(false);
 		this.showPatientInformation = ko.observable(false);
 		

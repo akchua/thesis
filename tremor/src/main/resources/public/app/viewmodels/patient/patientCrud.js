@@ -1,7 +1,10 @@
-define(['durandal/app','knockout', 'modules/userservice', 'viewmodels/patient/patientInfo', 'modules/securityservice'], 
-		function (app, ko, userService, patientInfo, securityService) {
+define(['durandal/app','knockout', 'modules/userservice', 'modules/securityservice',
+	'viewmodels/patient/patientAdd', 'viewmodels/patient/patientAddEx'], 
+		function (app, ko, userService, securityService, 
+				patientAdd, patientAddEx) {
 	
 	var PatientCrud = function() {
+		this.doctorId = ko.observable();
 		this.enableReset = ko.observable(true);
 		this.patientList = ko.observable();
     	
@@ -23,8 +26,10 @@ define(['durandal/app','knockout', 'modules/userservice', 'viewmodels/patient/pa
     	var self = this;
     	
     	securityService.getUser().done(function(user) {
-    		self.DoctorInfoModel.id(user.id);
+    		self.doctorId(user.id);
         });
+    	
+    	alert(self.doctorId);
     	
     	
     	self.currentPage(1);
@@ -38,7 +43,7 @@ define(['durandal/app','knockout', 'modules/userservice', 'viewmodels/patient/pa
     PatientCrud.prototype.refreshPatientList = function() {
     	var self = this;
     	
-    	userService.getPatientList(self.currentPage(), self.searchKey(), self.DoctorInfoModel.id).done(function(data) {
+    	userService.getPatientList(self.currentPage(), self.searchKey(), self.doctorId).done(function(data) {
     		self.patientList(data.list);
     		self.totalItems(data.total);
     	});
@@ -55,7 +60,7 @@ define(['durandal/app','knockout', 'modules/userservice', 'viewmodels/patient/pa
     	var self = this;
     	
     	userService.getUser(userId).done(function(user) {
-    		patientInfo.show(user,  'Edit User').done(function() {
+    		patientAdd.show(user,  'Edit User').done(function() {
         		self.refreshUserList();
         	});
     	});
@@ -64,7 +69,15 @@ define(['durandal/app','knockout', 'modules/userservice', 'viewmodels/patient/pa
     PatientCrud.prototype.add = function() {
     	var self = this;
     	
-    	patientInfo.show(new Object(),  'Create User').done(function() {
+    	patientAdd.show(new Object(),  'Add a New Patient').done(function() {
+    		self.refreshPatientList();
+    	});
+    };
+    
+    PatientCrud.prototype.addExisting = function() {
+    	var self = this;
+    	
+    	patientAddEx.show(new Object(),  'Add an Existing Patient').done(function() {
     		self.refreshPatientList();
     	});
     };
