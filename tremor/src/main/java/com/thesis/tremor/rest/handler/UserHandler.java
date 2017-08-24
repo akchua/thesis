@@ -19,7 +19,7 @@ public interface UserHandler {
 	
 	ObjectList<User> getUserObjectList(Integer pageNumber, String searchKey);
 	
-	ObjectList<User> getPatientObjectListByDoctor(Integer pageNumber, String searchKey, Long doctorId);
+	ObjectList<User> getPatientObjectListByDoctorId(Integer pageNumber, String searchKey, Long doctorId);
 	
 	ResultBean createUser(UserFormBean userForm);
 	

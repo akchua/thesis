@@ -4,7 +4,6 @@ define(['durandal/app','knockout', 'modules/userservice', 'modules/securityservi
 				patientAdd, patientAddEx) {
 	
 	var PatientCrud = function() {
-		this.doctorId = ko.observable();
 		this.enableReset = ko.observable(true);
 		this.patientList = ko.observable();
     	
@@ -16,21 +15,10 @@ define(['durandal/app','knockout', 'modules/userservice', 'modules/securityservi
 		this.totalItems = ko.observable();
 		this.currentPage = ko.observable(1);
 		this.currentPageSubscription = null;
-		
-		this.DoctorInfoModel = {
-				id: ko.observable()
-		};
 	};
 	
 	PatientCrud.prototype.activate = function() {
     	var self = this;
-    	
-    	securityService.getUser().done(function(user) {
-    		self.doctorId(user.id);
-        });
-    	
-    	alert(self.doctorId);
-    	
     	
     	self.currentPage(1);
 		self.currentPageSubscription = self.currentPage.subscribe(function() {
@@ -42,8 +30,7 @@ define(['durandal/app','knockout', 'modules/userservice', 'modules/securityservi
     
     PatientCrud.prototype.refreshPatientList = function() {
     	var self = this;
-    	
-    	userService.getPatientList(self.currentPage(), self.searchKey(), self.doctorId).done(function(data) {
+    	userService.getPatientList(self.currentPage(), self.searchKey(), app.user.id).done(function(data) {
     		self.patientList(data.list);
     		self.totalItems(data.total);
     	});

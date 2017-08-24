@@ -55,7 +55,7 @@ public class UserHandlerImpl implements UserHandler {
 	}
 	
 	@Override
-	public ObjectList<User> getPatientObjectListByDoctor(Integer pageNumber, String searchKey, Long doctorId) {
+	public ObjectList<User> getPatientObjectListByDoctorId(Integer pageNumber, String searchKey, Long doctorId) {
 		return doctorPatientService.findAllPatientsByDoctorWithPagingOrderByName(pageNumber, UserContextHolder.getItemsPerPage(), searchKey, doctorId);
 	}
 	

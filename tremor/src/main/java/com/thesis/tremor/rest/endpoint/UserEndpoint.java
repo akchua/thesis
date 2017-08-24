@@ -51,7 +51,7 @@ public class UserEndpoint {
 	@Produces({ MediaType.APPLICATION_JSON })
 	public ObjectList<User> getPatientObjectListByDoctor(@QueryParam("pageNumber") Integer pageNumber, @QueryParam("searchKey") String searchKey,
 			@QueryParam("doctorId") Long doctorId) {
-		return userHandler.getPatientObjectListByDoctor(pageNumber, searchKey, doctorId);
+		return userHandler.getPatientObjectListByDoctorId(pageNumber, searchKey, doctorId);
 	}
 	
 	@POST
