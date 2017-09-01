@@ -5,6 +5,7 @@ define(['durandal/app','knockout', 'plugins/dialog', 'modules/userservice'],
 		this.user = user;
 		this.title = title;
 		this.userTypeList = ko.observable();
+		this.sexList = ko.observableArray(['Male', 'Female']);
 		
 		this.showDoctorInformation = ko.observable(false);
 		this.showPatientInformation = ko.observable(false);

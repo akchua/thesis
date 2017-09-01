@@ -92,3 +92,53 @@
 .login-help{
   font-size: 12px;
 }
+
+
+/*For main page */
+.hero{
+  background-size:cover;
+  background:url('../img/medical_landing.jpg') no-repeat center;
+}
+
+h1.tremorPro{
+	font-family: 'Graduate', cursive;
+	text-shadow: 2px 4px 3px rgba(0,0,0,0.3);
+	color: ghostwhite;
+}
+
+.big-icon {
+    font-size: 70px;
+}
+
+p {
+	text-align: center; 
+}
+
+h3.title{
+	font-family: 'Graduate', cursive;
+	text-shadow: 4px 3px 0px #fff, 9px 8px 0px rgba(0,0,0,0.15);
+	font-size: 20 px;
+	color: darkcyan;
+	text-align: center; 
+}
+
+
+/* For Session Page */
+@media (min-width: 768px) {
+  .sidebar-nav .navbar .navbar-collapse {
+    padding: 0;
+    max-height: none;
+  }
+  .sidebar-nav .navbar ul {
+    float: none;
+    display: block;
+  }
+  .sidebar-nav .navbar li {
+    float: none;
+    display: block;
+  }
+  .sidebar-nav .navbar li a {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+}

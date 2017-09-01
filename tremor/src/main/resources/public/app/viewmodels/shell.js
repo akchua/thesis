@@ -3,7 +3,8 @@
 	var homeroute = [
 	    { route: ['', 'home'], moduleId: 'viewmodels/home/home', title: 'Home', nav: true },
 	    { route: ['patients'], moduleId: 'viewmodels/patient/patientCrud', title: 'Patients', nav: true },
-	    { route: ['users'], moduleId: 'viewmodels/users/usersCrud', title: 'Users', nav: true }
+	    { route: ['users'], moduleId: 'viewmodels/users/usersCrud', title: 'Users', nav: true },
+	    { route: ['session'], moduleId: 'viewmodels/session/sessionHome', title: 'Session', nav: true }
 	];
 	
 	var Shell = function() {

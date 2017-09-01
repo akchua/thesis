@@ -33,14 +33,16 @@
 				  <div class="form-group">
 				    <label class="control-label col-sm-2">Username:</label>
 				    <div class="col-sm-10">
+				      <!-- ko ifnot: PatientAddModel.id -->
 				      <input type="text" class="form-control" data-bind="textInput: PatientAddModel.username">
+				      <!-- /ko -->
 				      <!-- ko if: PatientAddModel.id -->
 				      <input type="text" class="form-control" data-bind="textInput: PatientAddModel.username" disabled="disabled">
-				    	<!-- /ko -->
+				      <!-- /ko -->
 				    </div>
 				  </div>
 					
-					<!-- ko if: PatientAddModel.id -->
+				  <!-- ko ifnot: PatientAddModel.id -->
 				  <div class="form-group">
 				    <label class="control-label col-sm-2">Password:</label>
 				    <div class="col-sm-10">
@@ -81,7 +83,7 @@
 		  			<div class="form-group">
 					   <label class="control-label col-sm-2">Birthday:</label>
 					   <div class="col-sm-10">
-					     <input type="text" class="form-control" data-bind="textInput: PatientAddModel.birthdate">
+					     <input type="date" class="form-control" data-bind="textInput: PatientAddModel.birthdate">
 					   </div>
 					 </div>
 					 
