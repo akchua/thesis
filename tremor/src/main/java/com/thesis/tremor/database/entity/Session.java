@@ -5,10 +5,17 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
+
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
+import org.hibernate.annotations.Where;
 
 import com.thesis.tremor.database.entity.base.BaseObject;
 import com.thesis.tremor.utility.DateUtil;
@@ -27,7 +34,21 @@ public class Session extends BaseObject {
 
 	public static final String TABLE_NAME = "session";
 	
+	private User patient;
+	
 	private Date dateDone;
+	
+	@ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
+	@JoinColumn(name = "patient_id")
+	@Where(clause = "valid = 1")
+	@NotFound(action = NotFoundAction.IGNORE)
+	public User getPatient() {
+		return patient;
+	}
+
+	public void setPatient(User patient) {
+		this.patient = patient;
+	}
 
 	@Temporal(value = TemporalType.TIMESTAMP)
 	@Column(name = "requested_on")

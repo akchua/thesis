@@ -6,6 +6,8 @@ import org.glassfish.jersey.server.ResourceConfig;
 import org.springframework.stereotype.Component;
 
 import com.thesis.tremor.rest.endpoint.SecurityEndpoint;
+import com.thesis.tremor.rest.endpoint.SessionEndpoint;
+import com.thesis.tremor.rest.endpoint.TestEndpoint;
 import com.thesis.tremor.rest.endpoint.UserEndpoint;
 
 /**
@@ -21,5 +23,7 @@ public class JerseyConfig extends ResourceConfig {
 		
 		register(SecurityEndpoint.class);
 		register(UserEndpoint.class);
+		register(SessionEndpoint.class);
+		register(TestEndpoint.class);
 	}
 }
