@@ -70,5 +70,4 @@ public class SessionEndpoint {
 		System.out.println(password);
 		return sessionHandler.saveSession(new SessionFormBean(), username, password);
 	}
-	
 }

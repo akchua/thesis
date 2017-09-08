@@ -3,6 +3,7 @@ package com.thesis.tremor.database.entity;
 import java.time.Duration;
 
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -10,6 +11,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -41,6 +43,10 @@ public class Test extends BaseObject {
 	private String name;
 	
 	private Long duration;
+	
+	private Hand leftHand;
+	
+	private Hand rightHand;
 
 	@ManyToOne(targetEntity = Session.class, fetch = FetchType.LAZY)
 	@JoinColumn(name = "session_id")
@@ -87,5 +93,27 @@ public class Test extends BaseObject {
 
 	public void setDuration(Long duration) {
 		this.duration = duration;
+	}
+
+	@OneToOne(targetEntity = Hand.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@Where(clause = "valid = 1")
+	@NotFound(action = NotFoundAction.IGNORE)
+	public Hand getLeftHand() {
+		return leftHand;
+	}
+
+	public void setLeftHand(Hand leftHand) {
+		this.leftHand = leftHand;
+	}
+
+	@OneToOne(targetEntity = Hand.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@Where(clause = "valid = 1")
+	@NotFound(action = NotFoundAction.IGNORE)
+	public Hand getRightHand() {
+		return rightHand;
+	}
+
+	public void setRightHand(Hand rightHand) {
+		this.rightHand = rightHand;
 	}
 }
