@@ -48,6 +48,10 @@
 			<list>
 				<value>com.thesis.tremor.database.entity.User</value>
 				<value>com.thesis.tremor.database.entity.DoctorPatient</value>
+				<value>com.thesis.tremor.database.entity.Session</value>
+				<value>com.thesis.tremor.database.entity.Test</value>
+				<value>com.thesis.tremor.database.entity.TestImage</value>
+				<value>com.thesis.tremor.database.entity.Hand</value>
 			</list>
 		</property>
 		
