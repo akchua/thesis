@@ -70,7 +70,25 @@
     	
             <div class="col-md-2">
 				<h3 class="title">Account Details:</h3>
-				<p><i class="fa fa-user-plus big-icon" aria-hidden="true"></i></p>
+				
+				<!-- <div data-bind="if: isAdmin"> -->
+				<!-- ko if: isAdmin -->
+					<p><i class="fa fa-user-plus big-icon" aria-hidden="true"></i></p>
+				<!-- /ko -->
+				<!-- </div> -->
+				
+				<!-- <div data-bind="if: isPatient"> -->
+				<!-- ko if: isPatient -->
+					<p><i class="fa fa-user big-icon" aria-hidden="true"></i></p>
+				<!-- /ko -->
+				<!-- </div> -->
+				
+				<!-- <div data-bind="if: isDoctor"> -->
+				<!-- ko if: isDoctor -->
+					<p><i class="fa fa-user-md big-icon" aria-hidden="true"></i></p>
+				<!-- /ko -->
+				<!-- </div> -->
+				
 				<p data-bind="text: userDetails.fullName"></p>
 				<p data-bind="text: userDetails.userType"></p>
             </div>
@@ -99,7 +117,7 @@
 	<br />
         <div class="row">
             <div class="col-md-6">
-                <h4> © TremorPro 2017</h4>
+                <h4> &#9400; TremorPro 2017</h4>
         	</div>
         </div>
     </footer>
