@@ -49,7 +49,7 @@
 				<value>com.thesis.tremor.database.entity.User</value>
 				<value>com.thesis.tremor.database.entity.DoctorPatient</value>
 				<value>com.thesis.tremor.database.entity.Session</value>
-				<value>com.thesis.tremor.database.entity.SessionTest</value>
+				<value>com.thesis.tremor.database.entity.Test</value>
 			</list>
 		</property>
 		

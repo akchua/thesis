@@ -1,10 +1,19 @@
 ﻿define(['plugins/router', 'durandal/app', 'knockout', 'modules/securityservice'], 
 		function (router, app, ko, securityService) {
 	var homeroute = [
-	    { route: ['', 'home'], moduleId: 'viewmodels/home/home', title: 'Home', nav: true },
-	    { route: ['patients'], moduleId: 'viewmodels/patient/patientCrud', title: 'Patients', nav: true },
-	    { route: ['users'], moduleId: 'viewmodels/users/usersCrud', title: 'Users', nav: true },
-	    { route: ['session'], moduleId: 'viewmodels/session/sessionHome', title: 'Session', nav: true }
+	    { route: ['', 'home'], moduleId: 'viewmodels/home/home', title: 'Home', nav: true }
+	];
+	
+	var patientroute = [
+		 { route: ['patients'], moduleId: 'viewmodels/patient/patientCrud', title: 'Patients', nav: true }
+	];
+	
+	var userroute = [
+		 { route: ['users'], moduleId: 'viewmodels/users/usersCrud', title: 'Users', nav: true }
+	];
+	
+	var sessionroute = [
+	    { route: 'session/:id', moduleId: 'viewmodels/session/session', title: 'Session', nav: true, hash: '#session' }
 	];
 	
 	var Shell = function() {
@@ -32,7 +41,15 @@
     		
     		switch(app.user.userType.name) {
 	    		case 'ADMINISTRATOR':
-	    			//self.routes = self.routes.concat(testroute);
+	    			self.routes = self.routes.concat(patientroute);
+	    			self.routes = self.routes.concat(userroute);
+	    			self.routes = self.routes.concat(sessionroute);
+	    			break;
+	    		case 'PATIENT':
+	    			self.routes= self.routes.concat(sessionroute);
+	    			break;
+	    		case 'DOCTOR':
+	    			self.routes = self.routes.concat(patientroute);
 	    			break;
     		}
 		}

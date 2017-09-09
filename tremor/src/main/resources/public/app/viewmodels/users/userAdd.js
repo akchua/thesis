@@ -81,8 +81,6 @@ define(['durandal/app','knockout', 'plugins/dialog', 'modules/userservice'],
     UserAdd.prototype.save = function() {
     	var self = this;
     	
-    	console.log(self.userAddModel);
-    	
        userService.saveUser(ko.toJSON(self.userAddModel)).done(function(result) {
         	if(result.success) {
         		dialog.close(self);	

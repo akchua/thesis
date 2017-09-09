@@ -1,5 +1,5 @@
-define(['durandal/app','knockout', 'modules/userservice', 'viewmodels/users/userAdd'], 
-		function (app, ko, userService, userAdd) {
+define(['plugins/router', 'durandal/app','knockout', 'modules/userservice', 'viewmodels/users/userAdd'], 
+		function (router, app, ko, userService, userAdd) {
 	
 	var UsersCrud = function() {
 		this.enableReset = ko.observable(true);
@@ -24,6 +24,7 @@ define(['durandal/app','knockout', 'modules/userservice', 'viewmodels/users/user
 		});
 		
 		self.refreshUserList();
+
     };
     
     UsersCrud.prototype.refreshUserList = function() {
@@ -50,6 +51,13 @@ define(['durandal/app','knockout', 'modules/userservice', 'viewmodels/users/user
         		self.refreshUserList();
         	});
     	});
+    };
+    
+    //VIEWING SESSION OF PATIENT
+    UsersCrud.prototype.viewSession = function(patientId) {
+    	var self= this;
+    	
+    	router.navigate('#session/' + patientId);
     };
     
     UsersCrud.prototype.add = function() {
