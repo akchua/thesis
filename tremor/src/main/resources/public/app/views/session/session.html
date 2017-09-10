@@ -3,14 +3,20 @@
 	  <div class="col-md-4">
 	    <div class="sidebar-nav">
 	      <div class="navbar navbar-default" role="navigation">
-	          <ul class="nav navbar-nav">
-	            <li><a href="#">Session 1 <span class="badge">Date</span></a></li>
+	          <ul class="nav navbar-nav" data-bind="foreach: { data: sessionList, as: 'session' }">
+	            <li data-bind="click: function() { $parent.showTests(session.id) }"><a href="#">Session <span data-bind="text: session.id"></span><span class="badge pull-right" data-bind="text: session.formattedDateDone"></span></a></li>
 	          </ul>
 	      </div>
 	    </div>
 	  </div>
 	  
 	  <div class="col-md-8">
+	 	 <!-- ko ifnot: isSessionClicked -->
+	  		<span>Click on one of the sessions to view the test.</span>
+	  	<!-- /ko -->
+	  	
+	  	<!--ko compose: testList--><!--/ko-->
+	  	
 	  </div>
 	  
 	</div>

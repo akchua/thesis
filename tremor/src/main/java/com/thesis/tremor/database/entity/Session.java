@@ -51,7 +51,7 @@ public class Session extends BaseObject {
 	}
 
 	@Temporal(value = TemporalType.TIMESTAMP)
-	@Column(name = "requested_on")
+	@Column(name = "date_done")
 	public Date getDateDone() {
 		return dateDone;
 	}

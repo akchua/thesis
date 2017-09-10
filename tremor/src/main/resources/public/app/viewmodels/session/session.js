@@ -1,8 +1,12 @@
-define(['plugins/router', 'durandal/app','knockout', 'modules/session'], 
-		function (router, app, ko, session) {
+define(['plugins/router', 'durandal/app','knockout', 'durandal/activator',
+	'modules/session', 'viewmodels/session/test'], 
+		function (router, app, ko, activator, session, Test) {
 	
-	var Session = function() {
+	var Session = function(sessionId) {
 		this.patientId = ko.observable();
+		
+		this.isSessionClicked = ko.observable(false);
+		this.activeSession = ko.observable();
 		
 		this.itemsPerPage = ko.observable(app.user.itemsPerPage);
 		this.currentPage = ko.observable(1);
@@ -11,7 +15,14 @@ define(['plugins/router', 'durandal/app','knockout', 'modules/session'],
 		this.searchTo = ko.observable();
 		
 		this.sessionDate = ko.observable();
+		
+		this.sessionList = ko.observable();
+		this.totalItems = ko.observable();
+		
+		/*this.testList = ko.observable(new Test(sessionId));*/
+		this.testList = activator.create();
 	};
+	
 	
 	Session.prototype.activate = function (patientId) {
 		var self = this;
@@ -25,16 +36,22 @@ define(['plugins/router', 'durandal/app','knockout', 'modules/session'],
 		
 		self.refreshSessionList();
 		
+		
 	};
 	
 	Session.prototype.refreshSessionList = function (){
 		var self = this;
 		
-		console.log(self.patientId());
-		
 		session.getSessionList(self.currentPage(), /*self.searchFrom()*/'?', /*self.searchTo()*/'?', self.patientId()).done(function(data) {
-    		console.log(data);
+			self.sessionList(data.list);
+    		self.totalItems(data.total);
     	});
+	};
+	
+	Session.prototype.loadTestList = function(sessionId){
+		var self = this;
+		
+		self.testList.activateItem(new Test(sessionId));
 	};
 	
 	Session.prototype.search = function() {
@@ -42,7 +59,12 @@ define(['plugins/router', 'durandal/app','knockout', 'modules/session'],
 		
 		self.currentPage(1);
     	self.refreshSessionList();
-		
+    };
+    
+    Session.prototype.showTests = function (sessionId){
+    	var self = this;
+    	
+    	self.loadTestList(sessionId);
     };
 	
 	return Session;

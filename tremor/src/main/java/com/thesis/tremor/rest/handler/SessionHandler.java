@@ -1,6 +1,8 @@
 package com.thesis.tremor.rest.handler;
 
 import com.thesis.tremor.beans.DateDuration;
+import com.thesis.tremor.beans.ResultBean;
+import com.thesis.tremor.beans.SessionFormBean;
 import com.thesis.tremor.database.entity.Session;
 import com.thesis.tremor.objects.ObjectList;
 
@@ -14,4 +16,6 @@ public interface SessionHandler {
 	Session getSession(Long sessionId);
 	
 	ObjectList<Session> getSessionObjectList(Integer pageNumber, DateDuration dateDuration, Long patientId);
+	
+	ResultBean saveSession(SessionFormBean sessionFormBean, String username, String password);
 }
