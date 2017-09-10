@@ -19,8 +19,11 @@ import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 import org.hibernate.annotations.Where;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.thesis.tremor.database.entity.base.BaseObject;
 import com.thesis.tremor.enums.TestType;
+import com.thesis.tremor.serializer.json.HandSerializer;
+import com.thesis.tremor.serializer.json.SessionSerializer;
 import com.thesis.tremor.utility.format.DurationFormatter;
 
 /**
@@ -36,6 +39,7 @@ public class Test extends BaseObject {
 
 	public static final String TABLE_NAME = "test";
 	
+	@JsonSerialize(using = SessionSerializer.class)
 	private Session session;
 	
 	private TestType testType;
@@ -44,8 +48,10 @@ public class Test extends BaseObject {
 	
 	private Long duration;
 	
+	@JsonSerialize(using = HandSerializer.class)
 	private Hand leftHand;
 	
+	@JsonSerialize(using = HandSerializer.class)
 	private Hand rightHand;
 
 	@ManyToOne(targetEntity = Session.class, fetch = FetchType.LAZY)

@@ -1,5 +1,7 @@
 package com.thesis.tremor.database.service.impl;
 
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,11 @@ public class SessionServiceImpl
 	@Autowired
 	protected SessionServiceImpl(SessionDAO dao) {
 		super(dao);
+	}
+	
+	@Override
+	public boolean isExistsByPatientAndDateDone(Long patientId, Date dateDone) {
+		return dao.findSessionByPatientAndDateDone(patientId, dateDone) != null;
 	}
 
 	@Override

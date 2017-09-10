@@ -25,13 +25,22 @@ public class UserDAOImpl
 		implements UserDAO {
 
 	@Override
-	public User findByUsernameAndPassword(String username, String password) {
+	public User findByUsernamePasswordAndUserType(String username, String password, UserType userType) {
 		final Junction conjunction = Restrictions.conjunction();
 		conjunction.add(Restrictions.eq("isValid", Boolean.TRUE));
 		conjunction.add(Restrictions.eq("username", username));
 		conjunction.add(Restrictions.eq("password", password));
 		
+		if(userType != null) {
+			conjunction.add(Restrictions.eq("userType", userType));
+		}
+		
 		return findUniqueResult(null, null, null, conjunction);
+	}
+	
+	@Override
+	public User findByUsernameAndPassword(String username, String password) {
+		return findByUsernamePasswordAndUserType(username, password, null);
 	}
 	
 	@Override

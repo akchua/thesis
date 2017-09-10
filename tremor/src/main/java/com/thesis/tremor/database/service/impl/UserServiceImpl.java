@@ -36,6 +36,11 @@ public class UserServiceImpl
 	public User findByUsername(String username) {
 		return dao.findByUsername(username);
 	}
+	
+	@Override
+	public User findPatientByUsernameAndPassword(String username, String password) {
+		return dao.findByUsernamePasswordAndUserType(username, password, UserType.PATIENT);
+	}
 
 	@Override
 	public boolean isExistByUsername(String username) {

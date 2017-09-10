@@ -60,8 +60,8 @@ public class TestEndpoint {
 	@Produces({ MediaType.APPLICATION_JSON })
 	public ObjectList<Test> getTestObjectList(@QueryParam("pageNumber") Integer pageNumber, 
 				@QueryParam("searchKey") String searchKey,
-				@QueryParam("patientId") Long patientId) {
-		return testHandler.getTestObjectList(pageNumber, searchKey, patientId);
+				@QueryParam("sessionId") Long sessionId) {
+		return testHandler.getTestObjectList(pageNumber, searchKey, sessionId);
 	}
 	
 	@GET
@@ -75,11 +75,12 @@ public class TestEndpoint {
 	@Path("/uploadimage")
 	@Consumes(MediaType.MULTIPART_FORM_DATA)	
 	@Produces({ MediaType.APPLICATION_JSON })
-	public ResultBean uploadTestImage(@FormDataParam("testId") Long testId,
+	public ResultBean uploadTestImage(@FormDataParam("sessionId") Long sessionId,
+			@FormDataParam("testName") String testName,
 			@FormDataParam("username") String username,
 			@FormDataParam("password") String password,
 			@FormDataParam("imageFile") InputStream in,
 			@FormDataParam("imageFile") FormDataContentDisposition info) throws IOException {
-		return testHandler.saveTestImage(testId, username, password, in, info);
+		return testHandler.saveTestImage(sessionId, testName, username, password, in, info);
 	}
 }

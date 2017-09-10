@@ -21,6 +21,16 @@ public class TestDAOImpl
 		implements TestDAO {
 
 	@Override
+	public Test findBySessionAndName(Long sessionId, String name) {
+		final Junction conjunction = Restrictions.conjunction();
+		conjunction.add(Restrictions.eq("isValid", Boolean.TRUE));
+		conjunction.add(Restrictions.eq("session.id", sessionId));
+		conjunction.add(Restrictions.eq("name", name));
+		
+		return findUniqueResult(null, null, null, conjunction);
+	}
+	
+	@Override
 	public ObjectList<Test> findAllWithPaging(int pageNumber, int resultsPerPage, String searchKey, Long sessionId) {
 		final Junction conjunction = Restrictions.conjunction();
 		conjunction.add(Restrictions.eq("isValid", Boolean.TRUE));
