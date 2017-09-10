@@ -17,7 +17,9 @@ import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 import org.hibernate.annotations.Where;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.thesis.tremor.database.entity.base.BaseObject;
+import com.thesis.tremor.serializer.json.UserSerializer;
 import com.thesis.tremor.utility.DateUtil;
 import com.thesis.tremor.utility.format.DateFormatter;
 
@@ -34,6 +36,7 @@ public class Session extends BaseObject {
 
 	public static final String TABLE_NAME = "session";
 	
+	@JsonSerialize(using = UserSerializer.class)
 	private User patient;
 	
 	private Date dateDone;
