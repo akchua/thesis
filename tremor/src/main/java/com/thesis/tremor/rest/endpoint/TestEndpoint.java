@@ -60,8 +60,8 @@ public class TestEndpoint {
 	@Produces({ MediaType.APPLICATION_JSON })
 	public ObjectList<Test> getTestObjectList(@QueryParam("pageNumber") Integer pageNumber, 
 				@QueryParam("searchKey") String searchKey,
-				@QueryParam("patientId") Long patientId) {
-		return testHandler.getTestObjectList(pageNumber, searchKey, patientId);
+				@QueryParam("sessionId") Long sessionId) {
+		return testHandler.getTestObjectList(pageNumber, searchKey, sessionId);
 	}
 	
 	@GET
