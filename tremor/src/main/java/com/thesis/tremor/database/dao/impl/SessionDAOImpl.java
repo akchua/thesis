@@ -1,5 +1,7 @@
 package com.thesis.tremor.database.dao.impl;
 
+import java.util.Date;
+
 import org.hibernate.criterion.Junction;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
@@ -19,6 +21,16 @@ public class SessionDAOImpl
 		extends AbstractDAO<Session, Long>
 		implements SessionDAO {
 
+	@Override
+	public Session findSessionByPatientAndDateDone(Long patientId, Date dateDone) {
+		final Junction conjunction = Restrictions.conjunction();
+		conjunction.add(Restrictions.eq("isValid", Boolean.TRUE));
+		conjunction.add(Restrictions.eq("patient.id", patientId));
+		conjunction.add(Restrictions.eq("dateDone", dateDone));
+		
+		return findUniqueResult(null, null, null, conjunction);
+	}
+	
 	@Override
 	public ObjectList<Session> findAllWithPaging(int pageNumber, int resultsPerPage, DateDuration dateDuration, Long patientId) {
 		final Junction conjunction = Restrictions.conjunction();

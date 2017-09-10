@@ -1,5 +1,7 @@
 package com.thesis.tremor.database.dao;
 
+import java.util.Date;
+
 import com.thesis.tremor.beans.DateDuration;
 import com.thesis.tremor.database.entity.Session;
 import com.thesis.tremor.objects.ObjectList;
@@ -12,4 +14,6 @@ import com.thesis.tremor.objects.ObjectList;
 public interface SessionDAO extends DAO<Session, Long> {
 
 	ObjectList<Session> findAllWithPaging(int pageNumber, int resultsPerPage, DateDuration dateDuration, Long patientId);
+	
+	Session findSessionByPatientAndDateDone(Long patientId, Date dateDone);
 }

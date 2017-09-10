@@ -27,5 +27,5 @@ public interface TestHandler {
 	
 	List<TestImage> getTestImageList(Long testId);
 	
-	ResultBean saveTestImage(Long testId, String username, String password, InputStream in, FormDataContentDisposition info) throws IOException;
+	ResultBean saveTestImage(Long sessionId, String testName, String username, String password, InputStream in, FormDataContentDisposition info) throws IOException;
 }

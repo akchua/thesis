@@ -22,6 +22,11 @@ public class TestServiceImpl
 	protected TestServiceImpl(TestDAO dao) {
 		super(dao);
 	}
+	
+	@Override
+	public Test findBySessionAndName(Long sessionId, String name) {
+		return dao.findBySessionAndName(sessionId, name);
+	}
 
 	@Override
 	public ObjectList<Test> findAllWithPaging(int pageNumber, int resultsPerPage, String searchKey, Long sessionId) {

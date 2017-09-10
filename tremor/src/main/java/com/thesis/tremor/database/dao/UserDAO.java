@@ -15,6 +15,8 @@ import com.thesis.tremor.objects.ObjectList;
  * @since   Nov 13, 2016
  */
 public interface UserDAO extends DAO<User, Long>, UserPrototype {
+	
+	User findByUsernamePasswordAndUserType(String username, String password, UserType userType);
 
 	ObjectList<User> findAllWithPaging(int pageNumber, int resultsPerPage, String searchKey);
 	

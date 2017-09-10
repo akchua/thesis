@@ -15,6 +15,8 @@ public interface UserService extends Service<User, Long>, UserPrototype {
 
 	boolean isExistByUsername(String username);
 	
+	User findPatientByUsernameAndPassword(String username, String password);
+	
 	ObjectList<User> findAllWithPagingOrderByName(int pageNumber, int resultsPerPage, String searchKey);
 	
 	List<User> findAllAdministrators();

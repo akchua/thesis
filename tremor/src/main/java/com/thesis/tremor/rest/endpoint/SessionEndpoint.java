@@ -14,6 +14,7 @@ import javax.ws.rs.core.MediaType;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.thesis.tremor.beans.DateDuration;
 import com.thesis.tremor.beans.ResultBean;
 import com.thesis.tremor.beans.SessionFormBean;
@@ -65,9 +66,10 @@ public class SessionEndpoint {
 	public ResultBean saveSession(@FormParam("sessionFormData") String sessionFormData,
 					@FormParam("username") String username,
 					@FormParam("password") String password) throws IOException {
+		final SessionFormBean sessionForm = new ObjectMapper().readValue(sessionFormData, SessionFormBean.class);
 		System.out.println(sessionFormData);
 		System.out.println(username);
 		System.out.println(password);
-		return sessionHandler.saveSession(new SessionFormBean(), username, password);
+		return sessionHandler.saveSession(sessionForm, username, password);
 	}
 }

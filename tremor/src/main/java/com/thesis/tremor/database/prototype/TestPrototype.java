@@ -9,4 +9,5 @@ import com.thesis.tremor.database.entity.Test;
  */
 public interface TestPrototype extends Prototype<Test, Long> {
 
+	Test findBySessionAndName(Long sessionId, String name);
 }

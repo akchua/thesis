@@ -1,16 +1,29 @@
 package com.thesis.tremor.rest.handler.impl;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.stream.Collectors;
+
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.thesis.tremor.UserContextHolder;
 import com.thesis.tremor.beans.DateDuration;
+import com.thesis.tremor.beans.HandFormBean;
 import com.thesis.tremor.beans.ResultBean;
 import com.thesis.tremor.beans.SessionFormBean;
+import com.thesis.tremor.beans.TestFormBean;
+import com.thesis.tremor.database.entity.Hand;
 import com.thesis.tremor.database.entity.Session;
+import com.thesis.tremor.database.entity.Test;
 import com.thesis.tremor.database.entity.User;
+import com.thesis.tremor.database.service.HandService;
 import com.thesis.tremor.database.service.SessionService;
+import com.thesis.tremor.database.service.TestService;
 import com.thesis.tremor.database.service.UserService;
 import com.thesis.tremor.enums.Color;
 import com.thesis.tremor.objects.ObjectList;
@@ -30,6 +43,12 @@ public class SessionHandlerImpl implements SessionHandler {
 	private SessionService sessionService;
 	
 	@Autowired
+	private HandService handService;
+	
+	@Autowired
+	private TestService testService;
+	
+	@Autowired
 	private UserService userService;
 	
 	@Override
@@ -43,15 +62,92 @@ public class SessionHandlerImpl implements SessionHandler {
 	}
 
 	@Override
-	public ResultBean saveSession(SessionFormBean sessionFormBean, String username, String password) {
+	public ResultBean saveSession(SessionFormBean sessionForm, String username, String password) {
 		final ResultBean result;
-		final User patient = userService.findByUsernameAndPassword(username, password);
+		final User patient = userService.findPatientByUsernameAndPassword(username, password);
 		
 		if(patient != null) {
-			result = new ResultBean(Boolean.TRUE, "Success");
+			final ResultBean validateForm = validateSessionForm(sessionForm);
+			
+			if(validateForm.getSuccess()) {
+				if(!sessionService.isExistsByPatientAndDateDone(patient.getId(), sessionForm.getDateDone())) {
+					result = new ResultBean();
+					final Session session = new Session();
+					
+					setSession(session, sessionForm);
+					result.setSuccess(sessionService.insert(session) != null);
+					if(result.getSuccess()) {
+						for(TestFormBean testForm: sessionForm.getTests()) {
+							final Hand leftHand = new Hand();
+							setHand(leftHand, testForm.getLeftHand());
+							
+							final Hand rightHand = new Hand();
+							setHand(rightHand, testForm.getRightHand());
+							
+							result.setSuccess(handService.insert(leftHand) != null &&
+												handService.insert(rightHand) != null);
+							if(result.getSuccess()) {
+								final Test test = new Test();
+								setTest(test, session, leftHand, rightHand, testForm);
+								
+								result.setSuccess(testService.insert(test) != null);
+								
+								if(!result.getSuccess()) break;
+							} else break;
+						}
+						
+						if(result.getSuccess()) {
+							final Map<String, Object> extras = new HashMap<String, Object>();
+							extras.put("sessionId", session.getId());
+							result.setExtras(extras);
+							result.setMessage(Html.line(Html.text(Color.GREEN, "Successfully") + " saved session for " + Html.text(Color.BLUE, patient.getFormattedName()) + "."));
+						} else {
+							throw new WebApplicationException(Html.line(Html.text(Color.RED, "Server Error.") + " Please try again later."), Response.Status.INTERNAL_SERVER_ERROR);
+						}
+					} else {
+						throw new WebApplicationException(Html.line(Html.text(Color.RED, "Server Error.") + " Please try again later."), Response.Status.INTERNAL_SERVER_ERROR);
+					}
+				} else {
+					result = new ResultBean(Boolean.FALSE, Html.line(Html.text(Color.RED, "Session already exists.")));
+				}
+			} else {
+				result = validateForm;
+			}
 		} else {
 			result = new ResultBean(Boolean.FALSE, Html.line(Html.text(Color.RED, "Failed") + " to load patient. Please re-enter correct credentials."));
 		}
+		
+		return result;
+	}
+	
+	private void setSession(Session session, SessionFormBean sessionForm) {
+		session.setDateDone(sessionForm.getDateDone());
+	}
+	
+	private void setHand(Hand hand, HandFormBean handForm) {
+		hand.setAverageAmplitude(handForm.getAverageAmplitude());
+		hand.setAverageFrequency(handForm.getAverageFrequency());
+		hand.setHandPoints(
+				handForm.getHandPoints().stream()
+						.map(String::valueOf)
+						.collect(Collectors.joining(", "))
+				);
+	}
+	
+	private void setTest(Test test, Session session, Hand leftHand, Hand rightHand, TestFormBean testForm) {
+		test.setSession(session);
+		test.setLeftHand(leftHand);
+		test.setRightHand(rightHand);
+		
+		test.setTestType(testForm.getTestType());
+		test.setName(testForm.getName());
+		test.setDuration(testForm.getDuration());
+	}
+	
+	private ResultBean validateSessionForm(SessionFormBean sessionFormBean) {
+		final ResultBean result;
+		
+		result = new ResultBean(Boolean.TRUE, "No validations applied yet");
 		
 		return result;
 	}

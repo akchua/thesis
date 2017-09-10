@@ -17,5 +17,5 @@ public interface SessionHandler {
 	
 	ObjectList<Session> getSessionObjectList(Integer pageNumber, DateDuration dateDuration, Long patientId);
 	
-	ResultBean saveSession(SessionFormBean sessionFormBean, String username, String password);
+	ResultBean saveSession(SessionFormBean sessionForm, String username, String password);
 }

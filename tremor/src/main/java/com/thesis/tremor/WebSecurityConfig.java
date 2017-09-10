@@ -35,6 +35,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 							 "/favicon.ico",
 							 "/services/security/user",
 							 "/services/session/save",
+							 "/services/test/uploadimage",
 							 "/login").permitAll()
 				.anyRequest().authenticated()
 					.and()
