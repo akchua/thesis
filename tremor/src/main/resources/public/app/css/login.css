@@ -98,6 +98,7 @@
 .hero{
   background-size:cover;
   background:url('../img/medical_landing.jpg') no-repeat center;
+  margin-top: 5px;
 }
 
 h1.tremorPro{
@@ -122,6 +123,21 @@ h3.title{
 	text-align: center; 
 }
 
+.box {
+    padding: 25px;
+    background-color: #fff;
+    border-radius: 10px;
+    position: relative;
+}
+
+.box2{
+    padding: 25px;
+    background-color: #fff;
+    border-radius: 10px;
+    position: relative;
+    margin: 5%;
+}
+
 
 /* For Session Page */
 @media (min-width: 768px) {
@@ -141,4 +157,9 @@ h3.title{
     padding-top: 12px;
     padding-bottom: 12px;
   }
+}
+
+/* For Overall */
+body {
+    background: linear-gradient(to right, #25c481, #25b7c4);
 }

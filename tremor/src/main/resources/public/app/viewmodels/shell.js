@@ -13,7 +13,8 @@
 	];
 	
 	var sessionroute = [
-	    { route: 'session/:id', moduleId: 'viewmodels/session/session', title: 'Session', nav: true, hash: '#session' }
+	    { route: 'session/:id', moduleId: 'viewmodels/session/session', title: 'Session', nav: false, hash: '#session' }
+	    /*{ route: 'session/:id', moduleId: 'viewmodels/session/session', id: app.user.id, title: 'Session', nav: true, hash: '#session' }*/
 	];
 	
 	var Shell = function() {

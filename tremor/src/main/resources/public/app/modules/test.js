@@ -9,13 +9,13 @@ define(['jquery'], function ($) {
 			});
 		},
 		
-		getTestList: function(currentPage, searchKey, patientId) {
+		getTestList: function(currentPage, searchKey, sessionId) {
 			return $.ajax({
 				url: '/services/test/list',
 				data: {
 					pageNumber: currentPage - 1,
 					searchKey: searchKey,
-					patientId: patientId
+					sessionId: sessionId
 				}
 			});
 		},

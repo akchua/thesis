@@ -19,7 +19,6 @@ define(['plugins/router', 'durandal/app','knockout', 'durandal/activator',
 		this.sessionList = ko.observable();
 		this.totalItems = ko.observable();
 		
-		/*this.testList = ko.observable(new Test(sessionId));*/
 		this.testList = activator.create();
 	};
 	
@@ -35,7 +34,6 @@ define(['plugins/router', 'durandal/app','knockout', 'durandal/activator',
 		});
 		
 		self.refreshSessionList();
-		
 		
 	};
 	
@@ -63,7 +61,7 @@ define(['plugins/router', 'durandal/app','knockout', 'durandal/activator',
     
     Session.prototype.showTests = function (sessionId){
     	var self = this;
-    	
+    	self.isSessionClicked(true);
     	self.loadTestList(sessionId);
     };
 	

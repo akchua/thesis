@@ -28,8 +28,10 @@ define(['durandal/app','knockout', 'modules/test'], function (app, ko, test) {
 	Test.prototype.refreshTestList = function (){
 		var self = this;
 		
-		test.getTestList(self.currentPage(), /*self.searchKey()*/'?', self.sessionId).done(function(data) {
-			console.log(data);
+		test.getTestList(self.currentPage(), /*self.searchKey()*/null, self.sessionId).done(function(data) {
+			self.testList(data.list);
+    		self.totalItems(data.total);
+    		console.log(data);
     	});
 	};
 	
