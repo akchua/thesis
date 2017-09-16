@@ -67,9 +67,6 @@ public class SessionEndpoint {
 					@FormParam("username") String username,
 					@FormParam("password") String password) throws IOException {
 		final SessionFormBean sessionForm = new ObjectMapper().readValue(sessionFormData, SessionFormBean.class);
-		System.out.println(sessionFormData);
-		System.out.println(username);
-		System.out.println(password);
 		return sessionHandler.saveSession(sessionForm, username, password);
 	}
 }

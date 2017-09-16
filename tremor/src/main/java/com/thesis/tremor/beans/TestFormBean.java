@@ -1,5 +1,7 @@
 package com.thesis.tremor.beans;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.thesis.tremor.deserializer.json.TestDeserializer;
 import com.thesis.tremor.enums.TestType;
 
 /**
@@ -7,6 +9,7 @@ import com.thesis.tremor.enums.TestType;
  * @version 1.0
  * @since   8 Sep 2017
  */
+@JsonDeserialize(using = TestDeserializer.class)
 public class TestFormBean extends FormBean {
 
 	private TestType testType;

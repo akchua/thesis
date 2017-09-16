@@ -28,6 +28,7 @@ import com.thesis.tremor.database.service.UserService;
 import com.thesis.tremor.enums.Color;
 import com.thesis.tremor.objects.ObjectList;
 import com.thesis.tremor.rest.handler.SessionHandler;
+import com.thesis.tremor.utility.EncryptionUtil;
 import com.thesis.tremor.utility.Html;
 
 /**
@@ -64,7 +65,7 @@ public class SessionHandlerImpl implements SessionHandler {
 	@Override
 	public ResultBean saveSession(SessionFormBean sessionForm, String username, String password) {
 		final ResultBean result;
-		final User patient = userService.findPatientByUsernameAndPassword(username, password);
+		final User patient = userService.findPatientByUsernameAndPassword(username, EncryptionUtil.getMd5(password));
 		
 		if(patient != null) {
 			final ResultBean validateForm = validateSessionForm(sessionForm);
