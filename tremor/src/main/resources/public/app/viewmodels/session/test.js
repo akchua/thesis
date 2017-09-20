@@ -1,4 +1,4 @@
-define(['durandal/app','knockout', 'modules/test'], function (app, ko, test) {
+define(['durandal/app','knockout', 'modules/test', 'viewmodels/session/testModal'], function (app, ko, test, testModal) {
 	
 	var Test = function(sessionId) {
 		
@@ -40,6 +40,10 @@ define(['durandal/app','knockout', 'modules/test'], function (app, ko, test) {
 		
 		self.currentPage(1);
     	self.refreshTestList();
+    };
+    
+    Test.prototype.viewModal = function(testId) {
+    	testModal.show(testId);
     };
     
 	return Test;

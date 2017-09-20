@@ -48,7 +48,7 @@
 					<td data-bind="text: test.rightHand.averageFrequency" class = "text-center"></td>
 					<td>
 						<div class="btn-group pull-right">
-							<button type="button" class="btn btn-primary btn-sm" title="View Complete Data"><i class="fa fa-eye"></i>View Complete Data</button>
+							<button data-bind="click: function() { $parent.viewModal(test.id) }" type="button" class="btn btn-primary btn-sm" title="View Complete Data"><i class="fa fa-eye"></i>View Complete Data</button>
 						</div>
 					</td>
 				</tr>

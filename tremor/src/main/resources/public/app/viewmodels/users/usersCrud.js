@@ -55,7 +55,6 @@ define(['plugins/router', 'durandal/app','knockout', 'modules/userservice', 'vie
     
     //VIEWING SESSION OF PATIENT
     UsersCrud.prototype.viewSession = function(patientId) {
-    	var self= this;
     	
     	router.navigate('#session/' + patientId);
     };

@@ -9,7 +9,8 @@
         'jquery': '../lib/jquery/jquery-1.9.1',
         'bootstrap-datetimepicker': '../lib/bootstrap/js/bootstrap-datetimepicker',
         'moment': '../lib/moment/moment',
-        'fullcalendar' : '../lib/fullcalendar/js/fullcalendar.min'
+        'fullcalendar' : '../lib/fullcalendar/js/fullcalendar.min',
+        'jqPlot': '../lib/jqplot/js/jquery.jqplot'
     },
     shim: {
         'bootstrap': {
@@ -19,7 +20,7 @@
     }
 });
 
-define(['durandal/system', 'durandal/app', 'durandal/viewLocator', 'modules/securityservice', 'bootstrap', 'modules/kocustombindings'],  function (system, app, viewLocator, securityService) {
+define(['durandal/system', 'durandal/app', 'durandal/viewLocator', 'modules/securityservice', 'durandal/composition','knockout'],  function (system, app, viewLocator, securityService, composition, ko) {
     //>>excludeStart("build", true);
     system.debug(true);
     //>>excludeEnd("build");

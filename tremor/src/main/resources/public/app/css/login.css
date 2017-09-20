@@ -163,3 +163,14 @@ h3.title{
 body {
     background: linear-gradient(to right, #25c481, #25b7c4);
 }
+
+/* MODAL */
+.modal-dialog {
+  width: 98%;
+  height: 92%;
+  padding: 0;
+}
+
+.modal-content {
+  height: 99%;
+}

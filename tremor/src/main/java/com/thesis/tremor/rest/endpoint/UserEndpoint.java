@@ -59,7 +59,7 @@ public class UserEndpoint {
 	@Produces({ MediaType.APPLICATION_JSON })
 	public ResultBean saveUser(@FormParam("userFormData") String userFormData) throws IOException {
 		final ResultBean result;
-
+		System.out.println(userFormData);
 		final UserFormBean userForm = new ObjectMapper().readValue(userFormData, UserFormBean.class);
 		if(userForm.getId() != null) {
 			result = userHandler.updateUser(userForm);

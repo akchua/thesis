@@ -14,7 +14,6 @@
 	
 	var sessionroute = [
 	    { route: 'session/:id', moduleId: 'viewmodels/session/session', title: 'Session', nav: false, hash: '#session' }
-	    /*{ route: 'session/:id', moduleId: 'viewmodels/session/session', id: app.user.id, title: 'Session', nav: true, hash: '#session' }*/
 	];
 	
 	var Shell = function() {
@@ -44,13 +43,14 @@
 	    		case 'ADMINISTRATOR':
 	    			self.routes = self.routes.concat(patientroute);
 	    			self.routes = self.routes.concat(userroute);
-	    			self.routes = self.routes.concat(sessionroute);
+	    			self.routes= self.routes.concat(sessionroute);
 	    			break;
 	    		case 'PATIENT':
 	    			self.routes= self.routes.concat(sessionroute);
 	    			break;
 	    		case 'DOCTOR':
 	    			self.routes = self.routes.concat(patientroute);
+	    			self.routes= self.routes.concat(sessionroute);
 	    			break;
     		}
 		}
