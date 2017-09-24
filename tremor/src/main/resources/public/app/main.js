@@ -10,7 +10,8 @@
         'bootstrap-datetimepicker': '../lib/bootstrap/js/bootstrap-datetimepicker',
         'moment': '../lib/moment/moment',
         'fullcalendar' : '../lib/fullcalendar/js/fullcalendar.min',
-        'jqPlot': '../lib/jqplot/js/jquery.jqplot'
+        'jqPlot': '../lib/jqplot/js/jquery.jqplot',
+        'highlighter': '../lib/jqplot/plugins/jqplot.highlighter'
     },
     shim: {
         'bootstrap': {

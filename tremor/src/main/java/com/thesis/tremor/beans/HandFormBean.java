@@ -2,40 +2,24 @@ package com.thesis.tremor.beans;
 
 import java.util.List;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.thesis.tremor.deserializer.json.HandDeserializer;
+
 /**
  * @author  Adrian Jasper K. Chua
  * @version 1.0
  * @since   8 Sep 2017
  */
+@JsonDeserialize(using = HandDeserializer.class)
 public class HandFormBean extends FormBean {
 
-	private Float averageAmplitude;
-	
-	private Float averageFrequency;
-	
-	private List<Float> handPoints;
+	private List<FingerFormBean> fingers;
 
-	public Float getAverageAmplitude() {
-		return averageAmplitude;
+	public List<FingerFormBean> getFingers() {
+		return fingers;
 	}
 
-	public void setAverageAmplitude(Float averageAmplitude) {
-		this.averageAmplitude = averageAmplitude;
-	}
-
-	public Float getAverageFrequency() {
-		return averageFrequency;
-	}
-
-	public void setAverageFrequency(Float averageFrequency) {
-		this.averageFrequency = averageFrequency;
-	}
-
-	public List<Float> getHandPoints() {
-		return handPoints;
-	}
-
-	public void setHandPoints(List<Float> handPoints) {
-		this.handPoints = handPoints;
+	public void setFingers(List<FingerFormBean> fingers) {
+		this.fingers = fingers;
 	}
 }

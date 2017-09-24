@@ -6,6 +6,7 @@ import org.glassfish.jersey.media.multipart.MultiPartFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.springframework.stereotype.Component;
 
+import com.thesis.tremor.rest.endpoint.FingerEndpoint;
 import com.thesis.tremor.rest.endpoint.SecurityEndpoint;
 import com.thesis.tremor.rest.endpoint.SessionEndpoint;
 import com.thesis.tremor.rest.endpoint.TestEndpoint;
@@ -28,5 +29,6 @@ public class JerseyConfig extends ResourceConfig {
 		register(UserEndpoint.class);
 		register(SessionEndpoint.class);
 		register(TestEndpoint.class);
+		register(FingerEndpoint.class);
 	}
 }

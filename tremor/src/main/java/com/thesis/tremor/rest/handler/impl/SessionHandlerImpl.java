@@ -13,14 +13,16 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.thesis.tremor.UserContextHolder;
 import com.thesis.tremor.beans.DateDuration;
-import com.thesis.tremor.beans.HandFormBean;
+import com.thesis.tremor.beans.FingerFormBean;
 import com.thesis.tremor.beans.ResultBean;
 import com.thesis.tremor.beans.SessionFormBean;
 import com.thesis.tremor.beans.TestFormBean;
+import com.thesis.tremor.database.entity.Finger;
 import com.thesis.tremor.database.entity.Hand;
 import com.thesis.tremor.database.entity.Session;
 import com.thesis.tremor.database.entity.Test;
 import com.thesis.tremor.database.entity.User;
+import com.thesis.tremor.database.service.FingerService;
 import com.thesis.tremor.database.service.HandService;
 import com.thesis.tremor.database.service.SessionService;
 import com.thesis.tremor.database.service.TestService;
@@ -52,6 +54,9 @@ public class SessionHandlerImpl implements SessionHandler {
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private FingerService fingerService;
+	
 	@Override
 	public Session getSession(Long sessionId) {
 		return sessionService.find(sessionId);
@@ -75,19 +80,28 @@ public class SessionHandlerImpl implements SessionHandler {
 					result = new ResultBean();
 					final Session session = new Session();
 					
-					setSession(session, sessionForm);
+					setSession(session, sessionForm, patient);
 					result.setSuccess(sessionService.insert(session) != null);
 					if(result.getSuccess()) {
 						for(TestFormBean testForm: sessionForm.getTests()) {
 							final Hand leftHand = new Hand();
-							setHand(leftHand, testForm.getLeftHand());
-							
 							final Hand rightHand = new Hand();
-							setHand(rightHand, testForm.getRightHand());
 							
 							result.setSuccess(handService.insert(leftHand) != null &&
 												handService.insert(rightHand) != null);
 							if(result.getSuccess()) {
+								for(FingerFormBean fingerForm: testForm.getLeftHand().getFingers()) {
+									final Finger finger = new Finger();
+									setFinger(finger, fingerForm, leftHand);
+									fingerService.insert(finger);
+								}
+								
+								for(FingerFormBean fingerForm: testForm.getRightHand().getFingers()) {
+									final Finger finger = new Finger();
+									setFinger(finger, fingerForm, rightHand);
+									fingerService.insert(finger);
+								}
+								
 								final Test test = new Test();
 								setTest(test, session, leftHand, rightHand, testForm);
 								
@@ -121,18 +135,21 @@ public class SessionHandlerImpl implements SessionHandler {
 		return result;
 	}
 	
-	private void setSession(Session session, SessionFormBean sessionForm) {
+	private void setSession(Session session, SessionFormBean sessionForm, User patient) {
 		session.setDateDone(sessionForm.getDateDone());
+		session.setPatient(patient);
 	}
 	
-	private void setHand(Hand hand, HandFormBean handForm) {
-		hand.setAverageAmplitude(handForm.getAverageAmplitude());
-		hand.setAverageFrequency(handForm.getAverageFrequency());
-		hand.setHandPoints(
-				handForm.getHandPoints().stream()
-						.map(String::valueOf)
-						.collect(Collectors.joining(", "))
+	private void setFinger(Finger finger, FingerFormBean fingerForm, Hand hand) {
+		finger.setHand(hand);
+		finger.setAverageAmplitude(fingerForm.getAverageAmplitude());
+		finger.setAverageFrequency(fingerForm.getAverageFrequency());
+		finger.setFingerPoints(
+					fingerForm.getFingerPoints().stream()
+						.map(fp -> String.valueOf(fp.getX()) + "," + String.valueOf(fp.getY()))
+						.collect(Collectors.joining(";"))
 				);
+		finger.setFingerType(fingerForm.getFingerType());
 	}
 	
 	private void setTest(Test test, Session session, Hand leftHand, Hand rightHand, TestFormBean testForm) {

@@ -52,6 +52,7 @@
 				<value>com.thesis.tremor.database.entity.Test</value>
 				<value>com.thesis.tremor.database.entity.TestImage</value>
 				<value>com.thesis.tremor.database.entity.Hand</value>
+				<value>com.thesis.tremor.database.entity.Finger</value>
 			</list>
 		</property>
 		

@@ -1,17 +1,3 @@
-<br />
-<!--   <div class="row pull-right">
-   <div class="col-md-10">
-       	<input data-bind="value: searchKey" type="text" class="form-control" placeholder="Search">
-       </div>
-       <div class="col-md-2">
-	    <span class="input-group-btn">
-	    	<button data-bind="click: search" type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-	    </span>
-    </div>
-</div> -->
-<br />
-<br />
-<br />
 <div class="row">
 	<div class="table-responsive">
 		<table class="table table-hover">
@@ -48,7 +34,8 @@
 					<td data-bind="text: test.rightHand.averageFrequency" class = "text-center"></td>
 					<td>
 						<div class="btn-group pull-right">
-							<button data-bind="click: function() { $parent.viewModal(test.id) }" type="button" class="btn btn-primary btn-sm" title="View Complete Data"><i class="fa fa-eye"></i>View Complete Data</button>
+							<button data-bind="click: function() { $parent.viewHandModal(test.id) }" type="button" class="btn btn-primary btn-sm" title="View Complete Data"><i class="fa fa-eye"></i>View Left Data</button>
+							<button data-bind="click: function() { $parent.viewImageModal(test.id) }" type="button" class="btn btn-primary btn-sm" title="View Complete Data"><i class="fa fa-eye"></i>View Image Data</button>
 						</div>
 					</td>
 				</tr>

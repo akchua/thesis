@@ -1,11 +1,46 @@
-<div class="modal-dialog" >
+<div class="modal-dialog modal-xl" >
 	<div class="modal-content">
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal" data-bind="click: cancel">&times;</button>
-			<h3 align="center"><span data-bind="View Complete Data"></span></h3>
+			<h3 align="center">Test Name</h3>
 		</div>
 		<div class="modal-body">
-				<div id="chart" style="width: 500px; height: 400px;"></div>
+			<div id="chart" class="center-block" style="width: 520px; height: auto;"></div>
+			<br />
+				<div class="col-md-6">
+					<div class="well-link">
+						<div class="panel panel-primary panel-shadow">
+							<div class="panel-heading text-center"><h4>Amplitude</h4></div>
+							<div class="panel-body">
+								<div class="row">
+									<div class="col-md-6 text-center"><h3 data-bind="text: thumbData">4.5</h3></div>
+									<div class="col-md-6 text-center"><h3>4.8</h3></div>
+								</div>
+								<div class="row">
+									<div class="col-md-6 text-center">Left</div>
+									<div class="col-md-6 text-center">Right</div>
+								</div>
+							</div>
+						</div>    
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="well-link">
+						<div class="panel panel-primary panel-shadow">
+							<div class="panel-heading text-center"><h4>Frequency</h4></div>
+							<div class="panel-body">
+								<div class="row">
+									<div class="col-md-6 text-center"><h3>4.5</h3></div>
+									<div class="col-md-6 text-center"><h3>4.8</h3></div>
+								</div>
+								<div class="row">
+									<div class="col-md-6 text-center">Left</div>
+									<div class="col-md-6 text-center">Right</div>
+								</div>
+							</div>
+						</div>    
+					</div>
+				</div>
 		</div>
 	</div>
 </div>

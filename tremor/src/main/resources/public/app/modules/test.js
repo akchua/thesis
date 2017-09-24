@@ -1,8 +1,9 @@
 define(['jquery'], function ($) {
 	return {
-		getTest: function(testId) {
+		getTest: function(testId, async) {
 			return $.ajax({
 				url: '/services/test/get',
+				async: async,
 				data: {
 					testId: testId
 				}
@@ -19,5 +20,18 @@ define(['jquery'], function ($) {
 				}
 			});
 		},
+		
+		getImage: function(fileName) {
+			return '/services/test/getimage/' + fileName;				
+		},
+		
+		getImageList: function(testId, async) {
+			return $.ajax({
+				url: '/services/test/imagelist',
+				data: {
+					testId: testId,
+				}
+			});
+		}
 	};
 });

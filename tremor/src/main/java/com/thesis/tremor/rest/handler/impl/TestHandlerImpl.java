@@ -26,6 +26,7 @@ import com.thesis.tremor.database.service.UserService;
 import com.thesis.tremor.enums.Color;
 import com.thesis.tremor.objects.ObjectList;
 import com.thesis.tremor.rest.handler.TestHandler;
+import com.thesis.tremor.utility.EncryptionUtil;
 import com.thesis.tremor.utility.Html;
 import com.thesis.tremor.utility.StringHelper;
 
@@ -78,9 +79,9 @@ public class TestHandlerImpl implements TestHandler {
 			InputStream in, FormDataContentDisposition info) throws IOException {
 		final ResultBean result;
 		final Session session = sessionService.find(sessionId);
-		final User patient = userService.findPatientByUsernameAndPassword(username, password);
+		final User patient = userService.findPatientByUsernameAndPassword(username, EncryptionUtil.getMd5(password));
 		
-		if(patient.getId().equals(session.getPatient().getId())) {
+		if(patient != null && patient.getId().equals(session.getPatient().getId())) {
 			final String fileName = UUID.randomUUID().toString() + "." + StringHelper.getFileExtension(info.getFileName());
 			
 			File imageFile = new File(fileConstants.getTestImageHome() + fileName);
@@ -88,6 +89,7 @@ public class TestHandlerImpl implements TestHandler {
 			
 			if(!imageFile.exists()) {
 				Files.copy(in, imageFile.toPath());
+				
 				final Test test = testService.findBySessionAndName(sessionId, testName);
 				if(test != null) {
 					result = new ResultBean();

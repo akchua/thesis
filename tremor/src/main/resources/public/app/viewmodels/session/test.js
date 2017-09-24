@@ -1,4 +1,5 @@
-define(['durandal/app','knockout', 'modules/test', 'viewmodels/session/testModal'], function (app, ko, test, testModal) {
+define(['durandal/app','knockout', 'modules/test', 'viewmodels/session/testModal', 'viewmodels/session/image'], 
+		function (app, ko, test, testModal, imageModal) {
 	
 	var Test = function(sessionId) {
 		
@@ -31,7 +32,6 @@ define(['durandal/app','knockout', 'modules/test', 'viewmodels/session/testModal
 		test.getTestList(self.currentPage(), /*self.searchKey()*/null, self.sessionId).done(function(data) {
 			self.testList(data.list);
     		self.totalItems(data.total);
-    		console.log(data);
     	});
 	};
 	
@@ -42,8 +42,12 @@ define(['durandal/app','knockout', 'modules/test', 'viewmodels/session/testModal
     	self.refreshTestList();
     };
     
-    Test.prototype.viewModal = function(testId) {
+    Test.prototype.viewHandModal = function(testId) {
     	testModal.show(testId);
+    };
+    
+    Test.prototype.viewImageModal = function(testId) {
+    	imageModal.show(testId);
     };
     
 	return Test;
