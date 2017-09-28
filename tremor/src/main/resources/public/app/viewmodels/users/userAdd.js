@@ -21,7 +21,7 @@ define(['durandal/app','knockout', 'plugins/dialog', 'modules/userservice'],
 	    		emailAddress: ko.observable(),
 	    		contactNumber: ko.observable(),
 	    		userType: ko.observable(),
-	    		itemsPerPage: ko.observable(),
+	    		itemsPerPage: ko.observable(10),
 	    		
 	    		birthdate: ko.observable(),
 	    		sex: ko.observable(),
@@ -57,6 +57,7 @@ define(['durandal/app','knockout', 'plugins/dialog', 'modules/userservice'],
     	
     	userService.getUserTypeList().done(function(userTypeList) {
     		self.userTypeList(userTypeList);
+    		console.log(self.userTypeList());
     		
     		if(self.user.userType) self.userAddModel.userType(self.user.userType.name);
     		
@@ -109,6 +110,45 @@ define(['durandal/app','knockout', 'plugins/dialog', 'modules/userservice'],
         		self.showPatientInformation(false);
         	}
     	});
+    	
+		 $('input').blur(function() {
+			 $('input').keypress(function(e){
+				    if(e.which == 13) {
+				    	self.login();
+				    }
+			})
+			    var $this = $(this);
+			    if ($this.val())
+			      $this.addClass('used');
+			    else
+			      $this.removeClass('used');
+			  });
+
+			  var $ripples = $('.ripples');
+
+			  $ripples.on('click.Ripples', function(e) {
+
+			    var $this = $(this);
+			    var $offset = $this.parent().offset();
+			    var $circle = $this.find('.ripplesCircle');
+
+			    var x = e.pageX - $offset.left;
+			    var y = e.pageY - $offset.top;
+
+			    $circle.css({
+			      top: y + 'px',
+			      left: x + 'px'
+			    });
+
+			    $this.addClass('is-active');
+
+
+			  });
+
+			  $ripples.on('animationend webkitAnimationEnd mozAnimationEnd oanimationend MSAnimationEnd', function(e) {
+			  	$(this).removeClass('is-active');
+			  });
+			  
     };
     
     

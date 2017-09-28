@@ -1,4 +1,4 @@
-<div class="modal-dialog modal-xl">
+<!-- <div class="modal-dialog modal-xl">
 	<div class="modal-content" >
 	  	<form class="form-horizontal">
 			<div class="modal-header">
@@ -11,13 +11,13 @@
 				  <label class="control-label col-sm-2">User Type:</label>
 				  <div class="col-sm-10">
 				  
-				  	<!-- ko if: userAddModel.id -->
+				  	ko if: userAddModel.id
 				  	<select disabled="disabled" data-bind="options: userTypeList, optionsValue: 'name', optionsText: 'displayName', value: userAddModel.userType" class="form-control select-lg" id="userType"></select>
-				  	<!-- /ko -->
+				  	/ko
 				  	
-				  	<!-- ko ifnot: userAddModel.id -->
+				  	ko ifnot: userAddModel.id
 				  	<select data-bind="options: userTypeList, optionsValue: 'name', optionsText: 'displayName', value: userAddModel.userType" class="form-control select-lg" id="userType"></select>
-				  	<!-- /ko -->
+				  	/ko
 				  </div>
 				</div>
 				
@@ -39,17 +39,17 @@
 				    <label class="control-label col-sm-2">Username:</label>
 				    <div class="col-sm-10">
 				    
-				      <!-- ko if: userAddModel.id -->
+				      ko if: userAddModel.id
 				      <input disabled="disabled" type="text" class="form-control" data-bind="textInput: userAddModel.username">
-				      <!-- /ko -->
+				      /ko
 				      
-				       <!-- ko ifnot: userAddModel.id -->
+				       ko ifnot: userAddModel.id
 				      <input type="text" class="form-control" data-bind="textInput: userAddModel.username">
-				      <!-- /ko -->
+				      /ko
 				      
 				    </div>
 				  </div>
-				  <!-- ko ifnot: userAddModel.id -->
+				  ko ifnot: userAddModel.id
 				  <div class="form-group">
 				    <label class="control-label col-sm-2">Password:</label>
 				    <div class="col-sm-10">
@@ -64,7 +64,7 @@
 				      <input type="password" class="form-control" data-bind="textInput: userAddModel.confirmPassword">
 				    </div>
 				  </div>
-				  <!-- /ko -->
+				  /ko
 				  <div class="form-group">
 				    <label class="control-label col-sm-2">Email Address:</label>
 				    <div class="col-sm-10">
@@ -128,17 +128,134 @@
 		  </div>
 		  
 		  <div class="modal-footer">
-		  		<!-- ko if: userAddModel.id -->
+		  		ko if: userAddModel.id
 				<button class="btn btn-success" type="submit" data-bind="click: save">Update</button>
-				<!-- /ko -->
+				/ko
 				
-		  		<!-- ko ifnot: userAddModel.id -->
+		  		ko ifnot: userAddModel.id
 		  		<button class="btn btn-success" type="submit" data-bind="click: save">Add</button>
-				<!-- /ko -->
+				/ko
 				
 				<button class="btn btn-danger" type="submit" data-bind="click: cancel">Cancel</button>
 			</div>
 		  
 		</form>
 	</div>
+</div> -->
+
+<div class="modal-dialog">
+	<div class="modal-content" >
+		<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" data-bind="click: cancel">&times;</button>
+				<div class="section-title text-center">
+			          <h2 class="head-title lg-line">Register</h2>
+			   	</div>
+		</div>
+		<div class="modal-body">
+			<form>
+				<div class="col-md-6">
+					<div class="group">
+					    <!-- ko if: userAddModel.id -->
+					  	<select disabled="disabled" data-bind="options: userTypeList, optionsValue: 'name', optionsText: 'displayName', value: userAddModel.userType" class="form-control select-lg" id="userType"></select>
+					  	<span class="highlight"></span><span class="bar"></span>
+					  	<!-- /ko -->
+					  	<!-- ko ifnot: userAddModel.id -->
+					  	<select data-bind="options: userTypeList, optionsValue: 'name', optionsText: 'displayName', value: userAddModel.userType" class="form-control select-lg" id="userType"></select>
+					  	<span class="highlight"></span><span class="bar"></span>
+					  	<!-- /ko -->
+					  	<label class="alwaysFocused">User Type</label>
+				 	</div>
+			 	</div>
+			 <div class="col-md-6">
+				 <div class="group">
+				    <input data-bind="textInput: userAddModel.username" type="text"><span class="highlight"></span><span class="bar"></span>
+				    <label>Username</label>
+				  </div>
+			  </div>
+			  <div class="col-md-6">
+				  <div class="group">
+				    <input data-bind="textInput: userAddModel.firstName" type="text"><span class="highlight"></span><span class="bar"></span>
+				    <label>First Name</label>
+				  </div>
+			  </div>
+			  <div class="col-md-6">
+			  	<div class="group">
+				    <input data-bind="textInput: userAddModel.lastName" type="text"><span class="highlight"></span><span class="bar"></span>
+				    <label>Last Name</label>
+			  	</div>
+			  </div>
+			 <!--  ko ifnot: userAddModel.id -->
+			  <div class="col-md-6">
+				  <div class="group">
+				    <input data-bind="textInput: userAddModel.password" type="password"><span class="highlight"></span><span class="bar"></span>
+				    <label>Password</label>
+				  </div>
+			  </div>
+			  <div class="col-md-6">
+			  	<div class="group">
+				    <input data-bind="textInput: userAddModel.confirmPassword" type="password"><span class="highlight"></span><span class="bar"></span>
+				    <label>Confirm Password</label>
+			  	</div>
+			  </div>
+			  <!-- /ko -->
+			  <div class="col-md-6">
+				  <div class="group">
+				    <input data-bind="textInput: userAddModel.emailAddress" type="text"><span class="highlight"></span><span class="bar"></span>
+				    <label>E-mail Address</label>
+				  </div>
+			  </div>
+			  <div class="col-md-6">
+			  	<div class="group">
+				    <input data-bind="textInput: userAddModel.contactNumber" type="text"><span class="highlight"></span><span class="bar"></span>
+				    <label>Contact Number</label>
+			  	</div>
+			  </div>
+			  
+			  <div class="row" data-bind="if: showDoctorInformation">
+			  
+			  	<div class="col-md-6">
+				  <div class="group">
+				    <input data-bind="textInput: userAddModel.hospital_name" type="text"><span class="highlight"></span><span class="bar"></span>
+				    <label>Hospital Name</label>
+				  </div>
+			  </div>
+			  <div class="col-md-6">
+			  	<div class="group">
+				    <input data-bind="textInput: userAddModel.hospital_address" type="text"><span class="highlight"></span><span class="bar"></span>
+				    <label>Hospital Address</label>
+			  	</div>
+			  </div>
+	  		</div>
+	  		<div class="row" data-bind="if: showPatientInformation">
+			   <div class="group">
+				     <input data-bind="textInput: userAddModel.address" type="text"><span class="highlight"></span><span class="bar"></span>
+					 <label>Address</label>
+				</div>
+	  		
+	  		
+			   <div class="col-md-6">
+			   	<div class="group">
+			   		<input data-bind="textInput: userAddModel.birthdate" type="date"><span class="highlight"></span><span class="bar"></span>
+			   		<label class="alwaysFocused">Birthdate</label>
+			   	</div>
+			   </div>
+			   
+			   <div class="col-md-6">
+			   	<div class="group">
+			      <select data-bind="options: sexList, value: userAddModel.sex"></select><span class="highlight"></span><span class="bar"></span>
+			   	  <label class="alwaysFocused">Sex</label>
+			   	 </div>
+			   </div>
+			   
+	  			</div>
+			</form>
+		 </div>
+		 
+		 <div class= "modal-footer">	  
+			  <button data-bind="click: save" type="button" class="button buttonBlue">Register
+			    <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
+			  </button>
+		 </div>
+	</div>
 </div>
+

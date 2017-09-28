@@ -36,6 +36,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 							 "/services/security/user",
 							 "/services/session/save",
 							 "/services/test/uploadimage",
+							 "/services/user/usertype",
+							 "/services/user/save",
 							 "/login").permitAll()
 				.anyRequest().authenticated()
 					.and()

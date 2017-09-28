@@ -1,0 +1,30 @@
+<div class="modal-dialog">
+	<div class="modal-content" >
+		<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" data-bind="click: cancel">&times;</button>
+				<div class="section-title text-center">
+			          <h2 class="head-title lg-line">Login</h2>
+			   	</div>
+		</div>
+		<div class="modal-body">
+			<form>
+			  <div class="group">
+			    <input data-bind="textInput: username" type="text"><span class="highlight"></span><span class="bar"></span>
+			    <label>Username</label>
+			  </div>
+			  <div class="group">
+			    <input data-bind="textInput: password" type="password"><span class="highlight"></span><span class="bar"></span>
+			    <label>Password</label>
+			  </div>
+			  	<div class="group text-center">
+					<div data-bind="text: errorMessage" style="color:red"></div>
+				</div>
+			  <button data-bind="click: login" type="button" class="button buttonBlue">Login
+			    <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
+			  </button>
+			  
+			  <p><a href="#" class="text-center" data-bind="click: register">Register</a> - <a href="#" class="text-center">Forgot Password?</a></p>
+			</form>
+		 </div>
+	</div>
+</div>

@@ -3,22 +3,13 @@
 		<table class="table table-hover">
 			<thead>
 				<tr>
-					<th></th>
-					<th></th>
-					<th></th>
-					<th></th>
-					<th class = "text-center" colspan="2">Left Hand</th>
-					<th class = "text-center" colspan="2">Right Hand</th>
-				</tr>
-				<tr>
 					<th class = "text-center">ID</th>
 					<th class = "text-center">Name</th>
 					<th class = "text-center">Duration</th>
 					<th class = "text-center">Test Type</th>
-					<th class = "text-center">Average Amplitude</th>
-					<th class = "text-center">Average Frequency</th>
-					<th class = "text-center">Average Amplitude</th>
-					<th class = "text-center">Average Frequency</th>
+					<th class = "text-center">Left Hand Data</th>
+					<th class = "text-center">Right Hand Data</th>
+					<th class = "text-center">Image Data</th>
 				</tr>
 			</thead>
 			
@@ -28,16 +19,9 @@
 					<td data-bind="text: test.name" class = "text-center"></td>
 					<td data-bind="text: test.formattedDuration" class = "text-center"></td>
 					<td data-bind="text: test.testType.displayName" class = "text-center"></td>
-					<td data-bind="text: test.leftHand.averageAmplitude" class = "text-center"></td>
-					<td data-bind="text: test.leftHand.averageFrequency" class = "text-center"></td>
-					<td data-bind="text: test.rightHand.averageAmplitude" class = "text-center"></td>
-					<td data-bind="text: test.rightHand.averageFrequency" class = "text-center"></td>
-					<td>
-						<div class="btn-group pull-right">
-							<button data-bind="click: function() { $parent.viewHandModal(test.id) }" type="button" class="btn btn-primary btn-sm" title="View Complete Data"><i class="fa fa-eye"></i>View Left Data</button>
-							<button data-bind="click: function() { $parent.viewImageModal(test.id) }" type="button" class="btn btn-primary btn-sm" title="View Complete Data"><i class="fa fa-eye"></i>View Image Data</button>
-						</div>
-					</td>
+					<td> <button data-bind="click: function() { $parent.viewLeftHandModal(test.id) }" type="button" class="btn btn-primary btn-sm" title="View Left Hand Data"><i class="fa fa-eye"></i>View Left HandData</button> </td>
+					<td> <button data-bind="click: function() { $parent.viewRightHandModal(test.id) }" type="button" class="btn btn-primary btn-sm" title="View Right Hand Data"><i class="fa fa-eye"></i>View Right Hand Data</button> </td>
+					<td><button data-bind="click: function() { $parent.viewImageModal(test.id) }, enable: test.testType.displayName == 'Task Specific'" type="button" class="btn btn-primary btn-sm" title="View Image Data"><i class="fa fa-eye"></i>View Image Data</button></td>
 				</tr>
 			</tbody>
 		</table>

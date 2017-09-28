@@ -28,6 +28,7 @@ define(['jquery'], function ($) {
 		getImageList: function(testId, async) {
 			return $.ajax({
 				url: '/services/test/imagelist',
+				async: async,
 				data: {
 					testId: testId,
 				}

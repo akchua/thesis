@@ -11,17 +11,57 @@
         'moment': '../lib/moment/moment',
         'fullcalendar' : '../lib/fullcalendar/js/fullcalendar.min',
         'jqPlot': '../lib/jqplot/js/jquery.jqplot',
-        'highlighter': '../lib/jqplot/plugins/jqplot.highlighter'
+        'barRenderer': '../lib/jqplot/plugins/jqplot.barRenderer',
+        'highlighter': '../lib/jqplot/plugins/jqplot.highlighter',
+        'cursor': '../lib/jqplot/plugins/jqplot.cursor',
+        'enhancedLegendRenderer': '../lib/jqplot/plugins/jqplot.enhancedLegendRenderer',
+        'axisLabelRenderer': '../lib/jqplot/plugins/jqplot.canvasAxisLabelRenderer',
+        'axisTickRenderer': '../lib/jqplot/plugins/jqplot.canvasAxisTickRenderer',
+        'logAxisRenderer': '../lib/jqplot/plugins/jqplot.logAxisRenderer',
+        'canvasTextRenderer': '../lib/jqplot/plugins/jqplot.canvasTextRenderer',
+        
     },
     shim: {
-        'bootstrap': {
+	        'bootstrap': {
             deps: ['jquery'],
             exports: 'jQuery'
-       }
+       },
+       'barRenderer': {
+	           deps: ['jquery', 'jqPlot'],
+	           exports: 'jQuery'
+	      },
+      	'highlighter': {
+	          deps: ['jquery', 'jqPlot'],
+	          exports: 'jQuery'
+	     },
+     	'cursor': {
+	         deps: ['jquery', 'jqPlot'],
+	         exports: 'jQuery'
+     	},
+   		'axisLabelRenderer': {
+	       deps: ['jquery', 'jqPlot'],
+	       exports: 'jQuery'
+   		},
+  		'axisTickRenderer': {
+	      deps: ['jquery', 'jqPlot'],
+	      exports: 'jQuery'
+  		},
+  		'enhancedLegendRenderer': {
+  	      deps: ['jquery', 'jqPlot'],
+  	      exports: 'jQuery'
+    	},
+    	'logAxisRenderer': {
+    	      deps: ['jquery', 'jqPlot'],
+    	      exports: 'jQuery'
+      	},
+      	'canvasTextRenderer': {
+  	      deps: ['jquery', 'jqPlot'],
+  	      exports: 'jQuery'
+    	}
     }
 });
 
-define(['durandal/system', 'durandal/app', 'durandal/viewLocator', 'modules/securityservice', 'durandal/composition','knockout'],  function (system, app, viewLocator, securityService, composition, ko) {
+define(['durandal/system', 'durandal/app', 'durandal/viewLocator', 'modules/securityservice'],  function (system, app, viewLocator, securityService) {
     //>>excludeStart("build", true);
     system.debug(true);
     //>>excludeEnd("build");
