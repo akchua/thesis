@@ -8,6 +8,8 @@ define(['durandal/app','knockout','plugins/dialog',
 		this.testId = testId;
 		this.isLeftHandData = isLeftHand;
 		
+		this.noData = ko.observable();
+		
 		this.fingerList = ko.observableArray([]);
 		this.thumbData = ko.observable();
 		this.ringData = ko.observable();
@@ -18,10 +20,6 @@ define(['durandal/app','knockout','plugins/dialog',
 		this.fingerType = ko.observableArray([]);
 		this.fingerPoints = ko.observableArray([]);
 		
-		this.chartConfig = {
-				data1: []
-		};
-		
 		this.tempChartConfig = {
 				thumbData: [],
 				ringData: [],
@@ -31,7 +29,7 @@ define(['durandal/app','knockout','plugins/dialog',
 				rootData: []
 		    };
 		
-		this.handConfig = {
+		this.handData = {
 				thumbAmp : ko.observable(),
 				thumbFreq : ko.observable(),
 				ringAmp : ko.observable(),
@@ -64,38 +62,38 @@ define(['durandal/app','knockout','plugins/dialog',
     	
     	for (var i = 0; i < data.length; i++){
     		if (data[i].fingerType == 'THUMB'){
-    			self.handConfig.thumbAmp(data[i].averageAmplitude);
-    			self.handConfig.thumbFreq(data[i].averageFrequency);
+    			self.handData.thumbAmp(data[i].averageAmplitude);
+    			self.handData.thumbFreq(data[i].averageFrequency);
     			for (var t = 0; t < data[i].fingerPointsList.length; t++){
     				thumbTemp.push([parseFloat(data[i].fingerPointsList[t].x),parseFloat(data[i].fingerPointsList[t].y)]);
     			}
     		} else if (data[i].fingerType == 'RING'){
-    			self.handConfig.ringAmp(data[i].averageAmplitude);
-    			self.handConfig.ringFreq(data[i].averageFrequency);
+    			self.handData.ringAmp(data[i].averageAmplitude);
+    			self.handData.ringFreq(data[i].averageFrequency);
     			for (var t = 0; t < data[i].fingerPointsList.length; t++){
     				ringTemp.push([parseFloat(data[i].fingerPointsList[t].x),parseFloat(data[i].fingerPointsList[t].y)]);
     			}
     		} else if (data[i].fingerType == 'MIDDLE'){
-    			self.handConfig.middleAmp(data[i].averageAmplitude);
-    			self.handConfig.middleFreq(data[i].averageFrequency);
+    			self.handData.middleAmp(data[i].averageAmplitude);
+    			self.handData.middleFreq(data[i].averageFrequency);
     			for (var t = 0; t < data[i].fingerPointsList.length; t++){
     				middleTemp.push([parseFloat(data[i].fingerPointsList[t].x),parseFloat(data[i].fingerPointsList[t].y)]);
     			}
     		} else if (data[i].fingerType == 'INDEX'){
-    			self.handConfig.indexAmp(data[i].averageAmplitude);
-    			self.handConfig.indexFreq(data[i].averageFrequency);
+    			self.handData.indexAmp(data[i].averageAmplitude);
+    			self.handData.indexFreq(data[i].averageFrequency);
     			for (var t = 0; t < data[i].fingerPointsList.length; t++){
     				indexTemp.push([parseFloat(data[i].fingerPointsList[t].x),parseFloat(data[i].fingerPointsList[t].y)]);
     			}
     		} else if (data[i].fingerType == 'PINKY'){
-    			self.handConfig.pinkyAmp(data[i].averageAmplitude);
-    			self.handConfig.pinkyFreq(data[i].averageFrequency);
+    			self.handData.pinkyAmp(data[i].averageAmplitude);
+    			self.handData.pinkyFreq(data[i].averageFrequency);
     			for (var t = 0; t < data[i].fingerPointsList.length; t++){
     				pinkyTemp.push([parseFloat(data[i].fingerPointsList[t].x),parseFloat(data[i].fingerPointsList[t].y)]);
     			}
     		} else if (data[i].fingerType == 'ROOT'){
-    			self.handConfig.rootAmp(data[i].averageAmplitude);
-    			self.handConfig.rootFreq(data[i].averageFrequency);
+    			self.handData.rootAmp(data[i].averageAmplitude);
+    			self.handData.rootFreq(data[i].averageFrequency);
     			for (var t = 0; t < data[i].fingerPointsList.length; t++){
     				rootTemp.push([parseFloat(data[i].fingerPointsList[t].x),parseFloat(data[i].fingerPointsList[t].y)]);
     			}
@@ -108,6 +106,8 @@ define(['durandal/app','knockout','plugins/dialog',
     	self.tempChartConfig.indexData = Object.values(indexTemp);
     	self.tempChartConfig.pinkyData = Object.values(pinkyTemp);
     	self.tempChartConfig.rootData = Object.values(rootTemp);
+    	
+    	console.log(self.handData);
     	
     	return self;
     };
@@ -126,8 +126,8 @@ define(['durandal/app','knockout','plugins/dialog',
 			finger.getFingerList(handTemp, false).then(function(temp1){
 				self.saveToArray(temp1);
 				var data = [d.thumbData, d.ringData, d.middleData, d.indexData, d.pinkyData, d.rootData];
-				if(temp1.length == 0){	data= [[null]];	}
-				$.jqplot("chart", /*[d.thumbData, d.ringData, d.middleData, d.indexData, d.pinkyData, d.rootData]*/data, {
+				if(temp1.length == 0){	data= [[null]];	self.noData(true);}
+				$.jqplot("chart", data, {
 	    	      animate: true,
 	    	      animateReplot: true,
 	    	      cursor: {
@@ -202,6 +202,10 @@ define(['durandal/app','knockout','plugins/dialog',
 			});
 	   	});
 
+    };
+    
+    TestModal.prototype.noDataFunc = function(){
+    	
     };
     
     TestModal.prototype.cancel = function() {

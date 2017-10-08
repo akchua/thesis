@@ -2,6 +2,7 @@ package com.thesis.tremor.rest.handler;
 
 import java.util.List;
 
+import com.thesis.tremor.beans.PasswordFormBean;
 import com.thesis.tremor.beans.ResultBean;
 import com.thesis.tremor.beans.UserFormBean;
 import com.thesis.tremor.database.entity.User;
@@ -28,6 +29,8 @@ public interface UserHandler {
 	ResultBean updateUser(UserFormBean userForm);
 	
 	ResultBean removeUser(Long userId);
+	
+	ResultBean changePassword(PasswordFormBean passwordForm);
 	
 	ResultBean removePatient(Long patientId);
 	

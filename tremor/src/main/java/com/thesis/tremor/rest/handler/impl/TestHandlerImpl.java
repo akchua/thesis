@@ -80,7 +80,7 @@ public class TestHandlerImpl implements TestHandler {
 		final ResultBean result;
 		final Session session = sessionService.find(sessionId);
 		final User patient = userService.findPatientByUsernameAndPassword(username, EncryptionUtil.getMd5(password));
-		
+		 
 		if(patient != null && patient.getId().equals(session.getPatient().getId())) {
 			final String fileName = UUID.randomUUID().toString() + "." + StringHelper.getFileExtension(info.getFileName());
 			

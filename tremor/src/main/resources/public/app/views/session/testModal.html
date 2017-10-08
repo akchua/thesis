@@ -1,13 +1,82 @@
-<div class="modal-dialog modal-xl" >
+<div class="modal-dialog modal-lg">
 	<div class="modal-content">
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal" data-bind="click: cancel">&times;</button>
 			<h3 align="center">Test Name</h3>
 		</div>
 		<div class="modal-body">
-			<div id="chart" class="center-block" style="width: 520px; height: auto;"></div>
-			<br />
-				<div class="col-md-6">
+			<div id="chart" class="center-block" style="width: 100%; height: auto;"></div>
+			<table style="width: 100%;">
+			  <thead>
+			    <tr>
+			      <th>Finger</th>
+			      <th>Pinky</th>
+			      <th>Ring</th>
+			      <th>Middle</th>
+			      <th>Index</th>
+			      <th>Thumb</th>
+			      <th>Root</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			  	<tr>
+			    	<th>Amplitude</th>
+			    	<td data-bind="text: handData.pinkyAmp"></td>
+			    	<td data-bind="text: handData.ringAmp"></td>
+			    	<td data-bind="text: handData.middleAmp"></td>
+			    	<td data-bind="text: handData.ringAmp"></td>
+			    	<td data-bind="text: handData.thumbAmp"></td>
+			    	<td data-bind="text: handData.rootAmp"></td>
+			    </tr>
+			    <tr>
+			    	<th>Frequency</th>
+			    	<td data-bind="text: handData.pinkyFreq"></td>
+			    	<td data-bind="text: handData.ringFreq"></td>
+			    	<td data-bind="text: handData.middleFreq"></td>
+			    	<td data-bind="text: handData.ringFreq"></td>
+			    	<td data-bind="text: handData.thumbFreq"></td>
+			    	<td data-bind="text: handData.rootFreq"></td>
+			    </tr>
+			  </tbody>
+			</table>
+<!-- 				<div class="well-link">
+					<div class="panel panel-primary panel-shadow">
+						<div class="panel-heading text-center"><h4>Test Data</h4></div>
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-md-4 text-center"><h5>Finger</h5></div>
+								<div class="col-md-4 text-center"><h5>Amplitude</h5></div>
+								<div class="col-md-4 text-center"><h5>Frequency</h5></div>
+							</div>
+							<div class="row">
+								<div class="col-md-4 text-center"><h6>Thumb</h6></div>
+								<div class="col-md-4 text-center"><h6 data-bind="text: handData.thumbAmp"></h6></div>
+								<div class="col-md-4 text-center"><h6 data-bind="text: handData.thumbFreq"></h6></div>
+							</div>
+							<div class="row">
+								<div class="col-md-4 text-center"><h6>Index</h6></div>
+								<div class="col-md-4 text-center"><h6 data-bind="text: handData.indexAmp"></h6></div>
+								<div class="col-md-4 text-center"><h6 data-bind="text: handData.indexFreq"></h6></div>
+							</div>
+							<div class="row">
+								<div class="col-md-4 text-center"><h6>Middle</h6></div>
+								<div class="col-md-4 text-center"><h6 data-bind="text: handData.middleAmp"></h6></div>
+								<div class="col-md-4 text-center"><h6 data-bind="text: handData.middleFreq"></h6></div>
+							</div>
+							<div class="row">
+								<div class="col-md-4 text-center"><h6>Ring</h6></div>
+								<div class="col-md-4 text-center"><h6 data-bind="text: handData.ringAmp"></h6></div>
+								<div class="col-md-4 text-center"><h6 data-bind="text: handData.ringFreq"></h6></div>
+							</div>
+							<div class="row">
+								<div class="col-md-4 text-center"><h6>Pinky</h6></div>
+								<div class="col-md-4 text-center"><h6 data-bind="text: handData.pinkyAmp"></h6></div>
+								<div class="col-md-4 text-center"><h6 data-bind="text: handData.pinkyFreq"></h6></div>
+							</div>
+						</div>
+					</div>    
+				</div> -->
+<!-- 				<div class="col-md-6">
 					<div class="well-link">
 						<div class="panel panel-primary panel-shadow">
 							<div class="panel-heading text-center"><h4>Amplitude</h4></div>
@@ -40,7 +109,7 @@
 							</div>
 						</div>    
 					</div>
-				</div>
+				</div> -->
 		</div>
 	</div>
 </div>

@@ -1,5 +1,6 @@
 package com.thesis.tremor.database.service.impl;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,20 @@ public class DoctorPatientServiceImpl
 								.collect(Collectors.toList()));
 		patients.setTotal(doctorPatients.getTotal());
 		return patients;
+	}
+	
+	@Override
+	public List<User> findAllPatientByDoctor(Long doctorId) {
+		return dao.findAllByDoctor(doctorId).stream()
+										.map(DoctorPatient::getPatient)
+										.collect(Collectors.toList());
+	}
+	
+	@Override
+	public List<User> findAllDoctorByPatient(Long patientId) {
+		return dao.findAllByPatient(patientId).stream()
+											.map(DoctorPatient::getDoctor)
+											.collect(Collectors.toList());
 	}
 
 	@Override

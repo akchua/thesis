@@ -14,6 +14,7 @@ import javax.ws.rs.core.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.thesis.tremor.beans.PasswordFormBean;
 import com.thesis.tremor.beans.ResultBean;
 import com.thesis.tremor.beans.UserFormBean;
 import com.thesis.tremor.database.entity.User;
@@ -89,6 +90,14 @@ public class UserEndpoint {
 	@Produces({ MediaType.APPLICATION_JSON })
 	public ResultBean removePatient(@FormParam("patientId") Long patientId) {
 		return userHandler.removePatient(patientId);
+	}
+	
+	@POST
+	@Path("/changepassword")
+	@Produces({ MediaType.APPLICATION_JSON })
+	public ResultBean changePassword(@FormParam("passwordFormData") String passwordFormData) throws IOException {
+		final PasswordFormBean passwordForm = new ObjectMapper().readValue(passwordFormData, PasswordFormBean.class);
+		return userHandler.changePassword(passwordForm);
 	}
 	
 	@POST

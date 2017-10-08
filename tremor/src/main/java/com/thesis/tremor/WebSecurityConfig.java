@@ -34,6 +34,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 							 "/lib/**", 
 							 "/favicon.ico",
 							 "/services/security/user",
+							 "/services/security/ping",
 							 "/services/session/save",
 							 "/services/test/uploadimage",
 							 "/services/user/usertype",

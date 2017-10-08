@@ -8,6 +8,10 @@
 				<!-- ko foreach: { data: testImageList, as: 'testImage' } -->
 		        	<img data-bind="attr: { src: testImage.filePath }" class="img-responsive">
 		        <!-- /ko -->
+		        
+		        <!--  ko if: noImage -->
+		        	<h3 class="text-center">No Image</h3>
+		        <!-- /ko -->
 		</div>
 	</div>
 </div>

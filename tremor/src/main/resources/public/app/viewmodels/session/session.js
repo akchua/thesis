@@ -40,7 +40,7 @@ define(['plugins/router', 'durandal/app','knockout', 'durandal/activator',
 	Session.prototype.refreshSessionList = function (){
 		var self = this;
 		
-		session.getSessionList(self.currentPage(), /*self.searchFrom()*/null, /*self.searchTo()*/null, self.patientId()).done(function(data) {
+		session.getSessionList(self.currentPage(), null, null, self.patientId()).done(function(data) {
 			self.sessionList(data.list);
     		self.totalItems(data.total);
     	});

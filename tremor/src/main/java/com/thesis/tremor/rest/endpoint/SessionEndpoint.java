@@ -3,6 +3,7 @@ package com.thesis.tremor.rest.endpoint;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
@@ -19,6 +20,7 @@ import com.thesis.tremor.beans.DateDuration;
 import com.thesis.tremor.beans.ResultBean;
 import com.thesis.tremor.beans.SessionFormBean;
 import com.thesis.tremor.database.entity.Session;
+import com.thesis.tremor.database.entity.SessionComment;
 import com.thesis.tremor.objects.ObjectList;
 import com.thesis.tremor.rest.handler.SessionHandler;
 
@@ -41,6 +43,13 @@ public class SessionEndpoint {
 	}
 	
 	@GET
+	@Path("/getcomment")
+	@Produces({ MediaType.APPLICATION_JSON })
+	public SessionComment getSessionComment(@QueryParam("sessionCommentId") Long sessionCommentId) {
+		return sessionHandler.getSessionComment(sessionCommentId);
+	}
+	
+	@GET
 	@Path("/list")
 	@Produces({ MediaType.APPLICATION_JSON })
 	public ObjectList<Session> getSessionObjectList(@QueryParam("pageNumber") Integer pageNumber, 
@@ -60,6 +69,22 @@ public class SessionEndpoint {
 		return sessionHandler.getSessionObjectList(pageNumber, dateDuration, patientId);
 	}
 	
+	@GET
+	@Path("/commentlist")
+	@Produces({ MediaType.APPLICATION_JSON })
+	public List<SessionComment> getSessionCommentList(@QueryParam("sessionId") Long sessionId) {
+		return sessionHandler.getSessionCommentList(sessionId);
+	}
+	
+	@GET
+	@Path("/recentlist")
+	@Produces({ MediaType.APPLICATION_JSON })
+	public ObjectList<Session> getRecentSessionObjectList(@QueryParam("pageNumber") Integer pageNumber,
+				@QueryParam("daysAgo") Integer daysAgo,
+				@QueryParam("doctorId") Long doctorId) {
+		return sessionHandler.getRecentSessionObjectList(pageNumber, daysAgo, doctorId);
+	}
+	
 	@POST
 	@Path("/save")
 	@Produces({ MediaType.APPLICATION_JSON })
@@ -68,5 +93,28 @@ public class SessionEndpoint {
 					@FormParam("password") String password) throws IOException {
 		final SessionFormBean sessionForm = new ObjectMapper().readValue(sessionFormData, SessionFormBean.class);
 		return sessionHandler.saveSession(sessionForm, username, password);
+	}
+	
+	@POST
+	@Path("/addcomment")
+	@Produces({ MediaType.APPLICATION_JSON })
+	public ResultBean addComment(@FormParam("sessionId") Long sessionId,
+					@FormParam("comment") String comment) {
+		return sessionHandler.addComment(sessionId, comment);
+	}
+	
+	@POST
+	@Path("/editcomment")
+	@Produces({ MediaType.APPLICATION_JSON })
+	public ResultBean editComment(@FormParam("sessionCommentId") Long sessionCommentId,
+					@FormParam("comment") String comment) {
+		return sessionHandler.editComment(sessionCommentId, comment);
+	}
+	
+	@POST
+	@Path("/removecomment")
+	@Produces({ MediaType.APPLICATION_JSON })
+	public ResultBean addComment(@FormParam("sessionCommentId") Long sessionCommentId) {
+		return sessionHandler.removeComment(sessionCommentId);
 	}
 }

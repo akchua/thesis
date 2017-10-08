@@ -37,4 +37,11 @@ public class SecurityEndpoint {
 	public UserBean getUser() {
 		return securityHandler.getUser();
 	}
+	
+	@GET
+	@Path("/ping")
+	@Produces({ MediaType.APPLICATION_JSON })
+	public Boolean ping() {
+		return true;
+	}
 }

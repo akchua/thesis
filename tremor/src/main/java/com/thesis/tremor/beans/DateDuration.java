@@ -13,6 +13,15 @@ public class DateDuration {
 	private Date from;
 	
 	private Date to;
+	
+	public DateDuration() {
+		
+	}
+	
+	public DateDuration(Date from, Date to) {
+		setFrom(from);
+		setTo(to);
+	}
 
 	public Date getFrom() {
 		return from;

@@ -212,6 +212,39 @@ public class UserHandlerImpl implements UserHandler {
 	}
 	
 	@Override
+	public ResultBean changePassword(PasswordFormBean passwordForm) {
+		final ResultBean result;
+		final User user = userService.find(passwordForm.getId());
+		
+		if(user != null) {
+			if(user.getPassword().equals(EncryptionUtil.getMd5(passwordForm.getOldPassword()))) {
+				final ResultBean validatePassword = validatePassword(passwordForm);
+				
+				if(validatePassword.getSuccess()) {
+					result = new ResultBean();
+					user.setPassword(EncryptionUtil.getMd5(passwordForm.getPassword()));
+					
+					result.setSuccess(userService.update(user));
+					if(result.getSuccess()) {
+						UserContextHolder.refreshUser(user);
+						result.setMessage(Html.line(Html.text(Color.GREEN, "Successfully") + " changed your password."));
+					} else {
+						result.setMessage(Html.line(Html.text(Color.RED, "Server Error.") + " Please try again later."));
+					}
+				} else {
+					result = validatePassword;
+				}
+			} else {
+				result = new ResultBean(Boolean.FALSE, Html.line(Color.RED, "Incorrect password."));
+			}
+		} else {
+			result = new ResultBean(Boolean.FALSE, Html.line(Html.text(Color.RED, "Failed") + " to load user. Please re-log your account."));
+		}
+		
+		return result;
+	}
+	
+	@Override
 	public ResultBean resetPassword(Long userId) {
 		final ResultBean result;
 		final User user = userService.find(userId);

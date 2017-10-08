@@ -1,10 +1,12 @@
-﻿define(['durandal/app','knockout', 'modules/securityservice'], function (app, ko, securityService) {
+﻿define(['durandal/app','knockout', 'modules/securityservice', 'modules/session'], function (app, ko, securityService, session) {
 	
 	var Home = function() {
 		
 		this.isPatient = ko.observable (false);
 		this.isDoctor = ko.observable (false);
 		this.isAdmin = ko.observable (false);
+		
+		this.recentActivityList = ko.observable();
 		
 		this.userDetails = {
 			id: ko.observable(),
@@ -13,9 +15,6 @@
 		};
 	};
 	
-	Home.prototype.showPatientInfo = function () {
-		//Opens a Modal
-	};
 	
 	Home.prototype.activate = function(){
 		var self = this;
@@ -39,6 +38,11 @@
 			self.isDoctor(false);
 			self.isAdmin(true);
     	}
+		
+		session.getRecentSessionList(0, 10, app.user.id).done(function(data){
+			self.recentActivityList(data.list);
+			console.log(self.recentActivityList());
+		});
 	}
 	
 	return Home;

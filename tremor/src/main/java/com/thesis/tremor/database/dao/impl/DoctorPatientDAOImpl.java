@@ -1,5 +1,7 @@
 package com.thesis.tremor.database.dao.impl;
 
+import java.util.List;
+
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.criterion.Junction;
 import org.hibernate.criterion.MatchMode;
@@ -46,6 +48,24 @@ public class DoctorPatientDAOImpl
 		JoinType[] joinTypes = { JoinType.INNER_JOIN };
 		
 		return findAllByCriterion(pageNumber, resultsPerPage, associatedPaths, aliasNames, joinTypes, orders, conjunction);
+	}
+	
+	@Override
+	public List<DoctorPatient> findAllByDoctor(Long doctorId) {
+		final Junction conjunction = Restrictions.conjunction();
+		conjunction.add(Restrictions.eq("isValid", Boolean.TRUE));
+		conjunction.add(Restrictions.eq("doctor.id", doctorId));
+		
+		return findAllByCriterionList(null, null, null, null, conjunction);
+	}
+	
+	@Override
+	public List<DoctorPatient> findAllByPatient(Long patientId) {
+		final Junction conjunction = Restrictions.conjunction();
+		conjunction.add(Restrictions.eq("isValid", Boolean.TRUE));
+		conjunction.add(Restrictions.eq("patient.id", patientId));
+		
+		return findAllByCriterionList(null, null, null, null, conjunction);
 	}
 
 	@Override

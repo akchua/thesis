@@ -5,6 +5,7 @@ define(['durandal/app','knockout', 'plugins/dialog', 'modules/userservice'],
 		this.user = user;
 		this.title = title;
 		this.userTypeList = ko.observable();
+		this.sexList = ko.observableArray(['Male', 'Female']);
 		
 		this.PatientAddModel = {
 	    		id: ko.observable(),
@@ -59,8 +60,6 @@ define(['durandal/app','knockout', 'plugins/dialog', 'modules/userservice'],
     PatientAdd.prototype.save = function() {
     	var self = this;
     	
-    	console.log(ko.toJSON(self.PatientAddModel));
-    	
        userService.saveUser(ko.toJSON(self.PatientAddModel)).done(function(result) {
         	if(result.success) {
         		 userService.addPatient(self.PatientAddModel.username, self.PatientAddModel.password).done(function(result) {
@@ -77,6 +76,46 @@ define(['durandal/app','knockout', 'plugins/dialog', 'modules/userservice'],
     
     PatientAdd.prototype.cancel = function() {
         dialog.close(this);
+    };
+    
+    PatientAdd.prototype.compositionComplete = function(){
+    	 $('input').blur(function() {
+			 $('input').keypress(function(e){
+				    if(e.which == 13) {
+				    	self.save();
+				    }
+			})
+			    var $this = $(this);
+			    if ($this.val())
+			      $this.addClass('used');
+			    else
+			      $this.removeClass('used');
+			  });
+
+			  var $ripples = $('.ripples');
+
+			  $ripples.on('click.Ripples', function(e) {
+
+			    var $this = $(this);
+			    var $offset = $this.parent().offset();
+			    var $circle = $this.find('.ripplesCircle');
+
+			    var x = e.pageX - $offset.left;
+			    var y = e.pageY - $offset.top;
+
+			    $circle.css({
+			      top: y + 'px',
+			      left: x + 'px'
+			    });
+
+			    $this.addClass('is-active');
+
+
+			  });
+
+			  $ripples.on('animationend webkitAnimationEnd mozAnimationEnd oanimationend MSAnimationEnd', function(e) {
+			  	$(this).removeClass('is-active');
+			  });
     };
     
     

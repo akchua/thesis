@@ -1,0 +1,22 @@
+<div class="modal-dialog modal-lg">
+	<div class="modal-content">
+		<button type="button" class="close" data-dismiss="modal" data-bind="click: cancel">&times;</button>
+		<div class="modal-body">
+			<form>
+			  <div class="form-group">
+			     <h4>Comment</h4>
+			     <textarea class="form-control" data-bind="textInput: userComment" rows="5" id="comment"></textarea>
+			  </div>
+			  <button data-bind="click: add" type="submit" class="btn btn-appoint">Submit</button>
+			  <br/>
+			   <div class="form-group" data-bind="foreach: { data: commentList, as: 'comment' }">
+			   	<div class="row">
+			   		<h4 class="pull-left" data-bind="comment.commenter.formattedName"></h4>
+			   		<h4 class="pull-right" data-bind="comment.formattedUpdatedOn"></h4>
+			   	</div>
+			  	<span data-bind="comment.comment"></span>
+			  </div>
+			</form>
+		</div>
+	</div>
+</div>

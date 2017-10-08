@@ -77,7 +77,7 @@ public class Finger extends BaseObject {
 	}
 	
 	@Basic
-	@Column(name = "finger_points", length = 2000)
+	@Column(name = "finger_points", length = 600)
 	public String getFingerPoints() {
 		return fingerPoints;
 	}

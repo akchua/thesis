@@ -19,11 +19,13 @@
 					<td data-bind="text: test.name" class = "text-center"></td>
 					<td data-bind="text: test.formattedDuration" class = "text-center"></td>
 					<td data-bind="text: test.testType.displayName" class = "text-center"></td>
-					<td> <button data-bind="click: function() { $parent.viewLeftHandModal(test.id) }" type="button" class="btn btn-primary btn-sm" title="View Left Hand Data"><i class="fa fa-eye"></i>View Left HandData</button> </td>
-					<td> <button data-bind="click: function() { $parent.viewRightHandModal(test.id) }" type="button" class="btn btn-primary btn-sm" title="View Right Hand Data"><i class="fa fa-eye"></i>View Right Hand Data</button> </td>
-					<td><button data-bind="click: function() { $parent.viewImageModal(test.id) }, enable: test.testType.displayName == 'Task Specific'" type="button" class="btn btn-primary btn-sm" title="View Image Data"><i class="fa fa-eye"></i>View Image Data</button></td>
+					<td> <button data-bind="click: function() { $parent.viewLeftHandModal(test.id) }" type="button" class="btn btn-appoint pull-right" title="View Left Hand Data"><i class="fa fa-eye"></i>View Left HandData</button> </td>
+					<td> <button data-bind="click: function() { $parent.viewRightHandModal(test.id) }" type="button" class="btn btn-appoint pull-right" title="View Right Hand Data"><i class="fa fa-eye"></i>View Right Hand Data</button> </td>
+					<td><button data-bind="click: function() { $parent.viewImageModal(test.id) }, enable: test.testType.displayName == 'Task Specific'" type="button" class="btn btn-appoint pull-right" title="View Image Data"><i class="fa fa-eye"></i>View Image Data</button></td>
 				</tr>
 			</tbody>
 		</table>
+		<br/>
+		<button data-bind="click: viewSessionComment" class="btn btn-appoint pull-right">View Session Comment</button>
 	</div>
 </div>

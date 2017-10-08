@@ -111,10 +111,11 @@ define(['durandal/app','knockout', 'plugins/dialog', 'modules/userservice'],
         	}
     	});
     	
-		 $('input').blur(function() {
+    	
+    	 $('input').blur(function() {
 			 $('input').keypress(function(e){
 				    if(e.which == 13) {
-				    	self.login();
+				    	self.save();
 				    }
 			})
 			    var $this = $(this);

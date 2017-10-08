@@ -1,9 +1,11 @@
 package com.thesis.tremor.database.service;
 
 import java.util.Date;
+import java.util.List;
 
 import com.thesis.tremor.beans.DateDuration;
 import com.thesis.tremor.database.entity.Session;
+import com.thesis.tremor.database.prototype.SessionPrototype;
 import com.thesis.tremor.objects.ObjectList;
 
 /**
@@ -11,9 +13,11 @@ import com.thesis.tremor.objects.ObjectList;
  * @version 1.0
  * @since   4 Sep 2017
  */
-public interface SessionService extends Service<Session, Long> {
+public interface SessionService extends Service<Session, Long>, SessionPrototype {
 
 	boolean isExistsByPatientAndDateDone(Long patientId, Date dateDone);
 	
-	ObjectList<Session> findAllWithPaging(int pageNumber, int resultsPerPage, DateDuration dateDuration, Long patientId);
+	ObjectList<Session> findAllWithPaging(int pageNumber, int resultsPerPage, DateDuration dateDuration, Long patientIds);
+	
+	ObjectList<Session> findAllWithPagingByPatientIdOrderByCreatedOn(int pageNumber, int resultsPerPage, DateDuration dateDuration, List<Long> patientId);
 }

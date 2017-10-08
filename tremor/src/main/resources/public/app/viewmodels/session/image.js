@@ -6,12 +6,14 @@ define(['durandal/app','knockout','plugins/dialog',
 		this.testId = testId;
 		
 		this.testImageList = ko.observable();
+		this.noImage = ko.observable();
 	};
 	
 	ImageModal.prototype.activate = function() {
 		var self = this;
 		
 		test.getImageList(self.testId, false).done(function(data){
+			if (data.length == 0)	self.noImage(true);
 			for (var i=0; i < data.length; i++){
 					data[i].filePath = test.getImage(data[i].fileName);
 			}

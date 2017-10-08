@@ -1,8 +1,10 @@
 package com.thesis.tremor.database.dao.impl;
 
 import java.util.Date;
+import java.util.List;
 
 import org.hibernate.criterion.Junction;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
@@ -45,5 +47,25 @@ public class SessionDAOImpl
 		}
 		
 		return findAllByCriterion(pageNumber, resultsPerPage, null, null, null, null, conjunction);
+	}
+	
+	@Override
+	public ObjectList<Session> findAllWithPagingByPatientId(int pageNumber, int resultsPerPage, DateDuration dateDuration, List<Long> patientIds,
+			Order[] orders) {
+		final Junction conjunction = Restrictions.conjunction();
+		conjunction.add(Restrictions.eq("isValid", Boolean.TRUE));
+		
+		if(dateDuration.getFrom() != null && dateDuration.getTo() != null) {
+			conjunction.add(Restrictions.between("dateDone", dateDuration.getFrom(), dateDuration.getTo()));
+		}
+		
+		if(patientIds.isEmpty()) patientIds.add(0l);
+		final Junction disjunction = Restrictions.disjunction();
+		for(Long patientId : patientIds) {
+			disjunction.add(Restrictions.eq("patient.id", patientId));
+		}
+		conjunction.add(disjunction);
+		
+		return findAllByCriterion(pageNumber, resultsPerPage, null, null, null, orders, conjunction);
 	}
 }

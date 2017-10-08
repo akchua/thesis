@@ -1,7 +1,9 @@
 package com.thesis.tremor.database.service.impl;
 
 import java.util.Date;
+import java.util.List;
 
+import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,5 +36,11 @@ public class SessionServiceImpl
 	@Override
 	public ObjectList<Session> findAllWithPaging(int pageNumber, int resultsPerPage, DateDuration dateDuration, Long patientId) {
 		return dao.findAllWithPaging(pageNumber, resultsPerPage, dateDuration, patientId);
+	}
+
+	@Override
+	public ObjectList<Session> findAllWithPagingByPatientIdOrderByCreatedOn(int pageNumber, int resultsPerPage,
+			DateDuration dateDuration, List<Long> patientIds) {
+		return dao.findAllWithPagingByPatientId(pageNumber, resultsPerPage, dateDuration, patientIds, new Order[] { Order.desc("createdOn") });
 	}
 }
