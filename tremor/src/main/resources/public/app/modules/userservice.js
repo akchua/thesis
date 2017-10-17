@@ -67,6 +67,16 @@ define(['jquery'], function ($) {
     		});
     	},
     	
+    	removePatient: function(patientId) {
+    		return $.ajax({
+    			url: '/services/user/removepatient',
+    			method: 'POST',
+    			data: {
+    				patientId: patientId
+    			}
+    		});
+    	},
+    	
     	resetPassword: function(userId) {
     		return $.ajax({
     			url: '/services/user/resetpassword',

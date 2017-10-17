@@ -1,4 +1,6 @@
-﻿define(['durandal/app','knockout', 'modules/securityservice', 'modules/session'], function (app, ko, securityService, session) {
+﻿define(['plugins/router','durandal/app','knockout', 'modules/securityservice', 'modules/session', 
+	'viewmodels/users/usersCrud'], 
+		function (router, app, ko, securityService, session, usersCrud) {
 	
 	var Home = function() {
 		
@@ -6,7 +8,7 @@
 		this.isDoctor = ko.observable (false);
 		this.isAdmin = ko.observable (false);
 		
-		this.recentActivityList = ko.observable();
+		this.recentActivityList = ko.observableArray();
 		
 		this.userDetails = {
 			id: ko.observable(),
@@ -41,9 +43,17 @@
 		
 		session.getRecentSessionList(0, 10, app.user.id).done(function(data){
 			self.recentActivityList(data.list);
-			console.log(self.recentActivityList());
 		});
-	}
+	};
+	
+	Home.prototype.viewMySession = function(){
+		router.navigate('#session/' + app.user.id);
+	};
+	
+	Home.prototype.viewUsers = function(){
+		router.navigate('#users');
+	};
+	
 	
 	return Home;
 });

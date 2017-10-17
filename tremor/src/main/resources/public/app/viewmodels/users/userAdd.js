@@ -57,7 +57,6 @@ define(['durandal/app','knockout', 'plugins/dialog', 'modules/userservice'],
     	
     	userService.getUserTypeList().done(function(userTypeList) {
     		self.userTypeList(userTypeList);
-    		console.log(self.userTypeList());
     		
     		if(self.user.userType) self.userAddModel.userType(self.user.userType.name);
     		

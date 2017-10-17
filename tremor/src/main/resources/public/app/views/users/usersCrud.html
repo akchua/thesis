@@ -1,80 +1,16 @@
-<!-- <section id="bannerUser" class="bannerUser">
-	<div class="bg-color">
-		<div class="container">
-			<div class="container box2">
-			    <div class="row pull-right">
-			        <div class="col-md-10">
-			        	<input data-bind="value: searchKey" type="text" class="form-control" placeholder="Search">
-			        </div>
-			        <div class="col-md-2">
-					    <span class="input-group-btn">
-					    	<button data-bind="click: search" type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-					    </span>
-				    </div>
-				</div>
-				<br />
-				
-				<div class="row">
-					<div class="table-responsive">
-						<table class="table table-hover">
-							<thead>
-								<tr>
-									<th class = "text-center">ID</th>
-									<th>Name</th>
-									<th>User Type</th>
-									<th>Contact Number</th>
-									<th>E-mail Address</th>
-								</tr>
-							</thead>
-							
-							<tbody data-bind="foreach: { data: userList, as: 'user' }">
-								<tr>
-									<td data-bind="text: user.id" class = "text-center"></td>
-									<td data-bind="click: function() { $parent.view(user.id) }, text: user.formattedName" role="button"></td>
-									<td data-bind="text: user.userType.displayName"></td>
-									<td data-bind="text: user.contactNumber"></td>
-									<td data-bind="text: user.emailAddress"></td>
-									
-									<td>
-										<div class="btn-group pull-right">
-											ko if: user.userType.displayName == 'Patient'
-												<button data-bind="click: function() { $parent.viewSession(user.id) }" type="button" class="btn btn-primary btn-sm" title="View Session"><i class="fa fa-eye"></i></button>
-											 /ko
-											<button data-bind="click: function() { $parent.resetPassword(user.id, user.lastName, user.firstName) }, enable: $parent.enableReset " type="button" class="btn btn-warning btn-sm" title="Reset Password"><i class="fa fa-refresh"></i></button>
-											<button data-bind="click: function() { $parent.remove(user.id, user.lastName, user.firstName) }" type="button" class="btn btn-danger btn-sm" title="Remove"><i class="fa fa-times"></i></button>
-										</div>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-				
-				<div class="row">
-					<div data-bind="widget: { kind: 'pager', config: { numberOfPagesToShow: 5, itemsPerPage: itemsPerPage, totalItems: totalItems, currentPage: currentPage } }" class="col-md-12"></div>
-				</div>
-				
-				<div class="row">
-					<button class="btn btn-default" data-bind="click: add" type="button" >Add a User</button>
-				</div>
-			</div>
-		</div>
-	</div>
-</section> -->
-
-
 <!--banner-->
 <section id="bannerUser" class="bannerUser">
 	<div class="bg-color">
 		<div class="container">
 			<div class="row">
 				<div class="banner-info">
-					<div class="banner-logo text-center">
-					</div>
 					<div class="banner-text text-center">
 						<h1 class="white">TremorPro<sup>+</sup></h1>
 						<p>A feature in where you have full control over users.</p>
 					</div>
+					<div class="overlay-detail text-center">
+			        	<i class="fa fa-angle-down"></i>
+			        </div>	
 				</div>
 			</div>
 		</div>
@@ -82,7 +18,7 @@
 </section>
 <!--/ banner-->
 <!--service-->
-<section id="service" class="section-padding">
+<section class="section-padding">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12 col-sm-12">
@@ -99,7 +35,7 @@
 				    </div>
 				</div>
 				<br />
-				
+				<br />
 				<div class="row">
 					<div class="table-responsive">
 						<table class="table table-hover">
@@ -110,6 +46,7 @@
 									<th>User Type</th>
 									<th>Contact Number</th>
 									<th>E-mail Address</th>
+									<th>Action</th>
 								</tr>
 							</thead>
 							
@@ -123,15 +60,14 @@
 									
 									<td>
 										<div class="btn-group pull-right">
-											<!-- ko if: user.userType.displayName == 'Patient' -->
-												<button data-bind="click: function() { $parent.viewSession(user.id) }" type="button" class="btn btn-primary btn-sm" title="View Session"><i class="fa fa-eye"></i></button>
-											 <!-- /ko -->
-											<button data-bind="click: function() { $parent.resetPassword(user.id, user.lastName, user.firstName) }, enable: $parent.enableReset " type="button" class="btn btn-warning btn-sm" title="Reset Password"><i class="fa fa-refresh"></i></button>
-											<button data-bind="click: function() { $parent.remove(user.id, user.lastName, user.firstName) }" type="button" class="btn btn-danger btn-sm" title="Remove"><i class="fa fa-times"></i></button>
+											<button data-bind="click: function() { $parent.viewSession(user.id) }, enable: user.userType.displayName == 'Patient'" type="button" class="btn btn-default btn-sm" title="View Session"><i class="fa fa-eye"></i></button>
+											<button data-bind="click: function() { $parent.resetPassword(user.id, user.lastName, user.firstName) }, enable: $parent.enableReset " type="button" class="btn btn-default btn-sm" title="Reset Password"><i class="fa fa-refresh"></i></button>
+											<button data-bind="click: function() { $parent.remove(user.id, user.lastName, user.firstName) }" type="button" class="btn btn-default btn-sm" title="Remove"><i class="fa fa-times"></i></button>
 										</div>
 									</td>
 								</tr>
 							</tbody>
+							
 						</table>
 					</div>
 				</div>

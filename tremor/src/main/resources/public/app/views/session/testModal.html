@@ -2,10 +2,12 @@
 	<div class="modal-content">
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal" data-bind="click: cancel">&times;</button>
-			<h3 align="center">Test Name</h3>
+			<h3 align="center" data-bind="text: title"></h3>
 		</div>
-		<div class="modal-body">
+		<div class="modal-body-test">
 			<div id="chart" class="center-block" style="width: 100%; height: auto;"></div>
+			
+			<!-- ko ifnot: isTaskSpecific -->
 			<table style="width: 100%;">
 			  <thead>
 			    <tr>
@@ -39,77 +41,30 @@
 			    </tr>
 			  </tbody>
 			</table>
-<!-- 				<div class="well-link">
-					<div class="panel panel-primary panel-shadow">
-						<div class="panel-heading text-center"><h4>Test Data</h4></div>
-						<div class="panel-body">
-							<div class="row">
-								<div class="col-md-4 text-center"><h5>Finger</h5></div>
-								<div class="col-md-4 text-center"><h5>Amplitude</h5></div>
-								<div class="col-md-4 text-center"><h5>Frequency</h5></div>
-							</div>
-							<div class="row">
-								<div class="col-md-4 text-center"><h6>Thumb</h6></div>
-								<div class="col-md-4 text-center"><h6 data-bind="text: handData.thumbAmp"></h6></div>
-								<div class="col-md-4 text-center"><h6 data-bind="text: handData.thumbFreq"></h6></div>
-							</div>
-							<div class="row">
-								<div class="col-md-4 text-center"><h6>Index</h6></div>
-								<div class="col-md-4 text-center"><h6 data-bind="text: handData.indexAmp"></h6></div>
-								<div class="col-md-4 text-center"><h6 data-bind="text: handData.indexFreq"></h6></div>
-							</div>
-							<div class="row">
-								<div class="col-md-4 text-center"><h6>Middle</h6></div>
-								<div class="col-md-4 text-center"><h6 data-bind="text: handData.middleAmp"></h6></div>
-								<div class="col-md-4 text-center"><h6 data-bind="text: handData.middleFreq"></h6></div>
-							</div>
-							<div class="row">
-								<div class="col-md-4 text-center"><h6>Ring</h6></div>
-								<div class="col-md-4 text-center"><h6 data-bind="text: handData.ringAmp"></h6></div>
-								<div class="col-md-4 text-center"><h6 data-bind="text: handData.ringFreq"></h6></div>
-							</div>
-							<div class="row">
-								<div class="col-md-4 text-center"><h6>Pinky</h6></div>
-								<div class="col-md-4 text-center"><h6 data-bind="text: handData.pinkyAmp"></h6></div>
-								<div class="col-md-4 text-center"><h6 data-bind="text: handData.pinkyFreq"></h6></div>
-							</div>
-						</div>
-					</div>    
-				</div> -->
-<!-- 				<div class="col-md-6">
-					<div class="well-link">
-						<div class="panel panel-primary panel-shadow">
-							<div class="panel-heading text-center"><h4>Amplitude</h4></div>
-							<div class="panel-body">
-								<div class="row">
-									<div class="col-md-6 text-center"><h3 data-bind="text: thumbData">4.5</h3></div>
-									<div class="col-md-6 text-center"><h3>4.8</h3></div>
-								</div>
-								<div class="row">
-									<div class="col-md-6 text-center">Left</div>
-									<div class="col-md-6 text-center">Right</div>
-								</div>
-							</div>
-						</div>    
-					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="well-link">
-						<div class="panel panel-primary panel-shadow">
-							<div class="panel-heading text-center"><h4>Frequency</h4></div>
-							<div class="panel-body">
-								<div class="row">
-									<div class="col-md-6 text-center"><h3>4.5</h3></div>
-									<div class="col-md-6 text-center"><h3>4.8</h3></div>
-								</div>
-								<div class="row">
-									<div class="col-md-6 text-center">Left</div>
-									<div class="col-md-6 text-center">Right</div>
-								</div>
-							</div>
-						</div>    
-					</div>
-				</div> -->
+			<!-- /ko -->
+			
+			<!-- ko if: isTaskSpecific -->
+			<table style="width: 100%;">
+			  <thead>
+			    <tr>
+			      <th>Finger</th>
+			      <th>Root</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			  	<tr>
+			    	<th>Amplitude</th>
+			    	<td data-bind="text: handData.rootAmp"></td>
+			    </tr>
+			    <tr>
+			    	<th>Frequency</th>
+			    	<td data-bind="text: handData.rootFreq"></td>
+			    </tr>
+			  </tbody>
+			</table>
+			<!-- /ko -->
+			
+			
 		</div>
 	</div>
 </div>

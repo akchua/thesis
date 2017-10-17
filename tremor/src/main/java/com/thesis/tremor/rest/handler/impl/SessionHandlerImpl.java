@@ -157,7 +157,7 @@ public class SessionHandlerImpl implements SessionHandler {
 							final Map<String, Object> extras = new HashMap<String, Object>();
 							extras.put("sessionId", session.getId());
 							result.setExtras(extras);
-							result.setMessage(Html.line(Html.text(Color.GREEN, "Successfully") + " saved session for " + Html.text(Color.BLUE, patient.getFormattedName()) + "."));
+							result.setMessage("Successfully saved session for " + patient.getFormattedName() + ".");
 							
 							final List<User> doctors = doctorPatientService.findAllDoctorByPatient(patient.getId());
 							for(User doctor : doctors) {
@@ -170,19 +170,19 @@ public class SessionHandlerImpl implements SessionHandler {
 										null);
 							}
 						} else {
-							throw new WebApplicationException(Html.line(Html.text(Color.RED, "Server Error.") + " Please try again later."), Response.Status.INTERNAL_SERVER_ERROR);
+							throw new WebApplicationException("Server Error. Please try again later.", Response.Status.INTERNAL_SERVER_ERROR);
 						}
 					} else {
-						throw new WebApplicationException(Html.line(Html.text(Color.RED, "Server Error.") + " Please try again later."), Response.Status.INTERNAL_SERVER_ERROR);
+						throw new WebApplicationException("Server Error. Please try again later.", Response.Status.INTERNAL_SERVER_ERROR);
 					}
 				} else {
-					result = new ResultBean(Boolean.FALSE, Html.line(Html.text(Color.RED, "Session already exists.")));
+					result = new ResultBean(Boolean.FALSE, "Session already exists.");
 				}
 			} else {
 				result = validateForm;
 			}
 		} else {
-			result = new ResultBean(Boolean.FALSE, Html.line(Html.text(Color.RED, "Failed") + " to load patient. Please re-enter correct credentials."));
+			result = new ResultBean(Boolean.FALSE, "Failed to load patient. Please re-enter correct credentials.");
 		}
 		
 		return result;

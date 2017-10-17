@@ -1,6 +1,47 @@
-<div class="modal-dialog modal-lg">
+<!-- <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="vertical-alignment-helper">
+<div class="modal-dialog modal-lg vertical-align-center">
 	<div class="modal-content">
-		<button type="button" class="close" data-dismiss="modal" data-bind="click: cancel">&times;</button>
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" data-bind="click: cancel">&times;</button>
+			<h3 align="center">Comments</h3>
+		</div>
+		<div class="modal-content">
+			<form>
+			  <div class="form-group">
+			     <h4>Comment</h4>
+			     <textarea class="form-control" data-bind="textInput: userComment" rows="5" id="comment"></textarea>
+			  </div>
+			  <button data-bind="click: add" type="submit" class="btn btn-appoint">Submit</button>
+			  <br/>
+			</form>
+			
+			<div class="container">
+				<div class="row" data-bind="foreach: commentList">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<strong data-bind="text:commenter.formattedName"></strong> <span class="text-muted" data-bind="text:formattedUpdatedOn">commented 5 days ago</span>
+						</div>
+						<div class="panel-body" data-bind="text:comment"></div>/panel-body
+					</div>/panel panel-default
+				</div>/row
+				
+				</div>/container
+		</div>
+	</div>
+</div>
+</div>
+</div> -->
+
+
+<div class="modal-dialog modal-lg">
+	<div class="modal-content" >
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" data-bind="click: cancel">&times;</button>
+			<div class="section-title text-center">
+		          <h2 class="head-title lg-line">Comments</h2>
+		   	</div>
+		</div>
 		<div class="modal-body">
 			<form>
 			  <div class="form-group">
@@ -9,14 +50,19 @@
 			  </div>
 			  <button data-bind="click: add" type="submit" class="btn btn-appoint">Submit</button>
 			  <br/>
-			   <div class="form-group" data-bind="foreach: { data: commentList, as: 'comment' }">
-			   	<div class="row">
-			   		<h4 class="pull-left" data-bind="comment.commenter.formattedName"></h4>
-			   		<h4 class="pull-right" data-bind="comment.formattedUpdatedOn"></h4>
-			   	</div>
-			  	<span data-bind="comment.comment"></span>
-			  </div>
+			  <div class="container" style="width: 100%;">
+				<div class="row" data-bind="foreach: commentList">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<strong data-bind="text:commenter.formattedName"></strong> <span class="text-muted" data-bind="text:formattedUpdatedOn">commented 5 days ago</span>
+						</div>
+						<div class="panel-body" data-bind="text:comment"></div>
+					</div>
+				</div>
+				
+				</div>
 			</form>
-		</div>
+		
+		 </div>
 	</div>
 </div>

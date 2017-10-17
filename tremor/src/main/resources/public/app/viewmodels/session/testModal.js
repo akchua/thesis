@@ -8,7 +8,9 @@ define(['durandal/app','knockout','plugins/dialog',
 		this.testId = testId;
 		this.isLeftHandData = isLeftHand;
 		
-		this.noData = ko.observable();
+		this.isTaskSpecific = ko.observable(false);
+		
+		this.title = ko.observable();
 		
 		this.fingerList = ko.observableArray([]);
 		this.thumbData = ko.observable();
@@ -47,7 +49,8 @@ define(['durandal/app','knockout','plugins/dialog',
 	
 	TestModal.prototype.activate = function() {
 		var self = this;
-		
+		console.log(self.isLeftHand);
+		if(self.isLeftHand) self.title("Left Hand Data");
     };
     
     TestModal.prototype.saveToArray = function(data){
@@ -98,17 +101,17 @@ define(['durandal/app','knockout','plugins/dialog',
     				rootTemp.push([parseFloat(data[i].fingerPointsList[t].x),parseFloat(data[i].fingerPointsList[t].y)]);
     			}
     		}
-    	}
-    	
-    	self.tempChartConfig.thumbData = Object.values(thumbTemp);
-    	self.tempChartConfig.ringData  = Object.values(ringTemp);
-    	self.tempChartConfig.middleData = Object.values(middleTemp);
-    	self.tempChartConfig.indexData = Object.values(indexTemp);
-    	self.tempChartConfig.pinkyData = Object.values(pinkyTemp);
-    	self.tempChartConfig.rootData = Object.values(rootTemp);
-    	
-    	console.log(self.handData);
-    	
+    	}	
+    		if(self.isTaskSpecific()){
+    			self.tempChartConfig.rootData = Object.values(rootTemp);
+    		} else{
+        	self.tempChartConfig.thumbData = Object.values(thumbTemp);
+        	self.tempChartConfig.ringData  = Object.values(ringTemp);
+        	self.tempChartConfig.middleData = Object.values(middleTemp);
+        	self.tempChartConfig.indexData = Object.values(indexTemp);
+        	self.tempChartConfig.pinkyData = Object.values(pinkyTemp);
+        	self.tempChartConfig.rootData = Object.values(rootTemp);
+    		}
     	return self;
     };
     
@@ -121,12 +124,24 @@ define(['durandal/app','knockout','plugins/dialog',
 		  
 		   test.getTest(self.testId, false).then(function(data) {
 			   var handTemp = null;
+			   
+			   if (data.testType.displayName == 'Task Specific') self.isTaskSpecific(true); 
+			   
+			   
 			   if (self.isLeftHandData)	handTemp = data.leftHand.id;
 			   else {	handTemp = data.rightHand.id;	}
+			   
 			finger.getFingerList(handTemp, false).then(function(temp1){
+				
 				self.saveToArray(temp1);
-				var data = [d.thumbData, d.ringData, d.middleData, d.indexData, d.pinkyData, d.rootData];
-				if(temp1.length == 0){	data= [[null]];	self.noData(true);}
+				var data = [];
+	
+				if (self.isTaskSpecific()) data = [d.rootData];
+				else {
+					data = [d.rootData, d.pinkyData, d.indexData, d.middleData,d.ringData, d.thumbData];	}
+				
+				if(temp1.length == 0)	data= [[null]];
+				
 				$.jqplot("chart", data, {
 	    	      animate: true,
 	    	      animateReplot: true,
@@ -134,7 +149,7 @@ define(['durandal/app','knockout','plugins/dialog',
 	    	    	  show: false	
 	    	     },
 	    	     legend: {
-	    	    	labels:['Thumb', 'Ring', 'Middle', 'Index', 'Pinky', 'Root'],
+	    	    	labels:['Root', 'Pinky', 'Index','Middle','Ring', 'Thumb'],
 	    	    	show: true,
 	                location: 'e',
 	                renderer: $.jqplot.EnhancedLegendRenderer,
@@ -204,9 +219,7 @@ define(['durandal/app','knockout','plugins/dialog',
 
     };
     
-    TestModal.prototype.noDataFunc = function(){
-    	
-    };
+
     
     TestModal.prototype.cancel = function() {
         dialog.close(this);

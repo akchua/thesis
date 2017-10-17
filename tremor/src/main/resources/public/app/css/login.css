@@ -1,4 +1,29 @@
 
+.panel {
+	position:relative;
+}
+.panel>.panel-heading:after,.panel>.panel-heading:before{
+	position:absolute;
+	top:2%;left:-2%;
+	right:100%;
+	width:0;
+	height:0;
+	display:block;
+	content:" ";
+	border-color:transparent;
+	border-style:solid solid outset;
+	pointer-events:none;
+}
+.panel>.panel-heading:after{
+	border-width:7px;
+	border-right-color:#f7f7f7;
+	margin-top:1px;
+	margin-left:2px;
+}
+.panel>.panel-heading:before{
+	border-right-color:#ddd;
+	border-width:8px;
+}
 
 .btn-primary{
     color: #fff;
@@ -432,9 +457,14 @@ body {
 /* MODAL */
 
 .modal-body {
-    /* max-height: calc(100vh - 250px); */
-    max-height: 100vh;
+    max-height: calc(100vh - 250px);
     overflow-y: auto;
+}
+
+.modal-body-test{
+	max-height: calc(100vh - 100px);
+    overflow-y: none;
+    padding: 2%;
 }
 
 
@@ -496,12 +526,16 @@ hr.botm-line {
 /***************************************
 banner
 ***************************************/
+.navbar > .container .navbar-brand, .navbar > .container-fluid .navbar-brand {
+    margin-left: 20px;
+}
 .navbar {
     margin-bottom: 0px;
     border: 0px;
 }
 .navbar {
     border-radius: 0px;
+    width: 100%;
 }
 .navbar-default {
     background-color: #fff;
@@ -511,6 +545,7 @@ banner
 .navbar-default {
     background-color: transparent;
     border: 0px;
+    margin: -20px;
 }
 .navbar {
     border-radius: 0px;
@@ -519,6 +554,7 @@ banner
 .navbar-brand{
 	text-transform: uppercase;
 	padding-bottom:15px; 
+	margin-left: 15px;
 }
 
 .navbar-brand img {
@@ -527,7 +563,7 @@ banner
 }
 
 .navbar-default .navbar-brand, .navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus {
-    color: #EA6045;
+    color: #0CB8B6;
 }
 
 .top-nav-collapse {
@@ -547,7 +583,8 @@ banner
 .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:focus, .navbar-default .navbar-nav > .active > a:hover {
     color: #fff;
     text-transform: uppercase;
-    background-color: rgba(12, 184, 182, 0.21);
+    background-color: #0CB8B6;
+    z-index: 9999999999999999 !important;
 }
 .navbar-default .navbar-nav > li > a
 {
@@ -560,7 +597,7 @@ banner
 {
 	color: #fff;
     text-transform: uppercase;
-    background-color: rgba(12, 184, 182, 0.21);
+    background-color: #0CB8B6;
 }
 .affix {
     background-color: #ffffff !important;
@@ -574,7 +611,6 @@ banner
 	background-size: cover;
 	min-height: 100vh;
 	position: relative;
-	
 }
 
 #banner2 {
@@ -582,7 +618,6 @@ banner
 	background-size: cover;
 	min-height: calc(100vh - 500px);
 	position: relative;
-	z-index: -999 !important;
 }
 
 #bannerUser {

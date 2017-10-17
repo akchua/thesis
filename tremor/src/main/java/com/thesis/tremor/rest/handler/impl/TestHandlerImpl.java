@@ -23,11 +23,9 @@ import com.thesis.tremor.database.service.SessionService;
 import com.thesis.tremor.database.service.TestImageService;
 import com.thesis.tremor.database.service.TestService;
 import com.thesis.tremor.database.service.UserService;
-import com.thesis.tremor.enums.Color;
 import com.thesis.tremor.objects.ObjectList;
 import com.thesis.tremor.rest.handler.TestHandler;
 import com.thesis.tremor.utility.EncryptionUtil;
-import com.thesis.tremor.utility.Html;
 import com.thesis.tremor.utility.StringHelper;
 
 /**
@@ -100,18 +98,18 @@ public class TestHandlerImpl implements TestHandler {
 					
 					result.setSuccess(testImageService.insert(testImage) != null);
 					if(result.getSuccess()) {
-						result.setMessage(Html.line(Color.GREEN, "Upload Successful."));
+						result.setMessage("Upload Successful.");
 					} else {
-						result.setMessage(Html.line(Html.text(Color.RED, "Server Error.") + " Please try again later."));
+						result.setMessage("Server Error. Please try again later.");
 					}
 				} else {
-					result = new ResultBean(Boolean.FALSE, Html.line(Html.text(Color.RED, "Failed") + " to load test. Please check the id."));
+					result = new ResultBean(Boolean.FALSE, "Failed to load test. Please check the id.");
 				}
 			} else {
 				result = new ResultBean(Boolean.FALSE, "Error please try uploading again.");
 			}
 		} else {
-			result = new ResultBean(Boolean.FALSE, Html.line(Html.text(Color.RED, "Failed") + " to load patient. Please re-enter correct credentials."));
+			result = new ResultBean(Boolean.FALSE, "Failed to load patient. Please re-enter correct credentials.");
 		}
 		
 		return result;

@@ -59,6 +59,12 @@ define(['plugins/router', 'durandal/app','knockout', 'modules/userservice', 'vie
     	router.navigate('#session/' + patientId);
     };
     
+    UsersCrud.viewPatientSession = function(id) {
+    	var self = this;
+    	
+    	router.navigate('#session/' + id);
+    };
+    
     UsersCrud.prototype.add = function() {
     	var self = this;
     	

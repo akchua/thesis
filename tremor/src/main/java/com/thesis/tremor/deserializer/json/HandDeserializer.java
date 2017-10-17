@@ -41,7 +41,6 @@ public class HandDeserializer extends StdDeserializer<HandFormBean> {
 		try {
 			List<FingerFormBean> fingers = new ArrayList<FingerFormBean>();
 			for(JsonNode fingersNode : leftHandNode.get("fingers")) {
-				System.out.println("here");
 				FingerFormBean finger = mapper.readValue(fingersNode.toString(), FingerFormBean.class);
 				fingers.add(finger);
 			}

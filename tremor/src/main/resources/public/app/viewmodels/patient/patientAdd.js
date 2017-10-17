@@ -18,7 +18,7 @@ define(['durandal/app','knockout', 'plugins/dialog', 'modules/userservice'],
 	    		emailAddress: ko.observable(),
 	    		contactNumber: ko.observable(),
 	    		userType: ko.observable(),
-	    		itemsPerPage: ko.observable(),
+	    		itemsPerPage: ko.observable(10),
 	    		
 	    		birthdate: ko.observable(),
 	    		sex: ko.observable(),
@@ -59,7 +59,7 @@ define(['durandal/app','knockout', 'plugins/dialog', 'modules/userservice'],
     
     PatientAdd.prototype.save = function() {
     	var self = this;
-    	
+    	console.log(ko.toJSON(self.PatientAddModel));
        userService.saveUser(ko.toJSON(self.PatientAddModel)).done(function(result) {
         	if(result.success) {
         		 userService.addPatient(self.PatientAddModel.username, self.PatientAddModel.password).done(function(result) {

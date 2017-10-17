@@ -1,19 +1,21 @@
-﻿define(['plugins/router', 'durandal/app', 'knockout', 'modules/securityservice'], 
-		function (router, app, ko, securityService) {
+﻿define(['plugins/router', 'durandal/app', 'knockout', 'modules/securityservice', 'viewmodels/users/userAdd', 'modules/userservice'], 
+		function (router, app, ko, securityService, userAdd, userService) {
 	var homeroute = [
 	    { route: ['', 'home'], moduleId: 'viewmodels/home/home', title: 'Home', nav: true }
 	];
 	
+	var adminroute = [
+		{ route: ['users'], moduleId: 'viewmodels/users/usersCrud', title: 'Registered Users', nav: true, hash:'#users' },
+		{ route: 'session/:id', moduleId: 'viewmodels/session/session', title: 'Uploaded Sessions', nav: false, hash: '#session' }
+	];
+	
+	var doctorroute = [
+		{ route: ['patients'], moduleId: 'viewmodels/patient/patientCrud', title: 'My Registered Patients', nav: true, hash:'#patients'},
+		{ route: 'session/:id', moduleId: 'viewmodels/session/session', title: 'Patient Sessions', nav: false, hash: '#session' }
+	];
+	
 	var patientroute = [
-		 { route: ['patients'], moduleId: 'viewmodels/patient/patientCrud', title: 'Patients', nav: true }
-	];
-	
-	var userroute = [
-		 { route: ['users'], moduleId: 'viewmodels/users/usersCrud', title: 'Users', nav: true }
-	];
-	
-	var sessionroute = [
-	    { route: 'session/:id', moduleId: 'viewmodels/session/session', title: 'Session', nav: false, hash: '#session' }
+		{ route: 'session/:id', moduleId: 'viewmodels/session/session', title: 'My Sessions', nav: false, hash: '#session' }
 	];
 	
 	var Shell = function() {
@@ -41,16 +43,13 @@
     		
     		switch(app.user.userType.name) {
 	    		case 'ADMINISTRATOR':
-	    			self.routes = self.routes.concat(patientroute);
-	    			self.routes = self.routes.concat(userroute);
-	    			self.routes= self.routes.concat(sessionroute);
+	    			self.routes = self.routes.concat(adminroute);
 	    			break;
 	    		case 'PATIENT':
-	    			self.routes= self.routes.concat(sessionroute);
+	    			self.routes= self.routes.concat(patientroute);
 	    			break;
 	    		case 'DOCTOR':
-	    			self.routes = self.routes.concat(patientroute);
-	    			self.routes= self.routes.concat(sessionroute);
+	    			self.routes = self.routes.concat(doctorroute);;
 	    			break;
     		}
 		}
@@ -87,11 +86,21 @@
         });
 	};
 	
+	Shell.prototype.editProfile = function(){
+		var self = this;
+		
+		userService.getUser(self.userDetails.id()).done(function(user) {
+    		userAdd.show(user,  'Edit User').done(function() {
+        	});
+    	});
+	};
+	
 	Shell.prototype.logout = function() {
 		securityService.logout().done(function() {
     		location.href = '/';
     	});
 	};
+	
 	
 	return Shell;
 });

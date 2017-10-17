@@ -1,4 +1,4 @@
-<!--banner-->
+
 <section id="banner2" class="banner2">
 	<div class="bg-color">
 		<div class="container">
@@ -11,16 +11,15 @@
 						<p>Scroll down to begin.</p>
 					</div>
 					<div class="overlay-detail text-center">
-			               <a href="#service"><i class="fa fa-angle-down"></i></a>
+			               <i class="fa fa-angle-down"></i>
 			        </div>		
 				</div>
 			</div>
 		</div>
 	</div>
 </section>
-<!--/ banner-->
-<!--service-->
-<section id="service" class="section-padding">
+
+<section class="section-padding">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-4 col-sm-4">
@@ -46,199 +45,62 @@
 				<h4 class="ser-title text-center" data-bind="text: userDetails.fullName"></h4>
 				<h4 class="ser-title text-center" data-bind="text: userDetails.userType"></h4>
 			</div>
-			
+			<!-- ko if: isDoctor -->
 			<div class="col-md-8 col-sm-8">
 				<h2 class="ser-title">Patient Recent Activity</h2>
 				<hr class="botm-line">
 				<div class="panel panel-default">
 					<div class="panel-body">
-						<div class="list-group" data-bind="foreach: { data: recentActivityList, as: 'recent' }">
-<!-- 							<a href="#" class="list-group-item">
-							<span data-bind="recent.patient.formattedName"></span> uploaded a session<span class="badge pull-right" data-bind="text: recent.formattedCreatedOn"></span>
-							</a> -->
-							<span data-bind="recent.patient.formattedName"></span>
+						<div class="list-group" data-bind="foreach: recentActivityList">
+							<a href="#" class="list-group-item">
+							<span data-bind="text:patient.formattedName"></span> uploaded a session<span class="badge pull-right" data-bind="text: formattedUpdatedOn"></span>
+							</a>
 						</div>
 					</div>
 				</div>
 			</div>
+			<!-- /ko -->
 			
-			
-			</div>
-			
-			<!-- <div class="col-md-4 col-sm-4">
-				<div class="service-info">
-					<div class="icon">
-						<i class="fa fa-stethoscope"></i>
-					</div>
-					<div class="icon-info">
-						<h4>24 Hour Support</h4>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-					</div>
-				</div>
-				<div class="service-info">
-					<div class="icon">
-						<i class="fa fa-ambulance"></i>
-					</div>
-					<div class="icon-info">
-						<h4>Emergency Services</h4>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-					</div>
-				</div>
-			</div> -->
-			<!-- <div class="col-md-4 col-sm-4">
-				<div class="service-info">
-					<div class="icon">
-						<i class="fa fa-user-md"></i>
-					</div>
-					<div class="icon-info">
-						<h4>Medical Counseling</h4>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-					</div>
-				</div>
-				<div class="service-info">
-					<div class="icon">
-						<i class="fa fa-medkit"></i>
-					</div>
-					<div class="icon-info">
-						<h4>Premium Healthcare</h4>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-					</div>
-				</div>
-			</div> -->
-		</div>
-<!-- 		</div> -->
-</section>
-<!--/ service-->
-<!--cta-->
-<!-- <section id="cta-1" class="section-padding">
-	<div class="container">
-		<div class="row">
-			<div class="schedule-tab">
-   			<div class="col-md-4 col-sm-4 bor-left">
-   				<div class="mt-boxy-color"></div>
-    			<div class="medi-info">
-	    			<h3>Emergency Case</h3>
-					<p>I am text block. Edit this text from Appearance / Customize / Homepage header columns. Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-					<a href="#" class="medi-info-btn">READ MORE</a>		    	
-				</div>
-   			</div>
-			<div class="col-md-4 col-sm-4">
-				<div class="medi-info">
-	    			<h3>Emergency Case</h3>
-					<p>I am text block. Edit this text from Appearance / Customize / Homepage header columns. Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-					<a href="#" class="medi-info-btn">READ MORE</a>	
-				</div>
-			</div>
-			<div class="col-md-4 col-sm-4 mt-boxy-3">
-				<div class="mt-boxy-color"></div>
-				<div class="time-info">
-		    			<h3>Opening Hours</h3>
-						<table style="margin: 8px 0px 0px;" border="1">
-							<tbody>
-								<tr>
-								<td>Monday - Friday</td>
-								<td>8.00 - 17.00</td>
-								</tr>
-								<tr>
-								<td>Saturday</td>
-								<td>9.30 - 17.30</td>
-								</tr>
-								<tr>
-								<td>Sunday</td>
-								<td>9.30 - 15.00</td>
-								</tr>
-							</tbody>
-						</table>				    		
-				</div>
-			</div>
-			</div>
-		</div>
-	</div>
-</section> -->
-<!--cta-->
-<!--about-->
-<!-- <section id="about" class="section-padding">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-3 col-sm-4 col-xs-12">
-		        <div class="section-title">
-		          <h2 class="head-title lg-line">Lalalalalalla</h2>
-		          <hr class="botm-line">
-		          <p class="sec-para">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua..</p>
-		          <a href="" style="color: #0cb8b6; padding-top:10px;">Know more..</a>
-		        </div>
-		    </div>
-		    <div class="col-md-9 col-sm-8 col-xs-12">
-		       <div style="visibility: visible;" class="col-sm-9 more-features-box">
-		          <div class="more-features-box-text">
-		            <div class="more-features-box-text-icon"> <i class="fa fa-angle-right" aria-hidden="true"></i> </div>
-		            <div class="more-features-box-text-description">
-			            <h3>It's something important you want to know.</h3>
-			            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et. Ut wisi enim ad minim veniam, quis nostrud.</p>
-			        </div>
-		          </div>
-		          <div class="more-features-box-text">
-		            <div class="more-features-box-text-icon"> <i class="fa fa-angle-right" aria-hidden="true"></i> </div>
-		            <div class="more-features-box-text-description">
-			            <h3>It's something important you want to know.</h3>
-			            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et. Ut wisi enim ad minim veniam, quis nostrud.</p>
-			        </div>
-                       </div>
-		        </div>
-		    </div>
-		</div>
-	</div>
-</section> -->
-<!--/ about-->
-<!--testimonial-->
-<!-- <section id="testimonial" class="section-padding">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<h2 class="ser-title">see what patients are saying?</h2>
+			<!-- ko if: isAdmin -->
+			<div class="col-md-8 col-sm-8">
+				<h2 class="ser-title">Quick Links</h2>
 				<hr class="botm-line">
+				
+				<div class="schedule-tab">
+		   			<!-- <div class="col-md-4 col-sm-4 bor-left"> -->
+		   				<div class="mt-boxy-color"></div>
+		    			<div class="medi-info">
+			    			<h3>View Registered Users</h3>
+							<p>View, update, add, and/or delete your users here </p>
+							<span class="medi-info-btn" data-bind="click:viewUsers">VIEW HERE >></span>		    	
+						</div>
+		   			<!-- </div> -->
+				</div>
+				
 			</div>
-			<div class="col-md-4 col-sm-4">
-				<div class="testi-details">
-					Paragraph
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+			<!-- /ko -->
+			
+			<!-- ko if: isPatient -->
+			<div class="col-md-8 col-sm-8">
+				<h2 class="ser-title">Quick Links</h2>
+				<hr class="botm-line">
+				
+				<div class="schedule-tab">
+		   				<div class="mt-boxy-color"></div>
+		    			<div class="medi-info">
+			    			<h3>View My Sessions</h3>
+							<p>View all of my uploaded sessions along with the comments of your doctor.</p>
+							<span class="medi-info-btn" data-bind="click:viewMySession">VIEW HERE >></span>		    	
+						</div>
 				</div>
-				<div class="testi-info">
-					User Image
-					<a href="#"><img src="img/thumb.png" alt="" class="img-responsive"></a>
-					User Name
-					<h3>Chua<span>Manila</span></h3>
-				</div>
+				
 			</div>
-		    <div class="col-md-4 col-sm-4">
-				<div class="testi-details">
-					Paragraph
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-				</div>
-				<div class="testi-info">
-					User Image
-					<a href="#"><img src="img/thumb.png" alt="" class="img-responsive"></a>
-					User Name
-					<h3>Corre<span>Fairview</span></h3>
-				</div>
-			</div>
-		    <div class="col-md-4 col-sm-4">
-				<div class="testi-details">
-					Paragraph
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-				</div>
-				<div class="testi-info">
-					User Image
-					<a href="#"><img src="img/thumb.png" alt="" class="img-responsive"></a>
-					User Name
-					<h3>Meiz<span>Bulacan</span></h3>
-				</div>
+			<!-- /ko -->
+			
 			</div>
 		</div>
-	</div>
-</section> -->
-<!--/ testimonial-->
-<!--cta 2-->
+</section>
+
 <section id="cta-2" class="section-padding">
 	<div class="container">
 		<div class=" row">
@@ -258,60 +120,7 @@
         </div>
 	</div>
 </section>
-<!--cta-->
-<!--contact-->
-<!-- <section id="contact" class="section-padding">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<h2 class="ser-title">Contact us</h2>
-				<hr class="botm-line">
-			</div>
-			<div class="col-md-4 col-sm-4">
-		      <h3>Contact Info</h3>
-		      <div class="space"></div>
-		      <p><i class="fa fa-map-marker fa-fw pull-left fa-2x"></i>321 Awesome Street<br>
-		        New York, NY 17022</p>
-		      <div class="space"></div>
-		      <p><i class="fa fa-envelope-o fa-fw pull-left fa-2x"></i>info@companyname.com</p>
-		      <div class="space"></div>
-		      <p><i class="fa fa-phone fa-fw pull-left fa-2x"></i>+1 800 123 1234</p>
-		    </div>
-			<div class="col-md-8 col-sm-8 marb20">
-				<div class="contact-info">
-						<h3 class="cnt-ttl">Having Any Query! Or Book an appointment</h3>
-						<div class="space"></div>
-                           <div id="sendmessage">Your message has been sent. Thank you!</div>
-                           <div id="errormessage"></div>
-						<form action="" method="post" role="form" class="contactForm">
-						    <div class="form-group">
-                                   <input type="text" name="name" class="form-control br-radius-zero" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
-                                   <div class="validation"></div>
-                               </div>
-                               <div class="form-group">
-                                   <input type="email" class="form-control br-radius-zero" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" />
-                                   <div class="validation"></div>
-                               </div>
-                               <div class="form-group">
-                                   <input type="text" class="form-control br-radius-zero" name="subject" id="subject" placeholder="Subject" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
-                                   <div class="validation"></div>
-                               </div>
-                               <div class="form-group">
-                                   <textarea class="form-control br-radius-zero" name="message" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Message"></textarea>
-                                   <div class="validation"></div>
-                               </div>
-                               
-							<div class="form-action">
-								<button type="submit" class="btn btn-form">Send Message</button>
-							</div>
-						</form>
-				</div>
-			</div>
-		</div>
-	</div>
-</section> -->
-<!--/ contact-->
-<!--footer-->
+
 <footer id="footer">
 	<div class="top-footer">
 		<div class="container">
@@ -353,4 +162,3 @@
 		</div>
 	</div>
 </footer>
-<!--/ footer-->

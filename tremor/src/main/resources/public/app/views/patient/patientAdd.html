@@ -3,7 +3,7 @@
 		<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" data-bind="click: cancel">&times;</button>
 				<div class="section-title text-center">
-			          <h2 class="head-title lg-line">Register a New Patient</h2>
+			          <h2 class="head-title lg-line" data-bind="text:title"></h2>
 			   	</div>
 		</div>
 		<div class="modal-body">
@@ -67,7 +67,6 @@
 			  	</div>
 			  </div>
 	  		
-	  		
 			   <div class="col-md-6">
 			   	<div class="group">
 			   		<input data-bind="textInput: PatientAddModel.birthdate" type="date"><span class="highlight"></span><span class="bar"></span>
@@ -81,7 +80,14 @@
 			   	  <label class="alwaysFocused">Sex</label>
 			   	 </div>
 			   </div>
-			   
+			   <div class="col-md-12">
+				   <div class="group">
+					      <input type="text" class="form-control" data-bind="textInput: PatientAddModel.address">
+					      <span class="highlight"></span><span class="bar"></span>
+					      <label class="alwaysFocused">Address</label>
+					</div>
+				</div>
+				
 			</form>
 		 </div>
 		 

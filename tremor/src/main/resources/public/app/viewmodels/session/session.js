@@ -43,6 +43,7 @@ define(['plugins/router', 'durandal/app','knockout', 'durandal/activator',
 		session.getSessionList(self.currentPage(), null, null, self.patientId()).done(function(data) {
 			self.sessionList(data.list);
     		self.totalItems(data.total);
+    		console.log(data);
     	});
 	};
 	

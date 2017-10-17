@@ -4,7 +4,7 @@ define(['durandal/app','knockout','plugins/dialog', 'modules/session'],
 	var sessionComment = function(sessionId) {
 		this.sessionId = sessionId;
 		
-		this.userComment = ko.observable();
+		this.userComment = ko.observableArray();
 		
 		this.comment = ko.observable();
 		this.commenter = ko.observable();
@@ -12,6 +12,14 @@ define(['durandal/app','knockout','plugins/dialog', 'modules/session'],
 		
 		this.commentList = ko.observable();
 	};
+	
+    sessionComment.prototype.refreshComment = function(){
+    	var self = this;
+    	session.getSessionCommentList(self.sessionId).done(function(comments) {
+    		self.commentList(comments);
+    		console.log(self.commentList());
+    	});
+    };
 	
 	sessionComment.prototype.activate = function() {
 		var self = this;
@@ -25,15 +33,7 @@ define(['durandal/app','knockout','plugins/dialog', 'modules/session'],
     sessionComment.show = function(sessionId) {
     	return dialog.show(new sessionComment(sessionId));
     };
-    
-    sessionComment.prototype.refreshComment = function(){
-    	var self = this;
-    	session.getSessionCommentList(self.sessionId).done(function(data) {
-    		self.commentList(data);
-    		console.log(self.commentList);
-    		console.log(self.commentList.commenter.formattedName);
-    	});
-    };
+
     
     sessionComment.prototype.add = function(){
     	var self = this;
@@ -42,6 +42,7 @@ define(['durandal/app','knockout','plugins/dialog', 'modules/session'],
     		self.refreshComment();
     	});
     };
+
     
 	return sessionComment;
 });
